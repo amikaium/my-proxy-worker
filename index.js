@@ -123,7 +123,7 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   padding: 0 12px !important;
-                  background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
+                  background-color: #17191c !important; 
                   height: 55px !important;
               }
 
@@ -131,20 +131,12 @@ export default {
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  gap: 12px !important; 
                   position: static !important; 
                   transform: none !important;
               }
-
-              /* মেনু আইকন শো করা */
-              .css-1vvjgde button[aria-label="menu"] {
-                  display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important;
-              }
-
-              /* মেইন লোগো সাইজ */
+              .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
               .css-1vvjgde > img { height: 22px !important; width: auto !important; object-fit: contain !important; }
-
-              /* স্পন্সর লোগো স্লাইডার সাইজ ফিক্স */
               .css-1vvjgde .swiper { width: 45px !important; overflow: hidden !important; margin: 0 !important; }
               .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
               .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
@@ -156,6 +148,12 @@ export default {
               /* ইউজারনেম ও প্রমোশন পার্মানেন্ট হাইড */
               p.css-1bsgmhw { display: none !important; }
               a[href="/promotions"] { display: none !important; }
+
+              /* 🚀 ব্যালেন্স বক্স নিচে দেখা যাওয়া (Flashing) চিরতরে বন্ধ করা */
+              div.css-1ctwhz0:not(.balance-deposit-group .css-1ctwhz0) {
+                  display: none !important;
+                  opacity: 0 !important;
+              }
 
               /* ======================================================= */
               /* 🚀 ডান দিক (লগআউট অবস্থা): লগইন ও সাইনআপ বাটন */
@@ -184,28 +182,41 @@ export default {
                   right: 12px !important;
                   display: flex !important;
                   align-items: center !important;
-                  gap: 8px !important;
+                  gap: 10px !important;
                   z-index: 99999 !important;
               }
 
               /* ব্যালেন্স এবং ডিপোজিট বাটনের গ্রুপ (একসাথে লাগানো) */
               .balance-deposit-group {
                   display: flex !important;
-                  align-items: center !important;
+                  align-items: stretch !important; /* হাইট সমান রাখার জন্য */
                   background-color: transparent !important;
                   border-radius: 4px !important;
-                  overflow: hidden !important; /* কর্নার শেপ ঠিক রাখার জন্য */
+                  overflow: hidden !important; 
+                  height: 34px !important; /* ফিক্সড হাইট */
               }
 
-              /* ব্যালেন্স কন্টেইনার (গ্রে ব্যাকগ্রাউন্ড) */
+              /* 🚀 ব্যালেন্স কন্টেইনার (সাইজ ও স্পেসিং ফিক্স) */
               .balance-deposit-group .css-1ctwhz0 {
-                  background-color: #2c2e35 !important; /* লগইন বাটনের মতো গ্রে কালার */
+                  background-color: #2c2e35 !important; 
                   display: flex !important;
                   align-items: center !important;
-                  height: 32px !important;
-                  padding: 0 10px !important;
+                  justify-content: space-between !important;
+                  min-width: 100px !important; /* বক্সের চওড়া বাড়ানো হয়েছে */
+                  width: fit-content !important;
+                  height: 100% !important;
+                  padding: 0 10px !important; /* দুই পাশে সুন্দর গ্যাপ */
                   margin: 0 !important;
-                  border-radius: 0 !important; /* গ্রুপ থেকে রেডিয়াস পাবে */
+                  border-radius: 0 !important; 
+                  gap: 8px !important; /* ভেতরের আইটেমগুলোর মাঝে গ্যাপ */
+              }
+
+              /* ব্যালেন্স টেক্সট ও আইকন কন্টেইনার */
+              .balance-deposit-group p {
+                  display: flex !important;
+                  align-items: center !important;
+                  margin: 0 !important;
+                  white-space: nowrap !important;
               }
 
               /* ৳ আইকন - সবুজ গোল বৃত্ত */
@@ -214,13 +225,14 @@ export default {
                   color: white !important;
                   width: 20px !important;
                   height: 20px !important;
+                  min-width: 20px !important;
                   border-radius: 50% !important;
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
                   font-size: 13px !important;
                   font-weight: bold !important;
-                  margin-right: 8px !important;
+                  margin-right: 6px !important;
               }
 
               /* ব্যালেন্স অ্যামাউন্ট */
@@ -228,10 +240,9 @@ export default {
                   color: #e5e7eb !important;
                   font-size: 14px !important;
                   font-weight: 500 !important;
-                  margin-right: 12px !important;
               }
 
-              /* রিফ্রেশ বাটন */
+              /* রিফ্রেশ বাটন ফিক্স */
               .balance-deposit-group button.refresh {
                   background: transparent !important;
                   border: none !important;
@@ -239,6 +250,7 @@ export default {
                   margin: 0 !important;
                   height: 18px !important;
                   width: 18px !important;
+                  min-width: 18px !important; /* চিপা হয়ে যেন না যায় */
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
@@ -247,32 +259,38 @@ export default {
               .balance-deposit-group button.refresh svg {
                   height: 18px !important;
                   width: 18px !important;
-                  stroke: #e5e7eb !important; /* রিফ্রেশ আইকনের কালার */
+                  stroke: #e5e7eb !important; 
               }
 
-              /* ডিপোজিট (+) বাটন (সবুজ কালার) */
+              /* 🚀 ডিপোজিট (+) বাটন (লিংক ফিক্স) */
               .custom-deposit-btn {
                   background-color: #1d9154 !important; /* Baji Green */
-                  height: 32px !important;
-                  width: 34px !important;
+                  height: 100% !important;
+                  width: 36px !important;
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  border-radius: 0 !important; /* গ্রুপ থেকে রেডিয়াস পাবে */
+                  border-radius: 0 !important; 
                   text-decoration: none !important;
-                  color: white !important;
-                  font-size: 24px !important;
-                  font-weight: 400 !important;
-                  line-height: 1 !important;
                   cursor: pointer !important;
               }
 
-              /* ডিপোজিটের পুরানো আইকন ও লেখা হাইড */
-              .custom-deposit-btn img, .custom-deposit-btn span, .custom-deposit-btn .chakra-image {
+              /* ডিপোজিটের পুরানো আইকন ও লেখা হাইড করা (HTML রিমুভ না করে) */
+              .custom-deposit-btn > * {
                   display: none !important;
               }
 
-              /* প্রোফাইল ও অন্যান্য আইকন কন্টেইনার (3D লোগো ইত্যাদি) */
+              /* CSS দিয়ে + আইকন বসানো (যাতে রিয়্যাক্টের লিংক না ভাঙে) */
+              .custom-deposit-btn::after {
+                  content: "+";
+                  color: white !important;
+                  font-size: 26px !important;
+                  font-weight: 300 !important;
+                  line-height: 1 !important;
+                  margin-bottom: 2px !important; /* একটু উপরে তোলার জন্য */
+              }
+
+              /* প্রোফাইল ও অন্যান্য আইকন কন্টেইনার */
               .custom-loggedin-right .css-145pjb7 {
                   display: flex !important;
                   align-items: center !important;
@@ -281,9 +299,7 @@ export default {
               }
 
               /* ইনপুট বক্স ডিজাইন (অতিরিক্ত) */
-              input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; height: 50px !important; background-color: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important;
-              }
+              input.chakra-input, .chakra-input { border-radius: 8px !important; height: 50px !important; background-color: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important; }
             </style>
 
             <script>
@@ -308,25 +324,19 @@ export default {
                     // রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
-                        if (refInput.value !== REF_CODE) {
-                            setNativeValue(refInput, REF_CODE);
-                        }
+                        if (refInput.value !== REF_CODE) { setNativeValue(refInput, REF_CODE); }
                         const parentGroup = refInput.closest('.chakra-form-control');
-                        if (parentGroup && parentGroup.style.display !== 'none') {
-                            parentGroup.style.display = 'none';
-                        }
+                        if (parentGroup && parentGroup.style.display !== 'none') { parentGroup.style.display = 'none'; }
                     }
 
                     // LiveChat বাটন হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
-                            if (btn.style.display !== 'none') {
-                                btn.style.display = 'none';
-                            }
+                            if (btn.style.display !== 'none') { btn.style.display = 'none'; }
                         }
                     });
 
-                    // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    // স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
@@ -339,11 +349,12 @@ export default {
                     // 🚀 লগইন অবস্থা: ব্যালেন্স, রিফ্রেশ ও ডিপোজিট (+) হেডারে নেয়া
                     // ============================================================
                     const header = document.querySelector('#header');
-                    const balanceBox = document.querySelector('.css-1ctwhz0'); // ব্যালেন্স কন্টেইনার
-                    const iconsBox = document.querySelector('.css-145pjb7');   // প্রোফাইল/ডিপোজিট কন্টেইনার
+                    // ব্যালেন্স কন্টেইনার (এটি নিচে তৈরি হলেও CSS দিয়ে লুকানো আছে)
+                    const balanceBox = document.querySelector('.css-1ctwhz0'); 
+                    const iconsBox = document.querySelector('.css-145pjb7');
 
                     if (header && balanceBox && iconsBox) {
-                        // লগইন বাটন থাকলে তা হাইড করা
+                        // লগইন বাটন হাইড করা
                         const authContainer = document.querySelector('.fixed-auth-container');
                         if (authContainer) authContainer.style.display = 'none';
 
@@ -355,7 +366,7 @@ export default {
                             header.appendChild(customRight);
                         }
 
-                        // ব্যালেন্স ও ডিপোজিট বাটনের গ্রুপ কন্টেইনার
+                        // ব্যালেন্স ও ডিপোজিট বাটনের গ্রুপ
                         let groupDiv = document.querySelector('.balance-deposit-group');
                         if (!groupDiv) {
                             groupDiv = document.createElement('div');
@@ -366,27 +377,23 @@ export default {
                         // ব্যালেন্স বক্সকে গ্রুপে মুভ করা
                         if (balanceBox.parentElement !== groupDiv) {
                             groupDiv.appendChild(balanceBox);
-                            
-                            // ৳ লেখাকে সুন্দর সবুজ বৃত্তে রূপান্তর করা (১ম ছবির মতো)
-                            const balParagraphs = balanceBox.querySelectorAll('p');
-                            balParagraphs.forEach(p => {
-                                // ইউজারনেম ক্লাস ইগনোর করে ব্যালেন্স টেক্সট ধরা হচ্ছে
-                                if(!p.classList.contains('css-1bsgmhw') && (p.textContent.includes('BDT') || p.textContent.match(/[0-9]/))) {
-                                    if(!p.querySelector('.cur-circle')) {
-                                        const amountStr = p.textContent.replace('BDT', '').replace(':', '').trim();
-                                        p.innerHTML = '<span class="cur-circle">৳</span><span class="bal-amt">' + amountStr + '</span>';
-                                    }
-                                }
-                            });
                         }
 
-                        // ডিপোজিট বাটনকে (+) বানিয়ে ব্যালেন্সের সাথে যুক্ত করা
+                        // ৳ লেখাকে সুন্দর সবুজ বৃত্তে রূপান্তর করা
+                        const balParagraphs = balanceBox.querySelectorAll('p');
+                        balParagraphs.forEach(p => {
+                            if(!p.classList.contains('css-1bsgmhw') && (p.textContent.includes('BDT') || p.textContent.match(/[0-9]/))) {
+                                if(!p.querySelector('.cur-circle')) {
+                                    const amountStr = p.textContent.replace('BDT', '').replace(':', '').trim();
+                                    p.innerHTML = '<span class="cur-circle">৳</span><span class="bal-amt">' + amountStr + '</span>';
+                                }
+                            }
+                        });
+
+                        // 🚀 ডিপোজিট বাটনকে গ্রুপে মুভ করা (HTML পরিবর্তন না করে)
                         const depositLink = iconsBox.querySelector('a[href*="/dw?tab=deposit"]');
                         if (depositLink && depositLink.parentElement !== groupDiv) {
                             depositLink.classList.add('custom-deposit-btn');
-                            if(!depositLink.innerHTML.includes('+')){
-                                depositLink.innerHTML = '+'; // শুধুমাত্র + লেখা বসিয়ে দেওয়া হলো
-                            }
                             groupDiv.appendChild(depositLink);
                         }
 
