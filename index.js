@@ -125,6 +125,7 @@ export default {
                   padding: 0 12px !important;
                   background-color: #17191c !important; 
                   height: 55px !important;
+                  z-index: 1000 !important;
               }
 
               /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
@@ -178,35 +179,62 @@ export default {
                   background: transparent !important;
               }
 
-              /* 🚀 ব্যালেন্স কন্টেইনার হেডারে ফিক্সড করা */
-              .fixed-header-balance {
+              /* 🛡️ অরিজিনাল ব্যালেন্স হাইড করা (মুভ না করে) */
+              .hide-original-balance {
+                  opacity: 0 !important;
+                  visibility: hidden !important;
+                  height: 0px !important;
+                  overflow: hidden !important;
+                  pointer-events: none !important;
+                  position: absolute !important;
+                  z-index: -9999 !important;
+              }
+
+              /* 🚀 আমাদের নতুন কাস্টম ব্যালেন্স বক্স (সবকিছুর উপরে ভাসবে) */
+              #arfan-custom-balance {
                   position: fixed !important;
-                  top: 8px !important; /* হেডারের ঠিক মাঝামাঝি সুন্দর করে বসবে */
+                  top: 11px !important; 
                   right: 12px !important; 
-                  z-index: 2147483647 !important; /* ম্যাক্সিমাম লেভেল */
+                  z-index: 2147483647 !important; /* ম্যাক্সিমাম পাওয়ার */
                   display: flex !important;
                   flex-direction: column !important;
                   align-items: flex-end !important;
-                  background: transparent !important;
                   pointer-events: auto !important;
               }
 
-              .fixed-header-balance p, .fixed-header-balance span, .fixed-header-balance div {
+              /* কাস্টম বক্সের ভিতরের টেক্সট ডিজাইন */
+              #arfan-custom-balance p, 
+              #arfan-custom-balance span, 
+              #arfan-custom-balance div {
                   text-align: right !important;
                   margin: 0 !important;
-                  line-height: 1.3 !important;
+                  line-height: 1.2 !important;
+                  color: #FEAC04 !important; /* গোল্ডেন কালার */
               }
 
-              /* হেডারে ইউজারনেম সাইজ একটু ফিট করা */
-              .fixed-header-balance > :first-child {
+              /* ইউজারনেম সাইজ */
+              #arfan-custom-balance > :first-child {
                   font-size: 11px !important;
                   opacity: 0.9 !important;
               }
+              
+              /* BDT ব্যালেন্স সাইজ */
+              #arfan-custom-balance > :nth-child(2) {
+                  font-size: 13px !important;
+                  font-weight: bold !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  gap: 4px !important;
+              }
+
+              /* রিফ্রেশ আইকন */
+              #arfan-custom-balance svg {
+                  cursor: pointer !important;
+                  fill: #FEAC04 !important;
+              }
 
               /* Language Selector হাইড */
-              .language-select-div {
-                  display: none !important;
-              }
+              .language-select-div { display: none !important; }
 
               /* লগইন ও সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
@@ -224,30 +252,15 @@ export default {
                   background-color: #2c2e35 !important; 
                   border: 1px solid rgba(255,255,255,0.05) !important;
               }
-              a[href="/login"] p { 
-                  color: #e5e7eb !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
-                  margin: 0 !important;
-              }
+              a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; margin: 0 !important; }
 
-              a[href="/signup"] { 
-                  background-color: #1d9154 !important; 
-                  border: none !important;
-              }
-              a[href="/signup"] p { 
-                  color: #ffffff !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
-                  margin: 0 !important; 
-              }
+              a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
+              a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; margin: 0 !important; }
 
               input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; 
-                  height: 50px !important; 
+                  border-radius: 8px !important; height: 50px !important; 
                   background-color: rgba(255, 255, 255, 0.08) !important; 
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
-                  color: white !important;
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important;
               }
             </style>
 
@@ -268,7 +281,7 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                // 🚀 TreeWalker: রিঅ্যাক্ট সাইটের যেকোনো টেক্সট নিখুঁতভাবে খোঁজার জাদুকরী ফাংশন
+                // টেক্সট খোঁজার ফাংশন
                 function findTextNode(text) {
                     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
                     let node;
@@ -282,49 +295,77 @@ export default {
 
                 const observer = new MutationObserver(() => {
                     
+                    // রেফারেল কোড
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
-                        if (refInput.value !== REF_CODE) {
-                            setNativeValue(refInput, REF_CODE);
-                        }
+                        if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
                         const parentGroup = refInput.closest('.chakra-form-control');
-                        if (parentGroup && parentGroup.style.display !== 'none') {
-                            parentGroup.style.display = 'none';
-                        }
+                        if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
+                    // চ্যাট হাইড
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
-                            if (btn.style.display !== 'none') {
-                                btn.style.display = 'none';
-                            }
+                            if (btn.style.display !== 'none') btn.style.display = 'none';
                         }
                     });
 
+                    // লগ আউট অবস্থায় বাটন ফিক্স
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
                         if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
                             loginBtnNode.parentElement.classList.add('fixed-auth-container');
                         }
+                        // যদি লগইন বাটন থাকে, তার মানে ইউজার লগআউট অবস্থায় আছে, তখন কাস্টম ব্যালেন্স হাইড রাখবো
+                        const cloneBox = document.getElementById('arfan-custom-balance');
+                        if(cloneBox) cloneBox.style.display = 'none';
                     }
 
-                    // 🚀 ব্যালেন্স (BDT) হেডারে মুভ করার নতুন ও 100% কার্যকরী লজিক
+                    // 🚀 The Magic: Clone & Sync Method
                     const bdtTextNode = findTextNode('BDT:');
                     if (bdtTextNode) {
-                        let container = bdtTextNode.parentElement;
-                        // উপরের দিকে কন্টেইনার খুঁজবে, কিন্তু Promotions বা Deposit এর প্যারেন্ট ধরবে না
-                        while(container.parentElement && 
-                              !container.parentElement.innerText.includes('Promotions') && 
-                              !container.parentElement.innerText.includes('Deposit')) {
-                            container = container.parentElement;
+                        let originalWrapper = bdtTextNode.parentElement;
+                        
+                        // মেইন কন্টেইনার খোঁজা
+                        for(let i=0; i<4; i++){
+                            if(originalWrapper.parentElement && 
+                               !originalWrapper.parentElement.innerText.includes('Promotions') && 
+                               !originalWrapper.parentElement.innerText.includes('Deposit')) {
+                                originalWrapper = originalWrapper.parentElement;
+                            } else {
+                                break;
+                            }
                         }
                         
-                        // নির্দিষ্ট কন্টেইনারে ক্লাস যুক্ত করা
-                        if (!container.classList.contains('fixed-header-balance')) {
-                            container.classList.add('fixed-header-balance');
+                        // ১. অরিজিনাল ব্যালেন্সকে তার জায়গাতেই সেফলি অদৃশ্য করে দেওয়া
+                        if (!originalWrapper.classList.contains('hide-original-balance')) {
+                            originalWrapper.classList.add('hide-original-balance');
+                        }
+
+                        // ২. বডির একদম শেষে আমাদের নিজস্ব একটি স্বাধীন এলিমেন্ট তৈরি করা
+                        let cloneBox = document.getElementById('arfan-custom-balance');
+                        if (!cloneBox) {
+                            cloneBox = document.createElement('div');
+                            cloneBox.id = 'arfan-custom-balance';
+                            document.body.appendChild(cloneBox);
+
+                            // রিফ্রেশ বাটন ক্লিক করলে অরিজিনাল বাটনে ক্লিক ফায়ার হবে!
+                            cloneBox.addEventListener('click', (e) => {
+                                const realSvg = originalWrapper.querySelector('svg');
+                                if(realSvg) {
+                                    realSvg.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+                                }
+                            });
+                        }
+
+                        // ৩. অরিজিনাল ডাটা আমাদের কাস্টম বক্সে লাইভ কপি করা
+                        cloneBox.style.display = 'flex'; // শো করানো
+                        if (cloneBox.innerHTML !== originalWrapper.innerHTML) {
+                            cloneBox.innerHTML = originalWrapper.innerHTML;
                         }
                     }
 
+                    // স্পন্সর লোগো
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
