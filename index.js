@@ -103,11 +103,11 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
+            // 🚀 NEW: UI Customizer (Advanced PURE CSS)
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🚀 হেডার ডিজাইন
+                 🚀 হেডার ডিজাইন 
                  ========================================== */
               div#header {
                   display: flex !important; align-items: center !important; padding: 0 12px !important;
@@ -135,77 +135,90 @@ export default {
               a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
               a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; margin: 0 !important; }
 
+
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Perfect 2-Box Layout)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Directly targeting your classes)
                  ========================================== */
-              .arfan-dashboard-panel {
+
+              /* 🚀 মেইন কন্টেইনার (div.css-1rfmqpc) */
+              div.css-1rfmqpc {
                   display: flex !important;
+                  flex-direction: row !important;
                   justify-content: space-between !important;
-                  align-items: stretch !important; /* দুইটা বক্সের হাইট সমান রাখার জন্য */
+                  align-items: stretch !important;
                   padding: 10px 12px 14px 12px !important;
                   gap: 12px !important;
-                  background-color: #121418 !important; /* সেকশনের ব্যাকগ্রাউন্ড */
+                  background-color: #121418 !important; /* মেইন সেকশনের ডার্ক ব্যাকগ্রাউন্ড */
                   width: 100% !important;
                   box-sizing: border-box !important;
               }
 
-              /* 📦 বক্স ১: ইউজারনেম এবং ব্যালেন্স */
-              .arfan-balance-box {
-                  flex: 1.1 !important; /* একটু বড় স্পেস নিবে */
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (div.css-1ctwhz0) */
+              div.css-1ctwhz0 {
+                  flex: 1.1 !important;
                   background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
                   border: 1px solid rgba(255, 255, 255, 0.08) !important;
                   border-radius: 10px !important;
-                  padding: 10px 14px !important;
+                  padding: 12px 14px !important;
                   display: flex !important;
                   flex-direction: column !important;
                   justify-content: center !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   position: relative !important;
+                  border-right: none !important; /* অরিজিনাল হলুদ দাগ রিমুভ */
               }
-              
-              /* Username Text (DEMOBAJI) */
-              .arfan-balance-box > p:first-child, .arfan-balance-box > div:first-child {
+
+              /* Username Text */
+              div.css-1ctwhz0 p.css-1bsgmhw {
                   color: #e5e7eb !important;
                   font-size: 13px !important;
                   font-weight: 600 !important;
                   margin: 0 0 6px 0 !important;
                   letter-spacing: 0.5px !important;
               }
-              
-              /* Balance & SVG Wrapper */
-              .arfan-balance-box > :last-child {
-                  display: flex !important;
-                  justify-content: space-between !important;
-                  align-items: center !important;
-                  margin: 0 !important;
-              }
-              .arfan-balance-box > :last-child p, .arfan-balance-box > :last-child span {
-                  color: #FEAC04 !important; /* ব্যালেন্সের গোল্ডেন কালার */
+
+              /* BDT Balance */
+              div.css-1ctwhz0 p.css-0 {
+                  color: #FEAC04 !important; /* গোল্ডেন কালার */
                   font-size: 16px !important;
                   font-weight: 700 !important;
                   margin: 0 !important;
               }
-              .arfan-balance-box svg {
+
+              /* Refresh Icon */
+              div.css-1ctwhz0 button {
+                  position: absolute !important;
+                  right: 14px !important;
+                  bottom: 12px !important;
+                  background: transparent !important;
+                  border: none !important;
+                  padding: 0 !important;
+                  margin: 0 !important;
+                  min-width: auto !important;
+                  height: auto !important;
+                  transition: transform 0.3s !important;
+              }
+              div.css-1ctwhz0 button svg {
                   fill: #FEAC04 !important;
                   width: 18px !important;
                   height: 18px !important;
-                  cursor: pointer !important;
-                  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
               }
-              .arfan-balance-box svg:active { transform: rotate(180deg) !important; }
+              div.css-1ctwhz0 button:active { transform: rotate(180deg) !important; }
 
-              /* 📦 বক্স ২: প্রমোশন এবং ডিপোজিট কন্টেইনার */
-              .arfan-action-box {
+
+              /* 📦 Box 2: প্রমোশন এবং ডিপোজিট (div.css-145pjb7) */
+              div.css-145pjb7 {
                   flex: 0.9 !important;
                   display: flex !important;
                   gap: 8px !important;
                   justify-content: space-between !important;
                   align-items: stretch !important;
+                  border: none !important; /* অরিজিনাল বর্ডার রিমুভ */
+                  padding: 0 !important;
               }
+              div.css-145pjb7::before, div.css-145pjb7::after { display: none !important; } /* ফালতু দাগ হাইড */
 
-              /* প্রমোশন এবং ডিপোজিট বাটন ডিজাইন */
-              .arfan-action-box a[href="/promotions"],
-              .arfan-action-box a[href="/dw?tab=deposit"] {
+              div.css-145pjb7 a {
                   flex: 1 !important;
                   background: linear-gradient(135deg, #252830 0%, #1a1c22 100%) !important;
                   border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -217,37 +230,30 @@ export default {
                   padding: 8px 4px !important;
                   text-decoration: none !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
-                  transition: all 0.2s !important;
               }
-              
-              .arfan-action-box a:active { transform: scale(0.95) !important; }
 
-              /* আইকন এবং টেক্সট সাইজ ফিক্স */
-              .arfan-action-box a svg {
+              div.css-145pjb7 a svg {
                   margin-bottom: 4px !important;
-                  width: 20px !important; height: 20px !important;
+                  width: 20px !important;
+                  height: 20px !important;
               }
-              .arfan-action-box a span, .arfan-action-box a p, .arfan-action-box a div {
+
+              div.css-145pjb7 a span, div.css-145pjb7 a p, div.css-145pjb7 a div {
                   font-size: 11px !important;
                   margin: 0 !important;
                   color: #e5e7eb !important;
               }
 
-              /* 🌟 স্পেশাল ডিপোজিট বাটন হাইলাইট */
-              .arfan-action-box a[href="/dw?tab=deposit"] {
+              /* স্পেশাল ডিপোজিট বাটন হাইলাইট */
+              div.css-145pjb7 a[href="/dw?tab=deposit"] {
                   border: 1px solid rgba(254, 172, 4, 0.4) !important;
                   background: linear-gradient(135deg, rgba(254, 172, 4, 0.1) 0%, #1a1c22 100%) !important;
               }
-              .arfan-action-box a[href="/dw?tab=deposit"] span, 
-              .arfan-action-box a[href="/dw?tab=deposit"] p,
-              .arfan-action-box a[href="/dw?tab=deposit"] div {
+              div.css-145pjb7 a[href="/dw?tab=deposit"] * {
                   color: #FEAC04 !important;
                   font-weight: 600 !important;
               }
 
-              /* অরিজিনাল হলুদ ডিভাইডার লাইন হাইড করা */
-              .hide-original-divider { display: none !important; border: none !important; }
-              
               /* ইনপুট বক্স ডিজাইন */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; height: 50px !important; 
@@ -267,15 +273,6 @@ export default {
                     if (valueSetter && valueSetter !== prototypeValueSetter) prototypeValueSetter.call(element, value);
                     else valueSetter.call(element, value);
                     element.dispatchEvent(new Event('input', { bubbles: true }));
-                }
-
-                function findTextNode(text) {
-                    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-                    let node;
-                    while (node = walker.nextNode()) {
-                        if (node.nodeValue.includes(text)) return node;
-                    }
-                    return null;
                 }
 
                 const observer = new MutationObserver(() => {
@@ -299,52 +296,6 @@ export default {
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement && !loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
                         loginBtnNode.parentElement.classList.add('fixed-auth-container');
-                    }
-
-                    // 🚀 Perfect Two-Box UI Logic
-                    const bdtTextNode = findTextNode('BDT:');
-                    const promoBtn = document.querySelector('a[href="/promotions"]');
-                    const depositBtn = document.querySelector('a[href="/dw?tab=deposit"]');
-
-                    if (bdtTextNode && promoBtn && depositBtn) {
-                        // ব্যালেন্স কন্টেইনার বের করা
-                        let balanceWrapper = bdtTextNode.parentElement;
-                        for(let i=0; i<4; i++){
-                            if(balanceWrapper.parentElement && 
-                               !balanceWrapper.parentElement.innerText.includes('Promotions') && 
-                               !balanceWrapper.parentElement.innerText.includes('Deposit')) {
-                                balanceWrapper = balanceWrapper.parentElement;
-                            } else break;
-                        }
-                        
-                        // অ্যাকশন (প্রমো/ডিপোজিট) কন্টেইনার বের করা
-                        let actionWrapper = promoBtn.parentElement;
-                        if (!actionWrapper.contains(depositBtn)) {
-                            actionWrapper = actionWrapper.parentElement; // যদি আলাদা flex row তে থাকে
-                        }
-
-                        // মেইন প্যানেল (যাতে ব্যালেন্স ও অ্যাকশন দুইটাই আছে)
-                        let mainRow = balanceWrapper.parentElement;
-
-                        // ক্লাসগুলো অ্যাপ্লাই করা
-                        if (mainRow && !mainRow.classList.contains('arfan-dashboard-panel')) {
-                            mainRow.classList.add('arfan-dashboard-panel');
-                        }
-                        if (!balanceWrapper.classList.contains('arfan-balance-box')) {
-                            balanceWrapper.classList.add('arfan-balance-box');
-                        }
-                        if (actionWrapper && !actionWrapper.classList.contains('arfan-action-box')) {
-                            actionWrapper.classList.add('arfan-action-box');
-                        }
-
-                        // ফালতু বর্ডার/ডিভাইডার লাইন হাইড করে দেওয়া
-                        if (mainRow) {
-                            Array.from(mainRow.children).forEach(child => {
-                                if (child !== balanceWrapper && child !== actionWrapper) {
-                                    child.classList.add('hide-original-divider');
-                                }
-                            });
-                        }
                     }
 
                     // স্পন্সর লোগো স্লাইডার
