@@ -118,40 +118,37 @@ export default {
             // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* 🚀 মেইন হেডার কন্টেইনার */
+              /* 🚀 মেইন হেডার কন্টেইনার (আপডেটেড) */
               div#header {
                   display: flex !important;
                   align-items: center !important;
+                  justify-content: space-between !important; /* বামে লোগো, ডানে ব্যালেন্স/বাটন রাখার জন্য */
                   padding: 0 12px !important;
                   background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
                   height: 55px !important;
+                  width: 100% !important;
+                  box-sizing: border-box !important;
               }
 
-              /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
+              /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর (অপরিবর্তিত) */
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  gap: 12px !important; 
                   position: static !important; 
                   transform: none !important;
               }
-
-              /* মেনু আইকন শো করা (আগে হাইড করা ছিল) */
               .css-1vvjgde button[aria-label="menu"] {
                   display: flex !important;
                   background: transparent !important;
                   padding: 0 !important;
                   margin: 0 !important;
               }
-
-              /* মেইন লোগো সাইজ */
               .css-1vvjgde > img {
                   height: 22px !important;
                   width: auto !important;
                   object-fit: contain !important;
               }
-
-              /* স্পন্সর লোগো স্লাইডার সাইজ ফিক্স */
               .css-1vvjgde .swiper {
                   width: 45px !important; 
                   overflow: hidden !important;
@@ -168,9 +165,9 @@ export default {
                   object-fit: contain !important;
               }
 
-              /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার (সম্পূর্ণ ফিক্সড) */
+              /* 🚀 ডান দিক: লগইন/সাইনআপ এবং ব্যালেন্স কন্টেইনার ডায়নামিক সাপোর্ট (আপডেটেড) */
               .fixed-auth-container {
-                  position: fixed !important; /* স্ক্রিনের ডানদিকে পার্মানেন্টলি ফিক্সড */
+                  position: fixed !important; 
                   top: 11px !important;
                   right: 12px !important;
                   display: flex !important;
@@ -179,6 +176,14 @@ export default {
                   z-index: 99999 !important;
                   width: auto !important;
                   background: transparent !important;
+              }
+
+              /* ব্যালেন্স বক্স এবং ডিপোজিট আইকন যেন প্রপার লাইনে থাকে */
+              .fixed-auth-container > div,
+              .fixed-auth-container > button,
+              .fixed-auth-container > a {
+                  display: flex !important;
+                  align-items: center !important;
               }
 
               /* ফালতু ডিভ হাইড */
@@ -205,7 +210,7 @@ export default {
 
               /* Log in বাটন */
               a[href="/login"] { 
-                  background-color: #2c2e35 !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
+                  background-color: #2c2e35 !important; 
                   border: 1px solid rgba(255,255,255,0.05) !important;
               }
               a[href="/login"] p { 
@@ -218,7 +223,7 @@ export default {
 
               /* Sign up বাটন */
               a[href="/signup"] { 
-                  background-color: #1d9154 !important; /* অরিজিনাল Baji Green */
+                  background-color: #1d9154 !important; 
                   border: none !important;
               }
               a[href="/signup"] p { 
@@ -279,12 +284,18 @@ export default {
                         }
                     });
 
-                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা (নিচে নামা বন্ধ করতে)
-                    const loginBtnNode = document.querySelector('a[href="/login"]');
-                    if (loginBtnNode && loginBtnNode.parentElement) {
-                        if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
-                            loginBtnNode.parentElement.classList.add('fixed-auth-container');
-                        }
+                    // 🚀 ডানদিকের সেকশন (লগইন বাটন অথবা ব্যালেন্স) ডাইনামিক ফিক্স করা
+                    const headerNode = document.getElementById('header');
+                    if (headerNode) {
+                        // হেডারের ভেতরের এলিমেন্ট স্ক্যান করে ডানদিকের দৃশ্যমান কন্টেইনার ধরা হচ্ছে
+                        Array.from(headerNode.children).forEach(child => {
+                            // বাম দিকের লোগো/মেনু (.css-1vvjgde) বাদ দিয়ে বাকি সব কন্টেইনারে পজিশন ফিক্স করা হচ্ছে
+                            if (!child.classList.contains('css-1vvjgde') && window.getComputedStyle(child).display !== 'none') {
+                                if (!child.classList.contains('fixed-auth-container')) {
+                                    child.classList.add('fixed-auth-container');
+                                }
+                            }
+                        });
                     }
 
                     // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
