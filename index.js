@@ -115,70 +115,52 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Advanced CSS + JS) - UPDATED DESIGN
+            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* 🚀 মেইন হেডার কন্টেইনার (Glassmorphism & Sticky) */
+              /* 🚀 মেইন হেডার কন্টেইনার */
               div#header {
                   display: flex !important;
                   align-items: center !important;
-                  padding: 0 16px !important;
-                  background: rgba(20, 22, 26, 0.85) !important; /* Premium Semi-transparent */
-                  backdrop-filter: blur(10px) !important; /* Glass Effect */
-                  -webkit-backdrop-filter: blur(10px) !important;
-                  height: 60px !important;
-                  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-                  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
-                  position: sticky !important;
-                  top: 0 !important;
-                  z-index: 99998 !important;
+                  padding: 0 12px !important;
+                  background-color: #17191c !important; 
+                  height: 55px !important;
               }
 
               /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 15px !important; 
+                  gap: 12px !important; 
                   position: static !important; 
                   transform: none !important;
               }
 
-              /* মেনু আইকন */
               .css-1vvjgde button[aria-label="menu"] {
                   display: flex !important;
                   background: transparent !important;
                   padding: 0 !important;
                   margin: 0 !important;
-                  transition: opacity 0.2s !important;
-              }
-              .css-1vvjgde button[aria-label="menu"]:active {
-                  opacity: 0.6 !important;
               }
 
-              /* মেইন লোগো সাইজ */
               .css-1vvjgde > img {
-                  height: 24px !important;
+                  height: 22px !important;
                   width: auto !important;
                   object-fit: contain !important;
               }
 
-              /* স্পন্সর লোগো - প্রিমিয়াম বক্স */
               .css-1vvjgde .swiper {
-                  width: 50px !important; 
+                  width: 45px !important; 
                   overflow: hidden !important;
                   margin: 0 !important;
-                  background: rgba(255, 255, 255, 0.04) !important;
-                  border-radius: 6px !important;
-                  padding: 2px 4px !important;
-                  border: 1px solid rgba(255, 255, 255, 0.05) !important;
               }
               .css-1vvjgde .swiper-slide {
                   display: flex !important;
-                  justify-content: center !important;
+                  justify-content: flex-start !important;
                   align-items: center !important;
               }
               .css-1vvjgde .swiper-slide img {
-                  max-height: 20px !important;
+                  max-height: 22px !important;
                   max-width: 45px !important;
                   object-fit: contain !important;
               }
@@ -186,78 +168,85 @@ export default {
               /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার */
               .fixed-auth-container {
                   position: fixed !important; 
-                  top: 12px !important;
-                  right: 16px !important;
+                  top: 11px !important;
+                  right: 12px !important;
                   display: flex !important;
                   align-items: center !important; 
-                  gap: 10px !important; 
+                  gap: 8px !important; 
                   z-index: 99999 !important;
+                  width: auto !important;
                   background: transparent !important;
               }
 
-              /* ফালতু ডিভ ও ল্যাঙ্গুয়েজ হাইড */
-              div.css-h096tp, .language-select-div {
+              /* 🚀 ব্যালেন্স কন্টেইনার হেডারে ফিক্সড করা (ডান দিকে) */
+              .fixed-header-balance {
+                  position: fixed !important;
+                  top: 27.5px !important; /* 55px হেডারের ঠিক মাঝখানে */
+                  transform: translateY(-50%) !important;
+                  right: 12px !important; /* হেডারের ডান দিকে এলাইন */
+                  z-index: 999999 !important;
+                  display: flex !important;
+                  flex-direction: column !important;
+                  align-items: flex-end !important;
+                  background: transparent !important;
+                  pointer-events: auto !important;
+              }
+
+              /* ব্যালেন্স এবং ইউজারনেমের সাইজ ও পজিশন ফিক্স */
+              .fixed-header-balance p {
+                  margin: 0 !important;
+                  text-align: right !important;
+                  line-height: 1.3 !important;
+              }
+
+              div.css-h096tp {
                   display: none !important;
               }
 
-              /* 🚀 লগইন ও সাইনআপ বাটন বেস ডিজাইন */
+              .language-select-div {
+                  display: none !important;
+              }
+
+              /* লগইন ও সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
-                  border-radius: 8px !important; 
-                  height: 36px !important; 
-                  padding: 0 16px !important;
+                  border-radius: 4px !important; 
+                  height: 32px !important; 
+                  padding: 0 14px !important;
                   display: flex !important; 
                   align-items: center !important; 
                   justify-content: center !important;
                   text-decoration: none !important;
                   box-sizing: border-box !important;
-                  transition: all 0.3s ease !important;
               }
 
-              /* 🚀 Log in বাটন (Outline Style) */
               a[href="/login"] { 
-                  background-color: rgba(255, 255, 255, 0.05) !important; 
-                  border: 1px solid rgba(255,255,255,0.15) !important;
+                  background-color: #2c2e35 !important; 
+                  border: 1px solid rgba(255,255,255,0.05) !important;
               }
               a[href="/login"] p { 
                   color: #e5e7eb !important; 
                   font-size: 13px !important; 
-                  font-weight: 600 !important; 
+                  font-weight: 500 !important; 
                   margin: 0 !important;
               }
-              a[href="/login"]:active {
-                  background-color: rgba(255, 255, 255, 0.1) !important;
-              }
 
-              /* 🚀 Sign up বাটন (Premium Gradient & Shadow) */
               a[href="/signup"] { 
-                  background: linear-gradient(135deg, #1d9154 0%, #29c071 100%) !important;
-                  border: 1px solid #2ee283 !important;
-                  box-shadow: 0 3px 10px rgba(29, 145, 84, 0.4) !important;
+                  background-color: #1d9154 !important; 
+                  border: none !important;
               }
               a[href="/signup"] p { 
                   color: #ffffff !important; 
                   font-size: 13px !important; 
-                  font-weight: 700 !important; 
+                  font-weight: 500 !important; 
                   margin: 0 !important; 
-                  text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
-                  letter-spacing: 0.3px !important;
-              }
-              a[href="/signup"]:active {
-                  transform: scale(0.96) !important;
-                  box-shadow: 0 1px 5px rgba(29, 145, 84, 0.4) !important;
               }
 
-              /* ইনপুট বক্স ডিজাইন */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; 
                   height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.05) !important; 
+                  background-color: rgba(255, 255, 255, 0.08) !important; 
                   border: 1px solid rgba(255, 255, 255, 0.1) !important; 
                   color: white !important;
-              }
-              input.chakra-input:focus, .chakra-input:focus {
-                  border-color: #29c071 !important;
-                  box-shadow: 0 0 0 1px #29c071 !important;
               }
             </style>
 
@@ -301,7 +290,7 @@ export default {
                         }
                     });
 
-                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা
+                    // লগইন/সাইনআপ বাটন ফিক্সড করা
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
                         if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
@@ -309,7 +298,33 @@ export default {
                         }
                     }
 
-                    // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    // 🚀 ব্যালেন্স (BDT) হেডারে মুভ করার স্মার্ট লজিক
+                    // এমন এলিমেন্ট খুঁজবে যেখানে 'BDT:' লেখা আছে
+                    const bdtElements = Array.from(document.querySelectorAll('*')).filter(el => 
+                        el.textContent && el.textContent.includes('BDT:') && el.children.length === 0
+                    );
+
+                    if (bdtElements.length > 0) {
+                        let bdtNode = bdtElements[bdtElements.length - 1]; // সবচেয়ে ভেতরের টেক্সট নোড
+                        let targetNode = bdtNode;
+                        
+                        // ৩-৪ লেভেল উপরে গিয়ে প্যারেন্ট খুঁজবে, তবে 'Promotions' বা 'Deposit' বাটন যেন সিলেক্ট না হয় সেদিকে খেয়াল রাখবে
+                        for(let i=0; i<4; i++) {
+                            let parent = targetNode.parentElement;
+                            if(parent && !parent.textContent.includes('Promotions') && !parent.textContent.includes('Deposit')) {
+                                targetNode = parent;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        // নির্দিষ্ট প্যারেন্টে ক্লাস অ্যাড করে হেডারে মুভ করে দিবে
+                        if (targetNode && !targetNode.classList.contains('fixed-header-balance')) {
+                            targetNode.classList.add('fixed-header-balance');
+                        }
+                    }
+
+                    // স্পন্সর লোগো স্লাইডার ফোর্স
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
