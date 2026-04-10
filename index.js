@@ -237,6 +237,20 @@ export default {
                   border: 1px solid rgba(255, 255, 255, 0.1) !important; 
                   color: white !important;
               }
+
+              /* ========================================= */
+              /* 🚀 NEW: আপনার স্ক্রিনশট অনুযায়ী হাইড সেকশন */
+              /* ========================================= */
+              
+              /* ইউজারনেম পার্মানেন্ট হাইড */
+              p.css-1bsgmhw {
+                  display: none !important;
+              }
+
+              /* প্রমোশন বাটন পার্মানেন্ট হাইড */
+              a[href="/promotions"] {
+                  display: none !important;
+              }
             </style>
 
             <script>
