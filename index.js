@@ -123,54 +123,32 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   padding: 0 12px !important;
-                  background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
+                  background-color: #17191c !important; 
                   height: 55px !important;
               }
+
+              /* 🚀 ২য় স্ক্রিনশটের ফালতু ডিভ পার্মানেন্টলি হাইড */
+              div.css-1q91j8q { display: none !important; }
+              div.css-h096tp { display: none !important; }
+              .language-select-div { display: none !important; }
 
               /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  gap: 12px !important; 
                   position: static !important; 
                   transform: none !important;
               }
+              .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
+              .css-1vvjgde > img { height: 22px !important; width: auto !important; object-fit: contain !important; }
+              .css-1vvjgde .swiper { width: 45px !important; overflow: hidden !important; margin: 0 !important; }
+              .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
+              .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
 
-              /* মেনু আইকন শো করা (আগে হাইড করা ছিল) */
-              .css-1vvjgde button[aria-label="menu"] {
-                  display: flex !important;
-                  background: transparent !important;
-                  padding: 0 !important;
-                  margin: 0 !important;
-              }
-
-              /* মেইন লোগো সাইজ */
-              .css-1vvjgde > img {
-                  height: 22px !important;
-                  width: auto !important;
-                  object-fit: contain !important;
-              }
-
-              /* স্পন্সর লোগো স্লাইডার সাইজ ফিক্স */
-              .css-1vvjgde .swiper {
-                  width: 45px !important; 
-                  overflow: hidden !important;
-                  margin: 0 !important;
-              }
-              .css-1vvjgde .swiper-slide {
-                  display: flex !important;
-                  justify-content: flex-start !important;
-                  align-items: center !important;
-              }
-              .css-1vvjgde .swiper-slide img {
-                  max-height: 22px !important;
-                  max-width: 45px !important;
-                  object-fit: contain !important;
-              }
-
-              /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার (সম্পূর্ণ ফিক্সড) */
+              /* 🚀 ডান দিক (লগআউট অবস্থা): লগইন ও সাইনআপ বাটন */
               .fixed-auth-container {
-                  position: fixed !important; /* স্ক্রিনের ডানদিকে পার্মানেন্টলি ফিক্সড */
+                  position: fixed !important; 
                   top: 11px !important;
                   right: 12px !important;
                   display: flex !important;
@@ -178,65 +156,105 @@ export default {
                   gap: 8px !important; 
                   z-index: 99999 !important;
                   width: auto !important;
-                  background: transparent !important;
               }
-
-              /* ফালতু ডিভ হাইড */
-              div.css-h096tp {
-                  display: none !important;
-              }
-
-              /* 🚀 ল্যাঙ্গুয়েজ সিলেক্টর সম্পূর্ণ হাইড */
-              .language-select-div {
-                  display: none !important;
-              }
-
-              /* 🚀 লগইন ও সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
-                  border-radius: 4px !important; 
-                  height: 32px !important; 
-                  padding: 0 14px !important;
-                  display: flex !important; 
-                  align-items: center !important; 
-                  justify-content: center !important;
-                  text-decoration: none !important;
-                  box-sizing: border-box !important;
+                  border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
+                  display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
+              }
+              a[href="/login"] { background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; }
+              a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; font-weight: 500 !important; margin: 0 !important; }
+              a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
+              a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; font-weight: 500 !important; margin: 0 !important; }
+
+              /* ============================================================ */
+              /* 🚀 ডান দিক (লগইন অবস্থা): ব্যালেন্স ও আইকন (1st Screenshot) */
+              /* ============================================================ */
+              .custom-loggedin-right {
+                  position: fixed !important;
+                  top: 10px !important;
+                  right: 12px !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  gap: 10px !important;
+                  z-index: 99999 !important;
               }
 
-              /* Log in বাটন */
-              a[href="/login"] { 
-                  background-color: #2c2e35 !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(255,255,255,0.05) !important;
-              }
-              a[href="/login"] p { 
-                  color: #e5e7eb !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
+              /* ব্যালেন্স বক্স (কালো ব্যাকগ্রাউন্ড) */
+              .custom-loggedin-right .css-1ctwhz0 {
+                  background-color: #222429 !important; /* ডার্ক ব্যাকগ্রাউন্ড */
+                  border-radius: 4px !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  height: 34px !important;
+                  padding: 0 !important;
                   margin: 0 !important;
-                  text-transform: none !important;
               }
 
-              /* Sign up বাটন */
-              a[href="/signup"] { 
-                  background-color: #1d9154 !important; /* অরিজিনাল Baji Green */
-                  border: none !important;
-              }
-              a[href="/signup"] p { 
-                  color: #ffffff !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
-                  margin: 0 !important; 
-                  text-transform: none !important;
+              /* ব্যালেন্স টেক্সট কন্টেইনার */
+              .custom-loggedin-right .css-1bsgmhw {
+                  display: flex !important;
+                  align-items: center !important;
+                  padding-left: 6px !important;
+                  margin: 0 !important;
+                  font-family: inherit !important;
               }
 
-              /* ইনপুট বক্স ডিজাইন (অতিরিক্ত) */
-              input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; 
-                  height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.08) !important; 
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+              /* ৳ আইকন - সবুজ গোল বৃত্ত */
+              .custom-currency-circle {
+                  background-color: #1d9154 !important; 
                   color: white !important;
+                  border-radius: 50% !important;
+                  width: 18px !important;
+                  height: 18px !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  font-size: 11px !important;
+                  font-weight: bold !important;
+                  margin-right: 6px !important;
               }
+
+              /* ব্যালেন্স অ্যামাউন্ট */
+              .custom-balance-amount {
+                  color: white !important;
+                  font-size: 14px !important;
+                  font-weight: 600 !important;
+                  margin-right: 8px !important;
+              }
+
+              /* রিফ্রেশ বাটন */
+              .custom-loggedin-right button.refresh {
+                  background: transparent !important;
+                  border: none !important;
+                  padding: 0 4px !important;
+                  margin-right: 4px !important;
+                  height: auto !important;
+                  min-width: auto !important;
+              }
+
+              /* + (ডিপোজিট) বাটন */
+              .custom-loggedin-right .css-1ctwhz0 > button:not(.refresh) {
+                  background-color: #1d9154 !important; /* Baji Green */
+                  height: 34px !important;
+                  width: 32px !important;
+                  border-radius: 0 4px 4px 0 !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  border: none !important;
+                  padding: 0 !important;
+              }
+
+              /* প্রোফাইল ও অন্যান্য আইকন কন্টেইনার */
+              .custom-loggedin-right .css-145pjb7 {
+                  display: flex !important;
+                  align-items: center !important;
+                  gap: 8px !important;
+                  margin: 0 !important;
+              }
+
+              /* ইনপুট বক্স ডিজাইন */
+              input.chakra-input, .chakra-input { border-radius: 8px !important; height: 50px !important; background-color: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important; }
             </style>
 
             <script>
@@ -247,12 +265,7 @@ export default {
                     const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
                     const prototype = Object.getPrototypeOf(element);
                     const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-                    
-                    if (valueSetter && valueSetter !== prototypeValueSetter) {
-                        prototypeValueSetter.call(element, value);
-                    } else {
-                        valueSetter.call(element, value);
-                    }
+                    if (valueSetter && valueSetter !== prototypeValueSetter) { prototypeValueSetter.call(element, value); } else { valueSetter.call(element, value); }
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
@@ -261,25 +274,19 @@ export default {
                     // রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
-                        if (refInput.value !== REF_CODE) {
-                            setNativeValue(refInput, REF_CODE);
-                        }
+                        if (refInput.value !== REF_CODE) { setNativeValue(refInput, REF_CODE); }
                         const parentGroup = refInput.closest('.chakra-form-control');
-                        if (parentGroup && parentGroup.style.display !== 'none') {
-                            parentGroup.style.display = 'none';
-                        }
+                        if (parentGroup && parentGroup.style.display !== 'none') { parentGroup.style.display = 'none'; }
                     }
 
                     // LiveChat বাটন হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
-                            if (btn.style.display !== 'none') {
-                                btn.style.display = 'none';
-                            }
+                            if (btn.style.display !== 'none') { btn.style.display = 'none'; }
                         }
                     });
 
-                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা (নিচে নামা বন্ধ করতে)
+                    // 🚀 লগআউট অবস্থা: বাটনের কন্টেইনার ফিক্সড করা
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
                         if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
@@ -287,13 +294,59 @@ export default {
                         }
                     }
 
-                    // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    // 🚀 স্পন্সর লোগো স্লাইডার ফিক্স
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
                             headerSwiper.swiper.params.slidesPerView = 1;
                             headerSwiper.swiper.update();
                         }
+                    }
+
+                    // ============================================================
+                    // 🚀 লগইন অবস্থা: ব্যালেন্স ও আইকনগুলো হেডারে নিয়ে যাওয়া
+                    // ============================================================
+                    const header = document.querySelector('#header');
+                    const balanceBox = document.querySelector('.css-1ctwhz0'); // ব্যালেন্স কন্টেইনার (৪র্থ ছবি)
+                    const iconsBox = document.querySelector('.css-145pjb7');   // প্রোফাইল আইকন কন্টেইনার
+
+                    if (header && balanceBox) {
+                        // লগইন বাটন থাকলে তা হাইড করা (Safety)
+                        const authContainer = document.querySelector('.fixed-auth-container');
+                        if (authContainer) authContainer.style.display = 'none';
+
+                        // হেডারের ডানদিকের কাস্টম কন্টেইনার তৈরি
+                        let customRight = document.querySelector('.custom-loggedin-right');
+                        if (!customRight) {
+                            customRight = document.createElement('div');
+                            customRight.className = 'custom-loggedin-right';
+                            header.appendChild(customRight);
+                        }
+
+                        // ব্যালেন্স বক্সকে হেডারে মুভ করা
+                        if (balanceBox.parentElement !== customRight) {
+                            customRight.appendChild(balanceBox);
+                            
+                            // ৳ লেখাকে সুন্দর সবুজ বৃত্তে রূপান্তর করা (১ম ছবির মতো)
+                            const balanceTextNode = balanceBox.querySelector('.css-1bsgmhw');
+                            if (balanceTextNode && !balanceTextNode.innerHTML.includes('custom-currency-circle')) {
+                                const originalText = balanceTextNode.innerText.trim();
+                                if(originalText.length > 0){
+                                    const currencySymbol = originalText.charAt(0); // ৳
+                                    const amountStr = originalText.slice(1).trim(); // 0.45
+                                    balanceTextNode.innerHTML = '<span class="custom-currency-circle">' + currencySymbol + '</span><span class="custom-balance-amount">' + amountStr + '</span>';
+                                }
+                            }
+                        }
+
+                        // প্রোফাইল/বোনাস আইকনগুলোকে হেডারে মুভ করা
+                        if (iconsBox && iconsBox.parentElement !== customRight) {
+                            customRight.appendChild(iconsBox);
+                        }
+                    } else {
+                        // লগআউট থাকলে লগইন বাটন আবার শো করানো
+                        const authContainer = document.querySelector('.fixed-auth-container');
+                        if (authContainer) authContainer.style.display = 'flex';
                     }
                 });
 
