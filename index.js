@@ -122,24 +122,41 @@ export default {
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; 
                   height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.08) !important; /* ডার্ক মোডের জন্য পারফেক্ট হালকা গ্রে */
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* চারপাশের সুন্দর বর্ডার */
+                  background-color: rgba(255, 255, 255, 0.08) !important;
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important;
                   color: white !important;
               }
 
-              /* ২. রাইট এবং লেফট অ্যাডঅন (চোখের আইকন, কান্ট্রি কোড) এর সাইজ এবং এলাইনমেন্ট */
-              .chakra-input__right-addon, .chakra-input__left-addon {
+              /* ২. রাইট অ্যাডঅন (চোখের আইকন, রিলোড) - ডান দিকে মার্জিন এবং ভার্টিক্যাল সেন্টার */
+              .chakra-input__right-addon {
                   height: 50px !important; 
-                  border-radius: 8px !important; 
                   display: flex !important;
                   align-items: center !important; 
                   justify-content: center !important;
+                  margin-right: 12px !important; /* ডানদিকে মার্জিন */
+                  position: absolute !important;
+                  top: 0 !important;
+                  bottom: 0 !important;
               }
 
-              /* ৩. আইকনগুলো যেন নিজেরাও সেন্টারে থাকে */
+              /* ৩. লেফট অ্যাডঅন (কান্ট্রি কোড) - বাম দিকে মার্জিন এবং ভার্টিক্যাল সেন্টার */
+              .chakra-input__left-addon {
+                  height: 50px !important; 
+                  display: flex !important;
+                  align-items: center !important; 
+                  justify-content: center !important;
+                  margin-left: 12px !important; /* বামদিকে মার্জিন */
+                  position: absolute !important;
+                  top: 0 !important;
+                  bottom: 0 !important;
+              }
+
+              /* ৪. ভেতরের বাটন এবং আইকন একদম সেন্টারে ফোর্স করা */
+              .chakra-input__right-addon button, .chakra-input__left-addon button,
               .chakra-input__right-addon svg, .chakra-input__left-addon svg,
               .chakra-input__right-addon img, .chakra-input__left-addon img {
                   margin: auto !important;
+                  align-self: center !important;
                   display: block !important;
               }
             </style>
@@ -183,7 +200,7 @@ export default {
                         }
                     });
 
-                    // 🚀 NEW: Sign Up এবং Login লেখাকে বামে আনা
+                    // Sign Up এবং Login লেখাকে বামে আনা
                     document.querySelectorAll('p').forEach(p => {
                         const text = p.textContent.trim().toLowerCase();
                         if(text === 'sign up' || text === 'login') {
@@ -192,7 +209,7 @@ export default {
                                 p.style.textAlign = 'left';
                                 p.style.marginLeft = '15px'; 
                                 p.style.fontWeight = 'bold'; 
-                                p.style.textTransform = 'capitalize'; // প্রথম অক্ষর বড় হাতের হবে
+                                p.style.textTransform = 'capitalize'; 
                             }
                         }
                     });
