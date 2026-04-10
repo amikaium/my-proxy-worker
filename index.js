@@ -118,25 +118,26 @@ export default {
             // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* 🚀 মেইন হেডার কন্টেইনার */
+              /* ==========================================
+                 🚀 হেডার এবং মেনু ডিজাইন (আগের মতোই ফিক্সড)
+                 ========================================== */
               div#header {
                   display: flex !important;
                   align-items: center !important;
                   padding: 0 12px !important;
-                  background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
+                  background-color: #17191c !important; 
                   height: 55px !important;
+                  z-index: 1000 !important;
               }
 
-              /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  gap: 12px !important; 
                   position: static !important; 
                   transform: none !important;
               }
 
-              /* মেনু আইকন শো করা (আগে হাইড করা ছিল) */
               .css-1vvjgde button[aria-label="menu"] {
                   display: flex !important;
                   background: transparent !important;
@@ -144,14 +145,12 @@ export default {
                   margin: 0 !important;
               }
 
-              /* মেইন লোগো সাইজ */
               .css-1vvjgde > img {
                   height: 22px !important;
                   width: auto !important;
                   object-fit: contain !important;
               }
 
-              /* স্পন্সর লোগো স্লাইডার সাইজ ফিক্স */
               .css-1vvjgde .swiper {
                   width: 45px !important; 
                   overflow: hidden !important;
@@ -168,9 +167,8 @@ export default {
                   object-fit: contain !important;
               }
 
-              /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার (সম্পূর্ণ ফিক্সড) */
               .fixed-auth-container {
-                  position: fixed !important; /* স্ক্রিনের ডানদিকে পার্মানেন্টলি ফিক্সড */
+                  position: fixed !important; 
                   top: 11px !important;
                   right: 12px !important;
                   display: flex !important;
@@ -181,17 +179,8 @@ export default {
                   background: transparent !important;
               }
 
-              /* ফালতু ডিভ হাইড */
-              div.css-h096tp {
-                  display: none !important;
-              }
+              .language-select-div { display: none !important; }
 
-              /* 🚀 ল্যাঙ্গুয়েজ সিলেক্টর সম্পূর্ণ হাইড */
-              .language-select-div {
-                  display: none !important;
-              }
-
-              /* 🚀 লগইন ও সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
                   border-radius: 4px !important; 
                   height: 32px !important; 
@@ -202,40 +191,86 @@ export default {
                   text-decoration: none !important;
                   box-sizing: border-box !important;
               }
+              a[href="/login"] { background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; }
+              a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; margin: 0 !important; }
+              a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
+              a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; margin: 0 !important; }
 
-              /* Log in বাটন */
-              a[href="/login"] { 
-                  background-color: #2c2e35 !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(255,255,255,0.05) !important;
-              }
-              a[href="/login"] p { 
-                  color: #e5e7eb !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
-                  margin: 0 !important;
-                  text-transform: none !important;
-              }
-
-              /* Sign up বাটন */
-              a[href="/signup"] { 
-                  background-color: #1d9154 !important; /* অরিজিনাল Baji Green */
-                  border: none !important;
-              }
-              a[href="/signup"] p { 
-                  color: #ffffff !important; 
-                  font-size: 13px !important; 
-                  font-weight: 500 !important; 
-                  margin: 0 !important; 
-                  text-transform: none !important;
+              /* ==========================================
+                 💎 প্রিমিয়াম ব্যালেন্স সেকশন ডিজাইন (VIP Look)
+                 ========================================== */
+              .premium-balance-container {
+                  background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
+                  border: 1px solid rgba(254, 172, 4, 0.15) !important;
+                  border-left: 4px solid #FEAC04 !important; /* গোল্ডেন আকৃতি */
+                  border-radius: 8px !important;
+                  padding: 12px 16px !important;
+                  margin: 10px 12px 16px 12px !important; /* চারপাশে সুন্দর স্পেসিং */
+                  display: flex !important;
+                  flex-direction: row !important;
+                  justify-content: space-between !important; /* ইউজারনেম একপাশে, ব্যালেন্স অন্যপাশে */
+                  align-items: center !important;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+                  position: relative !important;
+                  overflow: hidden !important;
               }
 
-              /* ইনপুট বক্স ডিজাইন (অতিরিক্ত) */
+              /* হালকা গ্লাস ইফেক্ট বা শাইন */
+              .premium-balance-container::before {
+                  content: '' !important;
+                  position: absolute !important;
+                  top: 0; left: -100%; width: 50%; height: 100%;
+                  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent) !important;
+                  transform: skewX(-20deg) !important;
+                  animation: shineEffect 5s infinite !important;
+              }
+              @keyframes shineEffect {
+                  0% { left: -100%; }
+                  20% { left: 200%; }
+                  100% { left: 200%; }
+              }
+
+              /* ভিতরের টেক্সট সাইজ ও কালার */
+              .premium-balance-container * {
+                  position: relative !important;
+                  z-index: 2 !important;
+              }
+
+              /* প্রথম চাইল্ড (সাধারণত Username) */
+              .premium-balance-container > :first-child {
+                  color: #e5e7eb !important;
+                  font-size: 14px !important;
+                  font-weight: 600 !important;
+                  letter-spacing: 0.5px !important;
+              }
+
+              /* দ্বিতীয় চাইল্ড (সাধারণত Balance) */
+              .premium-balance-container > :last-child {
+                  display: flex !important;
+                  align-items: center !important;
+                  gap: 10px !important;
+                  color: #FEAC04 !important; /* গোল্ডেন কালার */
+                  font-size: 16px !important;
+                  font-weight: 700 !important;
+              }
+
+              /* রিফ্রেশ আইকন অ্যানিমেশন */
+              .premium-balance-container svg {
+                  fill: #FEAC04 !important;
+                  width: 18px !important;
+                  height: 18px !important;
+                  cursor: pointer !important;
+                  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+              }
+              .premium-balance-container svg:active {
+                  transform: rotate(360deg) !important; /* ক্লিক করলে ঘুরবে */
+              }
+
+              /* ইনপুট বক্স ডিজাইন */
               input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; 
-                  height: 50px !important; 
+                  border-radius: 8px !important; height: 50px !important; 
                   background-color: rgba(255, 255, 255, 0.08) !important; 
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
-                  color: white !important;
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important;
               }
             </style>
 
@@ -256,30 +291,36 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                const observer = new MutationObserver(() => {
-                    
-                    // রেফারেল বক্স হাইড এবং কোড বসানো
-                    const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
-                    if (refInput) {
-                        if (refInput.value !== REF_CODE) {
-                            setNativeValue(refInput, REF_CODE);
-                        }
-                        const parentGroup = refInput.closest('.chakra-form-control');
-                        if (parentGroup && parentGroup.style.display !== 'none') {
-                            parentGroup.style.display = 'none';
+                // টেক্সট খোঁজার ফাংশন
+                function findTextNode(text) {
+                    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                    let node;
+                    while (node = walker.nextNode()) {
+                        if (node.nodeValue.includes(text)) {
+                            return node;
                         }
                     }
+                    return null;
+                }
 
-                    // LiveChat বাটন হাইড করা
+                const observer = new MutationObserver(() => {
+                    
+                    // রেফারেল কোড
+                    const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
+                    if (refInput) {
+                        if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
+                        const parentGroup = refInput.closest('.chakra-form-control');
+                        if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
+                    }
+
+                    // চ্যাট হাইড
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
-                            if (btn.style.display !== 'none') {
-                                btn.style.display = 'none';
-                            }
+                            if (btn.style.display !== 'none') btn.style.display = 'none';
                         }
                     });
 
-                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা (নিচে নামা বন্ধ করতে)
+                    // লগইন বাটন ফিক্স
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
                         if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
@@ -287,7 +328,29 @@ export default {
                         }
                     }
 
-                    // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    // 🚀 ব্যালেন্স ডিজাইন আপডেট (কোনো স্থান পরিবর্তন ছাড়াই)
+                    const bdtTextNode = findTextNode('BDT:');
+                    if (bdtTextNode) {
+                        let originalWrapper = bdtTextNode.parentElement;
+                        
+                        // মেইন কন্টেইনার খোঁজা (ঠিক আগের মতোই, কিন্তু মুভ না করে শুধু ক্লাস অ্যাড করবো)
+                        for(let i=0; i<4; i++){
+                            if(originalWrapper.parentElement && 
+                               !originalWrapper.parentElement.innerText.includes('Promotions') && 
+                               !originalWrapper.parentElement.innerText.includes('Deposit')) {
+                                originalWrapper = originalWrapper.parentElement;
+                            } else {
+                                break;
+                            }
+                        }
+                        
+                        // আমাদের নতুন প্রিমিয়াম ক্লাস যুক্ত করা
+                        if (!originalWrapper.classList.contains('premium-balance-container')) {
+                            originalWrapper.classList.add('premium-balance-container');
+                        }
+                    }
+
+                    // স্পন্সর লোগো
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
