@@ -178,13 +178,12 @@ export default {
                   background: transparent !important;
               }
 
-              /* 🚀 ব্যালেন্স কন্টেইনার হেডারে ফিক্সড করা (ডান দিকে) */
+              /* 🚀 ব্যালেন্স কন্টেইনার হেডারে ফিক্সড করা */
               .fixed-header-balance {
                   position: fixed !important;
-                  top: 27.5px !important; /* 55px হেডারের ঠিক মাঝখানে */
-                  transform: translateY(-50%) !important;
-                  right: 12px !important; /* হেডারের ডান দিকে এলাইন */
-                  z-index: 999999 !important;
+                  top: 8px !important; /* হেডারের ঠিক মাঝামাঝি সুন্দর করে বসবে */
+                  right: 12px !important; 
+                  z-index: 2147483647 !important; /* ম্যাক্সিমাম লেভেল */
                   display: flex !important;
                   flex-direction: column !important;
                   align-items: flex-end !important;
@@ -192,17 +191,19 @@ export default {
                   pointer-events: auto !important;
               }
 
-              /* ব্যালেন্স এবং ইউজারনেমের সাইজ ও পজিশন ফিক্স */
-              .fixed-header-balance p {
-                  margin: 0 !important;
+              .fixed-header-balance p, .fixed-header-balance span, .fixed-header-balance div {
                   text-align: right !important;
+                  margin: 0 !important;
                   line-height: 1.3 !important;
               }
 
-              div.css-h096tp {
-                  display: none !important;
+              /* হেডারে ইউজারনেম সাইজ একটু ফিট করা */
+              .fixed-header-balance > :first-child {
+                  font-size: 11px !important;
+                  opacity: 0.9 !important;
               }
 
+              /* Language Selector হাইড */
               .language-select-div {
                   display: none !important;
               }
@@ -267,9 +268,20 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
+                // 🚀 TreeWalker: রিঅ্যাক্ট সাইটের যেকোনো টেক্সট নিখুঁতভাবে খোঁজার জাদুকরী ফাংশন
+                function findTextNode(text) {
+                    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                    let node;
+                    while (node = walker.nextNode()) {
+                        if (node.nodeValue.includes(text)) {
+                            return node;
+                        }
+                    }
+                    return null;
+                }
+
                 const observer = new MutationObserver(() => {
                     
-                    // রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) {
@@ -281,7 +293,6 @@ export default {
                         }
                     }
 
-                    // LiveChat বাটন হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
                             if (btn.style.display !== 'none') {
@@ -290,7 +301,6 @@ export default {
                         }
                     });
 
-                    // লগইন/সাইনআপ বাটন ফিক্সড করা
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
                         if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
@@ -298,33 +308,23 @@ export default {
                         }
                     }
 
-                    // 🚀 ব্যালেন্স (BDT) হেডারে মুভ করার স্মার্ট লজিক
-                    // এমন এলিমেন্ট খুঁজবে যেখানে 'BDT:' লেখা আছে
-                    const bdtElements = Array.from(document.querySelectorAll('*')).filter(el => 
-                        el.textContent && el.textContent.includes('BDT:') && el.children.length === 0
-                    );
-
-                    if (bdtElements.length > 0) {
-                        let bdtNode = bdtElements[bdtElements.length - 1]; // সবচেয়ে ভেতরের টেক্সট নোড
-                        let targetNode = bdtNode;
-                        
-                        // ৩-৪ লেভেল উপরে গিয়ে প্যারেন্ট খুঁজবে, তবে 'Promotions' বা 'Deposit' বাটন যেন সিলেক্ট না হয় সেদিকে খেয়াল রাখবে
-                        for(let i=0; i<4; i++) {
-                            let parent = targetNode.parentElement;
-                            if(parent && !parent.textContent.includes('Promotions') && !parent.textContent.includes('Deposit')) {
-                                targetNode = parent;
-                            } else {
-                                break;
-                            }
+                    // 🚀 ব্যালেন্স (BDT) হেডারে মুভ করার নতুন ও 100% কার্যকরী লজিক
+                    const bdtTextNode = findTextNode('BDT:');
+                    if (bdtTextNode) {
+                        let container = bdtTextNode.parentElement;
+                        // উপরের দিকে কন্টেইনার খুঁজবে, কিন্তু Promotions বা Deposit এর প্যারেন্ট ধরবে না
+                        while(container.parentElement && 
+                              !container.parentElement.innerText.includes('Promotions') && 
+                              !container.parentElement.innerText.includes('Deposit')) {
+                            container = container.parentElement;
                         }
-
-                        // নির্দিষ্ট প্যারেন্টে ক্লাস অ্যাড করে হেডারে মুভ করে দিবে
-                        if (targetNode && !targetNode.classList.contains('fixed-header-balance')) {
-                            targetNode.classList.add('fixed-header-balance');
+                        
+                        // নির্দিষ্ট কন্টেইনারে ক্লাস যুক্ত করা
+                        if (!container.classList.contains('fixed-header-balance')) {
+                            container.classList.add('fixed-header-balance');
                         }
                     }
 
-                    // স্পন্সর লোগো স্লাইডার ফোর্স
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
