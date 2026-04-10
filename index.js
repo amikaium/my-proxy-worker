@@ -103,7 +103,7 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer
+            // 🚀 NEW: UI Customizer 
             const customStylesAndScripts = `
             <style>
               /* ==========================================
@@ -159,7 +159,7 @@ export default {
               /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (হালকা কমলা ব্যাকগ্রাউন্ড) */
               div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
-                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.20) 0%, rgba(254, 172, 4, 0.05) 100%) !important; /* হালকা কমলা কালার */
+                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.20) 0%, rgba(254, 172, 4, 0.05) 100%) !important; 
                   border: 1px solid rgba(254, 172, 4, 0.5) !important; 
                   border-radius: 8px !important;
                   padding: 8px 12px !important; 
@@ -168,7 +168,6 @@ export default {
                   justify-content: center !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
                   position: relative !important;
-                  border-right: 1px solid rgba(254, 172, 4, 0.5) !important; 
               }
 
               /* Username Text */
@@ -239,7 +238,8 @@ export default {
                   flex: 1 !important;
                   width: 100% !important;
                   background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; /* বামে সবুজ, ডানে লাল */
-                  border: 1px solid rgba(255, 255, 255, 0.15) !important; 
+                  border: 0px none !important; /* বর্ডার পুরোপুরি রিমুভ করা হলো */
+                  outline: none !important;
                   border-radius: 8px !important;
                   display: flex !important;
                   flex-direction: column !important;
@@ -248,17 +248,24 @@ export default {
                   padding: 6px 4px !important; 
                   text-decoration: none !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+                  overflow: hidden !important; /* চিকন দাগ হাইড করার জন্য */
               }
 
+              /* 🤍 আইকন সম্পূর্ণ সাদা */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg {
                   margin-bottom: 2px !important;
                   width: 18px !important;
                   height: 18px !important;
-                  fill: #ffffff !important; /* আইকন সাদা */
+                  fill: #ffffff !important; 
+                  stroke: #ffffff !important; 
+                  color: #ffffff !important;
               }
 
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
-                  color: #ffffff !important; /* ভেতরের টেক্সট সাদা */
+              /* 🤍 ভেতরের টেক্সট সম্পূর্ণ সাদা */
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] p,
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] span,
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] div {
+                  color: #ffffff !important; 
                   font-weight: 700 !important;
                   font-size: 11px !important;
                   margin: 0 !important;
