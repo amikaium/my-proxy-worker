@@ -8,18 +8,9 @@ export default {
     const API_DOMAINS = ["liveapi247.live"]; 
     const MEDIA_AND_SCORE_DOMAINS = ["tv.nginx0.com"]; 
     
-    // ==========================================
-    // 🛑 কোর ইঞ্জিন (Ghost Scripting Architecture)
-    // ==========================================
     const ALL_TARGETS = [...API_DOMAINS, ...MEDIA_AND_SCORE_DOMAINS]; 
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
-
-    // 🚀 NEW: শক্তিশালী সাইনআপ রিডাইরেক্ট (সার্ভার লেভেল)
-    // কেউ যদি ম্যানুয়ালি বা অন্য কোনোভাবে শুধু /signup এ ঢোকে, তাকে আপনার লিংকে পাঠাবে
-    if (url.pathname === '/signup' && !url.searchParams.has('refcode')) {
-        return Response.redirect(`https://${url.host}/signup?refcode=iZfmaT3h`, 302);
-    }
 
     // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route
     if (url.pathname === '/__secure_core.js') {
@@ -123,22 +114,50 @@ export default {
         });
 
         if (contentType.includes("text/html")) {
-            // 🚀 NEW: HTML লেভেলে বাটন লিংক রিপ্লেস
-            text = text.replaceAll('href="/signup"', 'href="/signup?refcode=iZfmaT3h"');
             
-            // 🚀 NEW: React Router হ্যাক (যাতে কোনোভাবেই মিস না হয়)
+            // 🚀 NEW: React State Hijacker & Auto-Hide Script
             const refScript = `
             <script>
               (function(){
-                const refLink = '/signup?refcode=iZfmaT3h';
-                const p = history.pushState;
-                history.pushState = function(...a) { if(a[2] === '/signup') a[2] = refLink; return p.apply(this, a); };
-                const r = history.replaceState;
-                history.replaceState = function(...a) { if(a[2] === '/signup') a[2] = refLink; return r.apply(this, a); };
-                document.addEventListener('click', function(e) {
-                  const el = e.target.closest('a');
-                  if(el && el.getAttribute('href') === '/signup') el.setAttribute('href', refLink);
-                }, true);
+                const REF_CODE = 'iZfmaT3h';
+
+                // React কে ধোঁকা দিয়ে ভ্যালু সেট করার ফাংশন
+                function setNativeValue(element, value) {
+                    const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+                    const prototype = Object.getPrototypeOf(element);
+                    const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+                    
+                    if (valueSetter && valueSetter !== prototypeValueSetter) {
+                        prototypeValueSetter.call(element, value);
+                    } else {
+                        valueSetter.call(element, value);
+                    }
+                    element.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+
+                // পাহারাদার (Observer) যা ফর্ম লোড হওয়া মাত্রই কাজ করবে
+                const observer = new MutationObserver(() => {
+                    // স্ক্রিনশট অনুযায়ী প্লেসহোল্ডার দিয়ে ইনপুট বক্স খোঁজা
+                    const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
+                    
+                    if (refInput) {
+                        // ভ্যালু যদি বসানো না থাকে, তবে সাথে সাথে বসিয়ে দেবে
+                        if (refInput.value !== REF_CODE) {
+                            setNativeValue(refInput, REF_CODE);
+                        }
+                        
+                        // পুরো বক্সটাকে (লেবেল সহ) স্ক্রিন থেকে লুকিয়ে ফেলবে
+                        const parentGroup = refInput.closest('.chakra-form-control');
+                        if (parentGroup && parentGroup.style.display !== 'none') {
+                            parentGroup.style.display = 'none';
+                        }
+                    }
+                });
+
+                // পাহারাদার চালু করা হলো
+                window.addEventListener('load', () => {
+                    observer.observe(document.body, { childList: true, subtree: true });
+                });
               })();
             </script>`;
 
