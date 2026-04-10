@@ -115,48 +115,33 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
+            // 🚀 NEW: UI Customizer (Fixed Layout)
             const customStylesAndScripts = `
             <style>
               /* ১. ইনপুট বক্সের রাউন্ড শেপ, 50px হাইট এবং হালকা গ্রে ব্যাকগ্রাউন্ড */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; 
                   height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.08) !important;
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                  background-color: rgba(255, 255, 255, 0.08) !important; 
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
                   color: white !important;
               }
 
-              /* ২. রাইট অ্যাডঅন (চোখের আইকন, রিলোড) - ডান দিকে মার্জিন এবং ভার্টিক্যাল সেন্টার */
-              .chakra-input__right-addon {
+              /* ২. লেআউট না ভেঙে আইকনগুলোকে সেন্টারে রাখার সেফ লজিক */
+              .chakra-input__right-addon, .chakra-input__left-addon,
+              .chakra-input__right-element, .chakra-input__left-element {
                   height: 50px !important; 
                   display: flex !important;
                   align-items: center !important; 
                   justify-content: center !important;
-                  margin-right: 12px !important; /* ডানদিকে মার্জিন */
-                  position: absolute !important;
-                  top: 0 !important;
-                  bottom: 0 !important;
+                  /* আগের ক্ষতিকর পজিশন এবং মার্জিন রিমুভ করা হয়েছে */
               }
 
-              /* ৩. লেফট অ্যাডঅন (কান্ট্রি কোড) - বাম দিকে মার্জিন এবং ভার্টিক্যাল সেন্টার */
-              .chakra-input__left-addon {
-                  height: 50px !important; 
-                  display: flex !important;
-                  align-items: center !important; 
-                  justify-content: center !important;
-                  margin-left: 12px !important; /* বামদিকে মার্জিন */
-                  position: absolute !important;
-                  top: 0 !important;
-                  bottom: 0 !important;
-              }
-
-              /* ৪. ভেতরের বাটন এবং আইকন একদম সেন্টারে ফোর্স করা */
-              .chakra-input__right-addon button, .chakra-input__left-addon button,
+              /* ৩. আইকনগুলো যেন নিখুঁতভাবে সেন্টারে থাকে */
               .chakra-input__right-addon svg, .chakra-input__left-addon svg,
+              .chakra-input__right-element svg, .chakra-input__left-element svg,
               .chakra-input__right-addon img, .chakra-input__left-addon img {
                   margin: auto !important;
-                  align-self: center !important;
                   display: block !important;
               }
             </style>
