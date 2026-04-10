@@ -140,59 +140,61 @@ export default {
 
 
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Strict Scoping)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Perfect Height & Highlights)
                  ========================================== */
 
-              /* 🚀 মেইন কন্টেইনার (div.css-1rfmqpc) */
+              /* 🚀 মেইন কন্টেইনার */
               div.css-1rfmqpc {
                   display: flex !important;
                   flex-direction: row !important;
                   justify-content: space-between !important;
                   align-items: stretch !important;
-                  padding: 10px 12px 14px 12px !important;
-                  gap: 12px !important;
+                  padding: 8px 12px !important; /* হাইট কমানো হলো */
+                  gap: 10px !important;
                   background-color: #121418 !important; 
                   width: 100% !important;
                   box-sizing: border-box !important;
               }
 
-              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (div.css-1rfmqpc এর ভেতরের div.css-1ctwhz0) */
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স */
               div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
-                  background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
-                  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                  border-radius: 10px !important;
-                  padding: 12px 14px !important;
+                  background: linear-gradient(135deg, #2b2f3a 0%, #1a1d24 100%) !important; /* কালার হাইলাইট */
+                  border: 1px solid rgba(254, 172, 4, 0.4) !important; /* গোল্ডেন বর্ডার */
+                  border-radius: 8px !important;
+                  padding: 8px 12px !important; /* হাইট কমানো হলো */
                   display: flex !important;
                   flex-direction: column !important;
                   justify-content: center !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   position: relative !important;
-                  border-right: none !important;
+                  border-right: 1px solid rgba(254, 172, 4, 0.4) !important; /* ফিক্সড বর্ডার */
               }
 
               /* Username Text */
               div.css-1rfmqpc > div.css-1ctwhz0 > p.css-1bsgmhw {
                   color: #e5e7eb !important;
-                  font-size: 13px !important;
+                  font-size: 12px !important;
                   font-weight: 600 !important;
-                  margin: 0 0 6px 0 !important;
+                  margin: 0 0 2px 0 !important; /* গ্যাপ কমানো হলো */
                   letter-spacing: 0.5px !important;
               }
 
               /* BDT Balance */
               div.css-1rfmqpc > div.css-1ctwhz0 > p.css-0 {
                   color: #FEAC04 !important; 
-                  font-size: 16px !important;
+                  font-size: 15px !important;
                   font-weight: 700 !important;
                   margin: 0 !important;
               }
 
-              /* Refresh Icon */
+              /* 🚀 অরিজিনাল Refresh Icon ফিক্স */
               div.css-1rfmqpc > div.css-1ctwhz0 > button {
                   position: absolute !important;
-                  right: 14px !important;
-                  bottom: 12px !important;
+                  right: 12px !important;
+                  top: 50% !important; /* একেবারে মাঝখানে */
+                  transform: translateY(-50%) !important;
+                  color: #FEAC04 !important; /* অরিজিনাল স্ট্রোকের কালার */
                   background: transparent !important;
                   border: none !important;
                   padding: 0 !important;
@@ -202,14 +204,17 @@ export default {
                   transition: transform 0.3s !important;
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button svg {
-                  fill: #FEAC04 !important;
+                  fill: none !important; /* Fill রিমুভ, অরিজিনাল স্ট্রোক থাকবে */
+                  stroke: currentColor !important;
                   width: 18px !important;
                   height: 18px !important;
               }
-              div.css-1rfmqpc > div.css-1ctwhz0 > button:active { transform: rotate(180deg) !important; }
+              div.css-1rfmqpc > div.css-1ctwhz0 > button:active { 
+                  transform: translateY(-50%) rotate(180deg) !important; 
+              }
 
 
-              /* 📦 Box 2: প্রমোশন এবং ডিপোজিট (div.css-1rfmqpc এর ভেতরের div.css-145pjb7) */
+              /* 📦 Box 2: প্রমোশন এবং ডিপোজিট কন্টেইনার */
               div.css-1rfmqpc > div.css-145pjb7 {
                   flex: 0.9 !important;
                   display: flex !important;
@@ -224,42 +229,38 @@ export default {
                   display: none !important; 
               }
 
-              div.css-1rfmqpc > div.css-145pjb7 > a {
+              /* 🚫 প্রমোশন বাটন পুরোপুরি হাইড */
+              div.css-1rfmqpc > div.css-145pjb7 > a[href="/promotions"] {
+                  display: none !important;
+              }
+
+              /* 💰 Deposit/Withdraw বাটনকে ফুল উইডথ করা */
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   flex: 1 !important;
-                  background: linear-gradient(135deg, #252830 0%, #1a1c22 100%) !important;
-                  border: 1px solid rgba(255, 255, 255, 0.05) !important;
-                  border-radius: 10px !important;
+                  width: 100% !important;
+                  background: linear-gradient(135deg, #2b2f3a 0%, #1a1d24 100%) !important; /* কালার হাইলাইট */
+                  border: 1px solid rgba(254, 172, 4, 0.5) !important; /* ক্লিয়ার গোল্ডেন বর্ডার */
+                  border-radius: 8px !important;
                   display: flex !important;
                   flex-direction: column !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  padding: 8px 4px !important;
+                  padding: 6px 4px !important; /* হাইট কমানো হলো */
                   text-decoration: none !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
               }
 
-              div.css-1rfmqpc > div.css-145pjb7 > a svg {
-                  margin-bottom: 4px !important;
-                  width: 20px !important;
-                  height: 20px !important;
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg {
+                  margin-bottom: 2px !important;
+                  width: 18px !important;
+                  height: 18px !important;
               }
 
-              div.css-1rfmqpc > div.css-145pjb7 > a span, 
-              div.css-1rfmqpc > div.css-145pjb7 > a p, 
-              div.css-1rfmqpc > div.css-145pjb7 > a div {
-                  font-size: 11px !important;
-                  margin: 0 !important;
-                  color: #e5e7eb !important;
-              }
-
-              /* স্পেশাল ডিপোজিট বাটন হাইলাইট */
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
-                  border: 1px solid rgba(254, 172, 4, 0.4) !important;
-                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.1) 0%, #1a1c22 100%) !important;
-              }
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
                   color: #FEAC04 !important;
                   font-weight: 600 !important;
+                  font-size: 11px !important;
+                  margin: 0 !important;
               }
 
               /* ইনপুট বক্স ডিজাইন */
@@ -300,15 +301,22 @@ export default {
                         }
                     });
 
-                    // 🚀 লগইন ও সাইনআপ বাটন ফিক্সড করা (Force CSS in DOM)
+                    // 🚀 লগইন ও সাইনআপ বাটন ফিক্সড করা
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     if (loginBtnNode && loginBtnNode.parentElement) {
-                        // React যেন রিমুভ করতে না পারে তাই ডাইরেক্ট ইনলাইন স্টাইল বসালাম
                         loginBtnNode.parentElement.setAttribute(
                             'style', 
                             'position: fixed !important; top: 11px !important; right: 12px !important; display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important; width: auto !important; background: transparent !important;'
                         );
                     }
+
+                    // 🚀 Deposit লেখাকে পরিবর্তন করে "Deposit/Withdraw" করা
+                    const depositTextNodes = document.querySelectorAll('a[href*="deposit"] p, a[href*="deposit"] span, a[href*="deposit"] div');
+                    depositTextNodes.forEach(node => {
+                        if (node.textContent.trim() === 'Deposit') {
+                            node.textContent = 'Deposit/Withdraw';
+                        }
+                    });
 
                     // স্পন্সর লোগো স্লাইডার
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
