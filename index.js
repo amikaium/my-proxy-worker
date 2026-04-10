@@ -126,27 +126,43 @@ export default {
                   border: 1px solid rgba(255, 255, 255, 0.1) !important; 
                   color: white !important;
               }
-              .chakra-input__right-addon, .chakra-input__left-addon {
-                  height: 50px !important; 
-                  border-radius: 8px !important; 
-                  display: flex !important;
-                  align-items: center !important; 
-                  justify-content: center !important;
+
+              /* 🚀 আপডেট: বাটন ফ্ল্যাশ (FOUC) বন্ধ করার জন্য ডাইরেক্ট গ্লোবাল CSS */
+              /* লগইন বাটন (Jeetbuzz স্টাইল) */
+              a[href="/login"] { 
+                  background-color: #3b3b3b !important; 
+                  border-radius: 4px !important; 
+                  height: 32px !important; 
+                  padding: 0 12px !important;
+                  display: flex !important; align-items: center !important; justify-content: center !important;
+                  border: none !important; text-decoration: none !important;
               }
-              .chakra-input__right-addon svg, .chakra-input__left-addon svg,
-              .chakra-input__right-addon img, .chakra-input__left-addon img {
-                  margin: auto !important;
-                  display: block !important;
+              a[href="/login"] p { 
+                  color: #ffffff !important; font-size: 13px !important; font-weight: bold !important; text-transform: capitalize !important; margin: 0 !important;
               }
 
-              /* 🚀 আপডেট: হেডারের লগইন, সাইনআপ ও ল্যাঙ্গুয়েজ সিলেক্টর পজিশনিং */
-              .custom-header-auth-buttons {
+              /* সাইনআপ বাটন (Jeetbuzz স্টাইল) */
+              a[href="/signup"] { 
+                  background-color: #ffb800 !important; 
+                  border-radius: 4px !important; 
+                  height: 32px !important; 
+                  padding: 0 12px !important;
+                  display: flex !important; align-items: center !important; justify-content: center !important;
+                  border: none !important; text-decoration: none !important;
+              }
+              a[href="/signup"] p { 
+                  color: #000000 !important; font-size: 13px !important; font-weight: bold !important; text-transform: capitalize !important; margin: 0 !important; 
+              }
+
+              /* 🚀 আপডেট: হেডারের লগইন ও সাইনআপ কন্টেইনার পজিশনিং (সরাসরি ক্লাস টার্গেট) */
+              .css-1w1k8u1 {
                   position: fixed !important;
                   top: 10px !important; 
                   right: 10px !important; 
                   bottom: auto !important;
                   left: auto !important;
                   display: flex !important;
+                  flex-direction: row !important;
                   align-items: center !important; 
                   gap: 8px !important; 
                   z-index: 99999 !important;
@@ -154,38 +170,11 @@ export default {
                   background: transparent !important;
               }
 
-              /* বাটন সাইজ ও শেপ (Jeetbuzz স্টাইল) */
-              .custom-header-auth-buttons a {
-                  border-radius: 4px !important; 
-                  height: 32px !important; 
-                  padding: 0 12px !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  border: none !important;
-                  text-decoration: none !important;
-              }
-
-              .custom-header-auth-buttons a p {
-                  margin: 0 !important;
-                  text-align: center !important;
-                  font-size: 13px !important;
-                  font-weight: bold !important;
-                  text-transform: capitalize !important;
-              }
-
-              /* লগইন বাটন কালার */
-              .custom-header-auth-buttons a[href="/login"] { background-color: #3b3b3b !important; }
-              .custom-header-auth-buttons a[href="/login"] p { color: #ffffff !important; }
-
-              /* সাইনআপ বাটন কালার */
-              .custom-header-auth-buttons a[href="/signup"] { background-color: #ffb800 !important; }
-              .custom-header-auth-buttons a[href="/signup"] p { color: #000000 !important; }
-
-              /* 🚀 আপডেট: ল্যাঙ্গুয়েজ সিলেক্টর (পতাকা) সার্কেল পারফেক্ট ডিজাইন */
-              .custom-header-auth-buttons .language-select-div {
+              /* 🚀 আপডেট: ল্যাঙ্গুয়েজ সিলেক্টর (পতাকা) একদম পারফেক্ট সার্কেল */
+              .language-select-div {
                   width: 30px !important; 
                   height: 30px !important;
+                  min-width: 30px !important;
                   border-radius: 50% !important; /* গোল সার্কেল */
                   overflow: hidden !important;
                   display: flex !important;
@@ -198,17 +187,19 @@ export default {
                   border: 1px solid rgba(255,255,255,0.2) !important;
               }
 
-              .custom-header-auth-buttons .language-select-div img {
+              .language-select-div img {
                   width: 100% !important;
                   height: 100% !important;
-                  object-fit: cover !important;
-                  border-radius: 50% !important; /* ইমেজের কর্নার গোল */
+                  object-fit: cover !important; /* ইমেজ যেন সুন্দরভাবে বসে */
+                  border-radius: 50% !important;
+                  margin: 0 !important;
               }
 
-              /* ল্যাঙ্গুয়েজের পাশের সব লেখা এবং আইকন পার্মানেন্ট হাইড */
-              .custom-header-auth-buttons .language-select-div p,
-              .custom-header-auth-buttons .language-select-div span,
-              .custom-header-auth-buttons .language-select-div svg {
+              /* ল্যাঙ্গুয়েজের ভেতরের সব লেখা এবং অ্যারো আইকন পার্মানেন্ট হাইড */
+              .language-select-div p,
+              .language-select-div span,
+              .language-select-div svg,
+              .language-select-div .chakra-text {
                   display: none !important;
               }
 
@@ -217,14 +208,20 @@ export default {
                   display: none !important;
               }
 
-              /* 🚀 আপডেট: লোগো স্লাইডার ছোট এবং বাম দিকে পজিশন করা হলো */
+              /* 🚀 আপডেট: বাম দিকের হেডারের সিরিয়াল ঠিক করা (মেনু > লোগো > স্পন্সর) */
               .css-1vvjgde {
-                  max-width: 90px !important; /* স্লাইডারের চওড়া কমানো হলো */
-                  position: absolute !important;
-                  left: 60px !important; /* একটু বাম দিকে চাপানো হলো */
-                  top: 50% !important;
-                  transform: translateY(-50%) !important;
-                  z-index: 99 !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  position: relative !important;
+                  left: 0 !important;
+                  transform: none !important; /* আগের অ্যাবসুলেট পজিশন রিমুভ করা হলো */
+              }
+
+              /* স্পন্সর লোগো স্লাইডারের সাইজ কন্ট্রোল (যাতে ১টি লোগো দেখায়) */
+              .css-1vvjgde .swiper {
+                  width: 70px !important; /* নির্দিষ্ট উইডথ দেওয়া হলো */
+                  overflow: hidden !important;
               }
               .css-1vvjgde .swiper-slide {
                   display: flex !important;
@@ -233,7 +230,7 @@ export default {
                   width: 100% !important; 
               }
               .css-1vvjgde .swiper-slide img {
-                  max-width: 60px !important; /* লোগোর সাইজ ছোট করা হলো */
+                  max-width: 60px !important;
                   max-height: 35px !important;
                   object-fit: contain !important;
               }
@@ -279,24 +276,14 @@ export default {
                         }
                     });
 
-                    // বাটন ও ল্যাঙ্গুয়েজ সিলেক্টর হেডারে একসাথে সেট করা
-                    const loginBtnNode = document.querySelector('a[href="/login"]');
-                    const signupBtnNode = document.querySelector('a[href="/signup"]');
-                    
-                    if (loginBtnNode && signupBtnNode && loginBtnNode.parentElement === signupBtnNode.parentElement) {
-                        const wrapperDiv = loginBtnNode.parentElement;
-                        if (!wrapperDiv.classList.contains('custom-header-auth-buttons')) {
-                            wrapperDiv.classList.add('custom-header-auth-buttons');
-                        }
-
-                        // ল্যাঙ্গুয়েজ সিলেক্টরকে সাইনআপের ডানপাশে নিয়ে আসা
-                        const langDiv = document.querySelector('.language-select-div');
-                        if (langDiv && langDiv.parentElement !== wrapperDiv) {
-                            wrapperDiv.appendChild(langDiv);
-                        }
+                    // 🚀 আপডেট: ল্যাঙ্গুয়েজ সিলেক্টরকে সাইনআপ বাটনের পাশে সেট করা
+                    const wrapperDiv = document.querySelector('.css-1w1k8u1');
+                    const langDiv = document.querySelector('.language-select-div');
+                    if (wrapperDiv && langDiv && langDiv.parentElement !== wrapperDiv) {
+                        wrapperDiv.appendChild(langDiv);
                     }
 
-                    // লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    // স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
                     if (headerSwiper && headerSwiper.swiper) {
                         if (headerSwiper.swiper.params.slidesPerView !== 1) {
@@ -305,15 +292,13 @@ export default {
                         }
                     }
 
-                    // 🚀 আপডেট: ল্যাঙ্গুয়েজ পপআপ মেনু টেক্সট 'EN' এবং 'BN' করা
+                    // 🚀 আপডেট: ল্যাঙ্গুয়েজ পপআপ মেনুতে 'EN' এবং 'BN' সেট করা
                     document.querySelectorAll('[role="menuitem"], .chakra-menu__menuitem').forEach(item => {
-                        // English থাকলে EN করবে
                         if(item.textContent.includes('English') && !item.textContent.includes('EN')) {
-                            item.innerHTML = item.innerHTML.replace('English', 'EN');
+                            item.innerHTML = 'EN'; // পুরো লেখা পরিবর্তন করে শুধু EN
                         }
-                        // Bengali বা Bangla থাকলে BN করবে
                         if((item.textContent.includes('Bengali') || item.textContent.includes('Bangla')) && !item.textContent.includes('BN')) {
-                            item.innerHTML = item.innerHTML.replace(/Bengali|Bangla/g, 'BN');
+                            item.innerHTML = 'BN'; // পুরো লেখা পরিবর্তন করে শুধু BN
                         }
                     });
 
