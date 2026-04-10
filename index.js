@@ -118,16 +118,14 @@ export default {
             // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* ১. ইনপুট বক্সের রাউন্ড শেপ, 50px হাইট এবং হালকা গ্রে ব্যাকগ্রাউন্ড */
+              /* ইনপুট বক্স ডিজাইন */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; 
                   height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.08) !important; /* ডার্ক মোডের জন্য পারফেক্ট হালকা গ্রে */
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* চারপাশের সুন্দর বর্ডার */
+                  background-color: rgba(255, 255, 255, 0.08) !important; 
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
                   color: white !important;
               }
-
-              /* ২. রাইট এবং লেফট অ্যাডঅন (চোখের আইকন, কান্ট্রি কোড) এর সাইজ এবং এলাইনমেন্ট */
               .chakra-input__right-addon, .chakra-input__left-addon {
                   height: 50px !important; 
                   border-radius: 8px !important; 
@@ -135,45 +133,99 @@ export default {
                   align-items: center !important; 
                   justify-content: center !important;
               }
-
-              /* ৩. আইকনগুলো যেন নিজেরাও সেন্টারে থাকে */
               .chakra-input__right-addon svg, .chakra-input__left-addon svg,
               .chakra-input__right-addon img, .chakra-input__left-addon img {
                   margin: auto !important;
                   display: block !important;
               }
 
-              /* 🚀 NEW: শুধুমাত্র লগইন এবং সাইনআপ বাটন হেডারে ফিক্সড করার স্টাইল */
+              /* 🚀 আপডেট: হেডারের লগইন, সাইনআপ ও ল্যাঙ্গুয়েজ সিলেক্টর পজিশনিং */
               .custom-header-auth-buttons {
                   position: fixed !important;
-                  top: 10px !important; /* হেডারের মাঝামাঝি পজিশন */
-                  right: 15px !important; /* ডানদিকে সেট করার জন্য */
+                  top: 10px !important; 
+                  right: 10px !important; 
                   bottom: auto !important;
                   left: auto !important;
                   display: flex !important;
-                  gap: 10px !important;
+                  align-items: center !important; /* সব সেন্টারে থাকবে */
+                  gap: 8px !important; /* বাটনের মাঝে গ্যাপ */
                   z-index: 99999 !important;
                   width: auto !important;
                   background: transparent !important;
               }
 
-              /* বাটনগুলোকে স্কয়ার শেপ এবং হালকা রেডিয়াস দেওয়া হলো */
+              /* 🚀 আপডেট: বাটন সাইজ ও শেপ (২নং স্ক্রিনশট অনুযায়ী) */
               .custom-header-auth-buttons a {
-                  border-radius: 8px !important; /* স্কয়ার শেপ, হালকা কর্নার রেডিয়াস */
-                  height: 38px !important; /* হেডারের জন্য মানানসই হাইট */
-                  padding: 0 15px !important;
+                  border-radius: 4px !important; /* হালকা স্কয়ার শেপ */
+                  height: 32px !important; /* হাইট কমানো হয়েছে */
+                  padding: 0 12px !important;
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
+                  border: none !important;
+                  text-decoration: none !important;
               }
 
-              /* বাটনের ভেতরের টেক্সট যাতে ঠিকমতো সেন্টারে থাকে */
               .custom-header-auth-buttons a p {
                   margin: 0 !important;
                   text-align: center !important;
-                  flex-grow: 0 !important;
+                  font-size: 13px !important;
+                  font-weight: bold !important;
+                  text-transform: capitalize !important;
+              }
+
+              /* লগইন বাটন কালার (Jeetbuzz স্টাইল) */
+              .custom-header-auth-buttons a[href="/login"] {
+                  background-color: #3b3b3b !important; /* ডার্ক গ্রে */
+              }
+              .custom-header-auth-buttons a[href="/login"] p {
+                  color: #ffffff !important; /* সাদা লেখা */
+              }
+
+              /* সাইনআপ বাটন কালার (Jeetbuzz স্টাইল) */
+              .custom-header-auth-buttons a[href="/signup"] {
+                  background-color: #ffb800 !important; /* ইয়েলো/অরেঞ্জ */
+              }
+              .custom-header-auth-buttons a[href="/signup"] p {
+                  color: #000000 !important; /* কালো লেখা */
+              }
+
+              /* 🚀 আপডেট: ল্যাঙ্গুয়েজ সিলেক্টর (পতাকা) সার্কেল ডিজাইন */
+              .custom-header-auth-buttons .language-select-div {
+                  width: 32px !important; /* বাটনের হাইটের সমান */
+                  height: 32px !important;
+                  border-radius: 50% !important; /* গোল সার্কেল */
+                  overflow: hidden !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  cursor: pointer !important;
+                  background: transparent !important;
+                  padding: 0 !important;
+                  margin-left: 2px !important;
+              }
+
+              .custom-header-auth-buttons .language-select-div img {
+                  width: 100% !important;
+                  height: 100% !important;
+                  object-fit: cover !important;
+                  border-radius: 50% !important;
+              }
+
+              /* ল্যাঙ্গুয়েজের পাশের লেখা হাইড করা */
+              .custom-header-auth-buttons .language-select-div span,
+              .custom-header-auth-buttons .language-select-div p {
+                  display: none !important;
+              }
+
+              /* 🚀 আপডেট: হেডারের লোগো স্লাইডার ১টি করে স্লাইড করার জন্য */
+              .css-1vvjgde .swiper-slide {
+                  width: 100% !important; /* একটি স্লাইড ফুল জায়গা নিবে */
+                  display: flex !important;
+                  justify-content: center !important;
               }
             </style>
+
             <script>
               (function(){
                 const REF_CODE = 'iZfmaT3h';
@@ -205,7 +257,7 @@ export default {
                         }
                     }
 
-                    // LiveChat বাটন পার্মানেন্টলি হাইড করা
+                    // LiveChat বাটন হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
                             if (btn.style.display !== 'none') {
@@ -214,30 +266,31 @@ export default {
                         }
                     });
 
-                    // 🚀 NEW: Sign Up এবং Login লেখাকে বামে আনা
-                    document.querySelectorAll('p').forEach(p => {
-                        const text = p.textContent.trim().toLowerCase();
-                        if(text === 'sign up' || text === 'login') {
-                            if (p.style.textAlign !== 'left') {
-                                p.style.flexGrow = '1';
-                                p.style.textAlign = 'left';
-                                p.style.marginLeft = '15px'; 
-                                p.style.fontWeight = 'bold'; 
-                                p.style.textTransform = 'capitalize'; // প্রথম অক্ষর বড় হাতের হবে
-                            }
-                        }
-                    });
-
-                    // 🚀 NEW: লগইন ও সাইনআপ বাটনের মেইন ডিভ টার্গেট করে হেডারে নেওয়ার ক্লাস যুক্ত করা
+                    // 🚀 আপডেট: বাটন ও ল্যাঙ্গুয়েজ সিলেক্টর হেডারে একসাথে সেট করা
                     const loginBtnNode = document.querySelector('a[href="/login"]');
                     const signupBtnNode = document.querySelector('a[href="/signup"]');
+                    
                     if (loginBtnNode && signupBtnNode && loginBtnNode.parentElement === signupBtnNode.parentElement) {
                         const wrapperDiv = loginBtnNode.parentElement;
                         if (!wrapperDiv.classList.contains('custom-header-auth-buttons')) {
                             wrapperDiv.classList.add('custom-header-auth-buttons');
                         }
+
+                        // ল্যাঙ্গুয়েজ সিলেক্টরকে সাইনআপের ডানপাশে নিয়ে আসা
+                        const langDiv = document.querySelector('.language-select-div');
+                        if (langDiv && langDiv.parentElement !== wrapperDiv) {
+                            wrapperDiv.appendChild(langDiv);
+                        }
                     }
 
+                    // 🚀 আপডেট: লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো (JS Method)
+                    const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
+                    if (headerSwiper && headerSwiper.swiper) {
+                        if (headerSwiper.swiper.params.slidesPerView !== 1) {
+                            headerSwiper.swiper.params.slidesPerView = 1;
+                            headerSwiper.swiper.update();
+                        }
+                    }
                 });
 
                 window.addEventListener('load', () => {
