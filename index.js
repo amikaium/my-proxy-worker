@@ -120,6 +120,7 @@ export default {
               div#header {
                   display: flex !important; align-items: center !important; padding: 0 12px !important;
                   background-color: #17191c !important; height: 55px !important; z-index: 1000 !important;
+                  position: relative !important;
               }
               .css-1vvjgde { display: flex !important; align-items: center !important; gap: 12px !important; }
               .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
@@ -127,23 +128,6 @@ export default {
               .css-1vvjgde .swiper { width: 45px !important; overflow: hidden !important; margin: 0 !important; }
               .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
               .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
-
-              /* লগইন/সাইনআপ বাটন ফিক্সড কন্টেইনার */
-              .fixed-auth-container {
-                  position: fixed !important; top: 11px !important; right: 12px !important; 
-                  display: flex !important; align-items: center !important; gap: 8px !important; 
-                  z-index: 99999 !important; width: auto !important; background: transparent !important;
-              }
-
-              a[href="/login"], a[href="/signup"] {
-                  border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
-                  display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
-              }
-              a[href="/login"] { background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; }
-              a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; margin: 0 !important; }
-              a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
-              a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; margin: 0 !important; }
-
 
               /* ==========================================
                  💎 কাস্টম ড্যাশবোর্ড প্যানেল 
@@ -199,20 +183,21 @@ export default {
               div.css-1rfmqpc > div.css-145pjb7::before, div.css-1rfmqpc > div.css-145pjb7::after { display: none !important; }
               div.css-1rfmqpc > div.css-145pjb7 > a[href="/promotions"] { display: none !important; }
 
-              /* 💰 Deposit/Withdraw বাটন (বামে সবুজ, ডানে লাল) */
+              /* 💰 Deposit/Withdraw বাটন */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   flex: 1 !important; width: 100% !important;
                   background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; 
                   border: 0px none !important; outline: none !important; border-radius: 8px !important;
                   display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
-                  padding: 6px 4px !important; text-decoration: none !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+                  padding: 8px 4px !important; text-decoration: none !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   overflow: hidden !important; 
               }
 
+              /* 🚀 আইকন সাইজ বড় করা হলো (24px) */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] img {
-                  margin-bottom: 2px !important;
-                  width: 20px !important;
-                  height: 20px !important;
+                  margin-bottom: 4px !important;
+                  width: 24px !important;
+                  height: 24px !important;
               }
 
               /* ইনপুট বক্স ডিজাইন */
@@ -253,26 +238,62 @@ export default {
                         }
                     });
 
-                    // 🚀 লগইন বাটন ফিক্স (শুধু হেডারের ভেতরের লগইন বাটনকে ধরবে, যাতে লগইন পেইজ ক্র্যাশ না করে)
-                    const headerLoginBtnNode = document.querySelector('div#header a[href="/login"]');
-                    if (headerLoginBtnNode && headerLoginBtnNode.parentElement) {
-                        if (!headerLoginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
-                            headerLoginBtnNode.parentElement.classList.add('fixed-auth-container');
+                    // 🚀 100% সেফ: অরিজিনাল মোবাইল লগইন বক্স হাইড এবং হেডারে কাস্টম বক্স তৈরি
+                    const loginBtnNode = document.querySelector('a[href="/login"]');
+                    const headerNode = document.querySelector('div#header');
+
+                    if (loginBtnNode) {
+                        // যদি বাটনটি হেডারের বাইরে (অর্থাৎ নিচের মোবাইল বারে) থাকে, তাহলে অরিজিনাল কন্টেইনার হাইড করে দাও
+                        if (loginBtnNode.closest('div#header') === null) {
+                            if (loginBtnNode.parentElement && loginBtnNode.parentElement.tagName === 'DIV') {
+                                loginBtnNode.parentElement.style.setProperty('display', 'none', 'important');
+                            }
+                            loginBtnNode.style.setProperty('display', 'none', 'important');
+                            
+                            const signupBtnNode = document.querySelector('a[href="/signup"]');
+                            if(signupBtnNode) signupBtnNode.style.setProperty('display', 'none', 'important');
                         }
+
+                        // হেডারের ডান দিকে আমাদের নিজস্ব ফিক্সড লগইন বাটন তৈরি (যদি আগে থেকে না থাকে)
+                        if (headerNode && !document.querySelector('.arfan-auth-box')) {
+                            const authBox = document.createElement('div');
+                            authBox.className = 'arfan-auth-box';
+                            authBox.style.cssText = 'position: absolute !important; right: 12px !important; top: 11px !important; display: flex !important; gap: 8px !important; align-items: center !important; z-index: 99999 !important;';
+                            
+                            // কাস্টম Login বাটন
+                            const logBtn = document.createElement('div');
+                            logBtn.innerHTML = 'Login';
+                            logBtn.style.cssText = 'background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 4px !important; height: 32px !important; padding: 0 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #e5e7eb !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
+                            logBtn.onclick = () => { const real = document.querySelector('a[href="/login"]'); if(real) real.click(); };
+
+                            // কাস্টম Sign up বাটন
+                            const signBtn = document.createElement('div');
+                            signBtn.innerHTML = 'Sign up';
+                            signBtn.style.cssText = 'background-color: #1d9154 !important; border: none !important; border-radius: 4px !important; height: 32px !important; padding: 0 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #ffffff !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
+                            signBtn.onclick = () => { const real = document.querySelector('a[href="/signup"]'); if(real) real.click(); };
+
+                            authBox.appendChild(logBtn);
+                            authBox.appendChild(signBtn);
+                            headerNode.appendChild(authBox);
+                        }
+                    } else {
+                        // ইউজার লগইন অবস্থায় থাকলে আমাদের তৈরি করা বক্স হাইড করে দিব
+                        const authBox = document.querySelector('.arfan-auth-box');
+                        if (authBox) authBox.style.display = 'none';
                     }
 
-                    // 🚀 100% সেফ লজিক: Deposit/Withdraw আইকন এবং টেক্সট
+                    // 🚀 100% সেফ: Deposit/Withdraw আইকন এবং টেক্সট সাইজ বড় করা
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
                     if (topDepositBtnContainer) {
                         
-                        // ১. অরিজিনাল সাদা আইকন রিপ্লেস করা (আপনার স্ক্রিনশটের লিংক থেকে)
+                        // আইকন সাদা করা
                         const imgIcon = topDepositBtnContainer.querySelector('img');
                         if (imgIcon && !imgIcon.src.includes('toolbar-icon-deposit.svg')) {
                             imgIcon.src = '/pub-images/maza365/footerIcons/toolbar-icon-deposit.svg';
-                            imgIcon.style.filter = 'none'; // ফালতু ফিল্টার রিমুভ
+                            imgIcon.style.filter = 'brightness(0) invert(1)'; 
                         }
 
-                        // ২. টেক্সট স্পেসিং এবং ডিজাইন (Infinite loop বন্ধ করার জন্য চেক যুক্ত করা হয়েছে)
+                        // টেক্সট স্পেসিং এবং বড় সাইজ (13px)
                         if (!topDepositBtnContainer.querySelector('.arfan-custom-text')) {
                             const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
                             let textNodes = [];
@@ -286,9 +307,8 @@ export default {
                             textNodes.forEach(n => {
                                 const spanWrapper = document.createElement('span');
                                 spanWrapper.className = 'arfan-custom-text';
-                                // Deposit এবং Withdraw একদম বোল্ড, এবং মাঝখানের স্পেস সহ স্ল্যাশ হালকা অপাসিটিতে
-                                spanWrapper.innerHTML = '<span style="font-weight: 800; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 4px; color: #ffffff !important;"> / </span><span style="font-weight: 800; color: #ffffff !important;">Withdraw</span>';
-                                spanWrapper.style.setProperty('font-size', '11px', 'important');
+                                // 🚀 ফন্ট সাইজ বড় করে 13px করা হলো
+                                spanWrapper.innerHTML = '<span style="font-weight: 800; font-size: 13px !important; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 4px; font-size: 13px !important; color: #ffffff !important;"> / </span><span style="font-weight: 800; font-size: 13px !important; color: #ffffff !important;">Withdraw</span>';
                                 spanWrapper.style.setProperty('display', 'inline-flex', 'important');
                                 spanWrapper.style.setProperty('align-items', 'center', 'important');
                                 
