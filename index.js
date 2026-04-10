@@ -118,9 +118,12 @@ export default {
             // 🚀 NEW: UI Customizer (CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* ইনপুট বক্সের নতুন প্রফেশনাল রাউন্ড শেপ ডিজাইন */
+              /* ইনপুট বক্সের নতুন প্রফেশনাল ডিজাইন */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; /* হালকা স্কয়ার-রাউন্ড শেপ */
+                  height: 50px !important; /* হাইট ৫০ পিক্সেল */
+                  background-color: #2d2d2d !important; /* ডার্ক থিমের সাথে মানানসই হালকা গ্রে */
+                  border: 1px solid #3d3d3d !important; /* বর্ডারের কালার হালকা দিলাম যাতে সুন্দর লাগে */
               }
             </style>
             <script>
@@ -165,9 +168,10 @@ export default {
                         }
                     });
 
-                    // ৩. Sign Up লেখাকে বামে (Back বাটনের পাশে) আনা
+                    // ৩. Sign Up এবং Login লেখাকে বামে (Back বাটনের পাশে) আনা
                     document.querySelectorAll('p').forEach(p => {
-                        if(p.textContent.trim() === 'Sign up' || p.textContent.trim() === 'Sign Up') {
+                        const pText = p.textContent.trim().toLowerCase();
+                        if(pText === 'sign up' || pText === 'login') {
                             if (p.style.textAlign !== 'left') {
                                 p.style.flexGrow = '1';
                                 p.style.textAlign = 'left';
