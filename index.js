@@ -140,7 +140,7 @@ export default {
 
 
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Perfect Height & Highlights)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Distinct Backgrounds)
                  ========================================== */
 
               /* 🚀 মেইন কন্টেইনার */
@@ -149,26 +149,26 @@ export default {
                   flex-direction: row !important;
                   justify-content: space-between !important;
                   align-items: stretch !important;
-                  padding: 8px 12px !important; /* হাইট কমানো হলো */
+                  padding: 8px 12px !important; 
                   gap: 10px !important;
                   background-color: #121418 !important; 
                   width: 100% !important;
                   box-sizing: border-box !important;
               }
 
-              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স */
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (Dark Distinct BG) */
               div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
-                  background: linear-gradient(135deg, #2b2f3a 0%, #1a1d24 100%) !important; /* কালার হাইলাইট */
-                  border: 1px solid rgba(254, 172, 4, 0.4) !important; /* গোল্ডেন বর্ডার */
+                  background: linear-gradient(135deg, #1e2126 0%, #15171a 100%) !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
+                  border: 1px solid rgba(254, 172, 4, 0.4) !important; 
                   border-radius: 8px !important;
-                  padding: 8px 12px !important; /* হাইট কমানো হলো */
+                  padding: 8px 12px !important; 
                   display: flex !important;
                   flex-direction: column !important;
                   justify-content: center !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   position: relative !important;
-                  border-right: 1px solid rgba(254, 172, 4, 0.4) !important; /* ফিক্সড বর্ডার */
+                  border-right: 1px solid rgba(254, 172, 4, 0.4) !important; 
               }
 
               /* Username Text */
@@ -176,7 +176,7 @@ export default {
                   color: #e5e7eb !important;
                   font-size: 12px !important;
                   font-weight: 600 !important;
-                  margin: 0 0 2px 0 !important; /* গ্যাপ কমানো হলো */
+                  margin: 0 0 2px 0 !important; 
                   letter-spacing: 0.5px !important;
               }
 
@@ -188,29 +188,29 @@ export default {
                   margin: 0 !important;
               }
 
-              /* 🚀 অরিজিনাল Refresh Icon ফিক্স */
+              /* 🚀 অরিজিনাল Refresh Icon (ঘোরাঘুরি বন্ধ) */
               div.css-1rfmqpc > div.css-1ctwhz0 > button {
                   position: absolute !important;
                   right: 12px !important;
-                  top: 50% !important; /* একেবারে মাঝখানে */
+                  top: 50% !important; 
                   transform: translateY(-50%) !important;
-                  color: #FEAC04 !important; /* অরিজিনাল স্ট্রোকের কালার */
+                  color: #FEAC04 !important; 
                   background: transparent !important;
                   border: none !important;
                   padding: 0 !important;
                   margin: 0 !important;
                   min-width: auto !important;
                   height: auto !important;
-                  transition: transform 0.3s !important;
+                  transition: none !important; /* ট্রানজিশন বাতিল */
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button svg {
-                  fill: none !important; /* Fill রিমুভ, অরিজিনাল স্ট্রোক থাকবে */
+                  fill: none !important; 
                   stroke: currentColor !important;
                   width: 18px !important;
                   height: 18px !important;
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button:active { 
-                  transform: translateY(-50%) rotate(180deg) !important; 
+                  transform: translateY(-50%) !important; /* রোটেশন বাতিল */
               }
 
 
@@ -234,18 +234,18 @@ export default {
                   display: none !important;
               }
 
-              /* 💰 Deposit/Withdraw বাটনকে ফুল উইডথ করা */
+              /* 💰 Deposit/Withdraw বাটন (Golden Tint BG) */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   flex: 1 !important;
                   width: 100% !important;
-                  background: linear-gradient(135deg, #2b2f3a 0%, #1a1d24 100%) !important; /* কালার হাইলাইট */
-                  border: 1px solid rgba(254, 172, 4, 0.5) !important; /* ক্লিয়ার গোল্ডেন বর্ডার */
+                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.15) 0%, rgba(254, 172, 4, 0.05) 100%) !important; /* একটু গোল্ডেন হাইলাইট ব্যাকগ্রাউন্ড */
+                  border: 1px solid rgba(254, 172, 4, 0.5) !important; 
                   border-radius: 8px !important;
                   display: flex !important;
                   flex-direction: column !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  padding: 6px 4px !important; /* হাইট কমানো হলো */
+                  padding: 6px 4px !important; 
                   text-decoration: none !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
               }
@@ -310,9 +310,9 @@ export default {
                         );
                     }
 
-                    // 🚀 Deposit লেখাকে পরিবর্তন করে "Deposit/Withdraw" করা
-                    const depositTextNodes = document.querySelectorAll('a[href*="deposit"] p, a[href*="deposit"] span, a[href*="deposit"] div');
-                    depositTextNodes.forEach(node => {
+                    // 🚀 Deposit লেখাকে পরিবর্তন করে "Deposit/Withdraw" করা (শুধুমাত্র ওপরের বক্সের জন্য)
+                    const topDepositTextNodes = document.querySelectorAll('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] p, div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] span, div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] div');
+                    topDepositTextNodes.forEach(node => {
                         if (node.textContent.trim() === 'Deposit') {
                             node.textContent = 'Deposit/Withdraw';
                         }
