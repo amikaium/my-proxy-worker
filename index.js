@@ -115,31 +115,33 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Advanced CSS + JS) - Exact Match to Screenshot
+            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* 🚀 মেইন হেডার কন্টেইনার ফিক্স (Flexbox Control) */
+              /* 🚀 মেইন হেডার কন্টেইনার */
               div#header {
                   display: flex !important;
-                  justify-content: space-between !important;
                   align-items: center !important;
                   padding: 0 12px !important;
                   background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
                   height: 55px !important;
               }
 
-              /* 🚀 বাম দিক: লোগো এবং স্পন্সর */
+              /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
               .css-1vvjgde {
                   display: flex !important;
                   align-items: center !important;
-                  gap: 8px !important;
-                  position: static !important; /* আগের সব পজিশন বাতিল */
+                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  position: static !important; 
                   transform: none !important;
               }
 
-              /* বাম দিকের ফালতু হ্যামবার্গার মেনু হাইড (স্ক্রিনশটে নেই) */
+              /* মেনু আইকন শো করা (আগে হাইড করা ছিল) */
               .css-1vvjgde button[aria-label="menu"] {
-                  display: none !important;
+                  display: flex !important;
+                  background: transparent !important;
+                  padding: 0 !important;
+                  margin: 0 !important;
               }
 
               /* মেইন লোগো সাইজ */
@@ -166,14 +168,17 @@ export default {
                   object-fit: contain !important;
               }
 
-              /* 🚀 ডান দিক: বাটন ও ল্যাঙ্গুয়েজ কন্টেইনার */
-              .css-1w1k8u1 {
+              /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার (সম্পূর্ণ ফিক্সড) */
+              .fixed-auth-container {
+                  position: fixed !important; /* স্ক্রিনের ডানদিকে পার্মানেন্টলি ফিক্সড */
+                  top: 11px !important;
+                  right: 12px !important;
                   display: flex !important;
                   align-items: center !important; 
                   gap: 8px !important; 
-                  position: static !important;
-                  background: transparent !important;
+                  z-index: 99999 !important;
                   width: auto !important;
+                  background: transparent !important;
               }
 
               /* ফালতু ডিভ হাইড */
@@ -181,7 +186,12 @@ export default {
                   display: none !important;
               }
 
-              /* 🚀 লগইন ও সাইনআপ বাটন ডিজাইন (হুবহু স্ক্রিনশটের মতো) */
+              /* 🚀 ল্যাঙ্গুয়েজ সিলেক্টর সম্পূর্ণ হাইড */
+              .language-select-div {
+                  display: none !important;
+              }
+
+              /* 🚀 লগইন ও সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
                   border-radius: 4px !important; 
                   height: 32px !important; 
@@ -217,39 +227,6 @@ export default {
                   font-weight: 500 !important; 
                   margin: 0 !important; 
                   text-transform: none !important;
-              }
-
-              /* 🚀 ল্যাঙ্গুয়েজ সিলেক্টর (পতাকা) পারফেক্ট সার্কেল */
-              .language-select-div {
-                  width: 26px !important; 
-                  height: 26px !important;
-                  min-width: 26px !important;
-                  border-radius: 50% !important; /* গোল সার্কেল */
-                  overflow: hidden !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  cursor: pointer !important;
-                  background: transparent !important;
-                  padding: 0 !important;
-                  margin-left: 2px !important;
-                  border: none !important;
-              }
-
-              .language-select-div img {
-                  width: 100% !important;
-                  height: 100% !important;
-                  object-fit: cover !important; 
-                  border-radius: 50% !important;
-                  margin: 0 !important;
-              }
-
-              /* ল্যাঙ্গুয়েজের ভেতরের লেখা/অ্যারো হাইড */
-              .language-select-div p,
-              .language-select-div span,
-              .language-select-div svg,
-              .language-select-div .chakra-text {
-                  display: none !important;
               }
 
               /* ইনপুট বক্স ডিজাইন (অতিরিক্ত) */
@@ -302,11 +279,12 @@ export default {
                         }
                     });
 
-                    // 🚀 ল্যাঙ্গুয়েজ সিলেক্টরকে সাইনআপ বাটনের পাশে সেট করা
-                    const wrapperDiv = document.querySelector('.css-1w1k8u1');
-                    const langDiv = document.querySelector('.language-select-div');
-                    if (wrapperDiv && langDiv && langDiv.parentElement !== wrapperDiv) {
-                        wrapperDiv.appendChild(langDiv);
+                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা (নিচে নামা বন্ধ করতে)
+                    const loginBtnNode = document.querySelector('a[href="/login"]');
+                    if (loginBtnNode && loginBtnNode.parentElement) {
+                        if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
+                            loginBtnNode.parentElement.classList.add('fixed-auth-container');
+                        }
                     }
 
                     // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
@@ -317,17 +295,6 @@ export default {
                             headerSwiper.swiper.update();
                         }
                     }
-
-                    // 🚀 ল্যাঙ্গুয়েজ পপআপ মেনুতে 'EN' এবং 'BN' সেট করা
-                    document.querySelectorAll('[role="menuitem"], .chakra-menu__menuitem').forEach(item => {
-                        if(item.textContent.includes('English') && !item.textContent.includes('EN')) {
-                            item.innerHTML = 'EN';
-                        }
-                        if((item.textContent.includes('Bengali') || item.textContent.includes('Bangla')) && !item.textContent.includes('BN')) {
-                            item.innerHTML = 'BN';
-                        }
-                    });
-
                 });
 
                 window.addEventListener('load', () => {
