@@ -128,7 +128,13 @@ export default {
               .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
               .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
 
-              /* লগইন/সাইনআপ বাটন ডিজাইন */
+              /* লগইন/সাইনআপ বাটন ফিক্সড কন্টেইনার */
+              .fixed-auth-container {
+                  position: fixed !important; top: 11px !important; right: 12px !important; 
+                  display: flex !important; align-items: center !important; gap: 8px !important; 
+                  z-index: 99999 !important; width: auto !important; background: transparent !important;
+              }
+
               a[href="/login"], a[href="/signup"] {
                   border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
                   display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
@@ -143,7 +149,6 @@ export default {
                  💎 কাস্টম ড্যাশবোর্ড প্যানেল 
                  ========================================== */
 
-              /* 🚀 মেইন কন্টেইনার */
               div.css-1rfmqpc {
                   display: flex !important;
                   flex-direction: row !important;
@@ -156,7 +161,7 @@ export default {
                   box-sizing: border-box !important;
               }
 
-              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (হালকা কমলা ব্যাকগ্রাউন্ড) */
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স */
               div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
                   background: linear-gradient(135deg, rgba(254, 172, 4, 0.20) 0%, rgba(254, 172, 4, 0.05) 100%) !important; 
@@ -169,94 +174,45 @@ export default {
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
                   position: relative !important;
               }
-
-              /* Username Text */
               div.css-1rfmqpc > div.css-1ctwhz0 > p.css-1bsgmhw {
-                  color: #e5e7eb !important;
-                  font-size: 12px !important;
-                  font-weight: 600 !important;
-                  margin: 0 0 2px 0 !important; 
-                  letter-spacing: 0.5px !important;
+                  color: #e5e7eb !important; font-size: 12px !important; font-weight: 600 !important; margin: 0 0 2px 0 !important; letter-spacing: 0.5px !important;
               }
-
-              /* BDT Balance */
               div.css-1rfmqpc > div.css-1ctwhz0 > p.css-0 {
-                  color: #FEAC04 !important; 
-                  font-size: 15px !important;
-                  font-weight: 700 !important;
-                  margin: 0 !important;
+                  color: #FEAC04 !important; font-size: 15px !important; font-weight: 700 !important; margin: 0 !important;
               }
-
-              /* 🚀 অরিজিনাল Refresh Icon (ঘোরাঘুরি বন্ধ) */
               div.css-1rfmqpc > div.css-1ctwhz0 > button {
-                  position: absolute !important;
-                  right: 12px !important;
-                  top: 50% !important; 
-                  transform: translateY(-50%) !important;
-                  color: #FEAC04 !important; 
-                  background: transparent !important;
-                  border: none !important;
-                  padding: 0 !important;
-                  margin: 0 !important;
-                  min-width: auto !important;
-                  height: auto !important;
-                  transition: none !important; 
+                  position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important;
+                  color: #FEAC04 !important; background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important;
+                  min-width: auto !important; height: auto !important; transition: none !important; 
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button svg {
-                  fill: none !important; 
-                  stroke: currentColor !important;
-                  width: 18px !important;
-                  height: 18px !important;
+                  fill: none !important; stroke: currentColor !important; width: 18px !important; height: 18px !important;
               }
-              div.css-1rfmqpc > div.css-1ctwhz0 > button:active { 
-                  transform: translateY(-50%) !important; 
-              }
+              div.css-1rfmqpc > div.css-1ctwhz0 > button:active { transform: translateY(-50%) !important; }
 
 
               /* 📦 Box 2: প্রমোশন এবং ডিপোজিট কন্টেইনার */
               div.css-1rfmqpc > div.css-145pjb7 {
-                  flex: 0.9 !important;
-                  display: flex !important;
-                  gap: 8px !important;
-                  justify-content: space-between !important;
-                  align-items: stretch !important;
-                  border: none !important; 
-                  padding: 0 !important;
+                  flex: 0.9 !important; display: flex !important; gap: 8px !important; justify-content: space-between !important;
+                  align-items: stretch !important; border: none !important; padding: 0 !important;
               }
-              div.css-1rfmqpc > div.css-145pjb7::before, 
-              div.css-1rfmqpc > div.css-145pjb7::after { 
-                  display: none !important; 
-              }
-
-              /* 🚫 প্রমোশন বাটন পুরোপুরি হাইড */
-              div.css-1rfmqpc > div.css-145pjb7 > a[href="/promotions"] {
-                  display: none !important;
-              }
+              div.css-1rfmqpc > div.css-145pjb7::before, div.css-1rfmqpc > div.css-145pjb7::after { display: none !important; }
+              div.css-1rfmqpc > div.css-145pjb7 > a[href="/promotions"] { display: none !important; }
 
               /* 💰 Deposit/Withdraw বাটন (বামে সবুজ, ডানে লাল) */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
-                  flex: 1 !important;
-                  width: 100% !important;
+                  flex: 1 !important; width: 100% !important;
                   background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; 
-                  border: 0px none !important; 
-                  outline: none !important;
-                  border-radius: 8px !important;
-                  display: flex !important;
-                  flex-direction: column !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  padding: 6px 4px !important; 
-                  text-decoration: none !important;
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+                  border: 0px none !important; outline: none !important; border-radius: 8px !important;
+                  display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
+                  padding: 6px 4px !important; text-decoration: none !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   overflow: hidden !important; 
               }
 
-              /* 🤍 <img> আইকন সম্পূর্ণ সাদা করার স্পেশাল ট্রিক */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] img {
                   margin-bottom: 2px !important;
-                  width: 18px !important;
-                  height: 18px !important;
-                  filter: brightness(0) invert(1) !important; /* এই ট্রিকটি ছবিকে ১০০% সাদা করে দেয় */
+                  width: 20px !important;
+                  height: 20px !important;
               }
 
               /* ইনপুট বক্স ডিজাইন */
@@ -297,45 +253,48 @@ export default {
                         }
                     });
 
-                    // 🚀 লগইন ও সাইনআপ বাটন ফিক্সড করা
-                    const loginBtnNode = document.querySelector('a[href="/login"]');
-                    if (loginBtnNode && loginBtnNode.parentElement) {
-                        loginBtnNode.parentElement.setAttribute(
-                            'style', 
-                            'position: fixed !important; top: 11px !important; right: 12px !important; display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important; width: auto !important; background: transparent !important;'
-                        );
+                    // 🚀 লগইন বাটন ফিক্স (শুধু হেডারের ভেতরের লগইন বাটনকে ধরবে, যাতে লগইন পেইজ ক্র্যাশ না করে)
+                    const headerLoginBtnNode = document.querySelector('div#header a[href="/login"]');
+                    if (headerLoginBtnNode && headerLoginBtnNode.parentElement) {
+                        if (!headerLoginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
+                            headerLoginBtnNode.parentElement.classList.add('fixed-auth-container');
+                        }
                     }
 
-                    // 🚀 100% গ্যারান্টেড: Deposit/Withdraw স্টাইলড লেখা এবং <img> আইকন ফিক্স
+                    // 🚀 100% সেফ লজিক: Deposit/Withdraw আইকন এবং টেক্সট
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
                     if (topDepositBtnContainer) {
                         
-                        // ছবিকে সাদা করার জন্য ইনলাইন ফিল্টার (ব্যাকআপ হিসেবে)
+                        // ১. অরিজিনাল সাদা আইকন রিপ্লেস করা (আপনার স্ক্রিনশটের লিংক থেকে)
                         const imgIcon = topDepositBtnContainer.querySelector('img');
-                        if (imgIcon) {
-                            imgIcon.style.setProperty('filter', 'brightness(0) invert(1)', 'important');
+                        if (imgIcon && !imgIcon.src.includes('toolbar-icon-deposit.svg')) {
+                            imgIcon.src = '/pub-images/maza365/footerIcons/toolbar-icon-deposit.svg';
+                            imgIcon.style.filter = 'none'; // ফালতু ফিল্টার রিমুভ
                         }
 
-                        // টেক্সট চেঞ্জ এবং বোল্ড/অপাসিটি ডিজাইন লজিক
-                        const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
-                        let textNodes = [];
-                        let node;
-                        while (node = walker.nextNode()) {
-                            if (node.nodeValue.trim() === 'Deposit' || node.nodeValue.trim() === 'Deposit/Withdraw') {
-                                textNodes.push(node);
+                        // ২. টেক্সট স্পেসিং এবং ডিজাইন (Infinite loop বন্ধ করার জন্য চেক যুক্ত করা হয়েছে)
+                        if (!topDepositBtnContainer.querySelector('.arfan-custom-text')) {
+                            const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
+                            let textNodes = [];
+                            let node;
+                            while (node = walker.nextNode()) {
+                                if (node.nodeValue.trim() === 'Deposit' || node.nodeValue.trim() === 'Deposit/Withdraw') {
+                                    textNodes.push(node);
+                                }
                             }
-                        }
 
-                        textNodes.forEach(n => {
-                            const spanWrapper = document.createElement('span');
-                            // Deposit এবং Withdraw বোল্ড, মাঝখানের স্ল্যাশ (/) নরমাল ও হালকা অপাসিটি
-                            spanWrapper.innerHTML = '<span style="font-weight: 800; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 2px; color: #ffffff !important;">/</span><span style="font-weight: 800; color: #ffffff !important;">Withdraw</span>';
-                            spanWrapper.style.setProperty('font-size', '11px', 'important');
-                            spanWrapper.style.setProperty('display', 'inline-flex', 'important');
-                            spanWrapper.style.setProperty('align-items', 'center', 'important');
-                            
-                            n.parentNode.replaceChild(spanWrapper, n);
-                        });
+                            textNodes.forEach(n => {
+                                const spanWrapper = document.createElement('span');
+                                spanWrapper.className = 'arfan-custom-text';
+                                // Deposit এবং Withdraw একদম বোল্ড, এবং মাঝখানের স্পেস সহ স্ল্যাশ হালকা অপাসিটিতে
+                                spanWrapper.innerHTML = '<span style="font-weight: 800; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 4px; color: #ffffff !important;"> / </span><span style="font-weight: 800; color: #ffffff !important;">Withdraw</span>';
+                                spanWrapper.style.setProperty('font-size', '11px', 'important');
+                                spanWrapper.style.setProperty('display', 'inline-flex', 'important');
+                                spanWrapper.style.setProperty('align-items', 'center', 'important');
+                                
+                                n.parentNode.replaceChild(spanWrapper, n);
+                            });
+                        }
                     }
 
                     // স্পন্সর লোগো স্লাইডার
