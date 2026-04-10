@@ -123,145 +123,119 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   padding: 0 12px !important;
-                  background-color: #17191c !important; 
+                  background-color: #17191c !important; /* অরিজিনাল ডার্ক ব্যাকগ্রাউন্ড */
                   height: 55px !important;
               }
 
               /* 🚀 বাম দিক: মেনু, লোগো এবং স্পন্সর */
               .css-1vvjgde {
-                  display: flex !important; align-items: center !important; gap: 12px !important; position: static !important; transform: none !important;
-              }
-              .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
-              .css-1vvjgde > img { height: 22px !important; width: auto !important; object-fit: contain !important; }
-              .css-1vvjgde .swiper { width: 45px !important; overflow: hidden !important; margin: 0 !important; }
-              .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
-              .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
-
-              /* ফালতু ডিভ ও ল্যাঙ্গুয়েজ সিলেক্টর হাইড */
-              div.css-h096tp, .language-select-div, p.css-1bsgmhw, a[href="/promotions"] { display: none !important; }
-
-              /* ======================================================= */
-              /* 🚀 অরিজিনাল এলিমেন্ট হাইড (Virtual UI এর জন্য) */
-              /* ======================================================= */
-              /* অরিজিনাল ব্যালেন্স বক্স পার্মানেন্টলি হাইড */
-              div.css-1ctwhz0 { display: none !important; opacity: 0 !important; position: absolute !important; pointer-events: none !important; }
-              /* অরিজিনাল ডিপোজিট বাটন পার্মানেন্টলি হাইড */
-              a[href*="/dw?tab=deposit"] { display: none !important; opacity: 0 !important; position: absolute !important; pointer-events: none !important; }
-
-              /* ======================================================= */
-              /* 🚀 ডান দিক (লগআউট অবস্থা): লগইন ও সাইনআপ বাটন */
-              /* ======================================================= */
-              .fixed-auth-container {
-                  position: fixed !important; top: 11px !important; right: 12px !important;
-                  display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important;
-              }
-              a[href="/login"], a[href="/signup"] {
-                  border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
-                  display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
-              }
-              a[href="/login"] { background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; }
-              a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; font-weight: 500 !important; margin: 0 !important; }
-              a[href="/signup"] { background-color: #1d9154 !important; border: none !important; }
-              a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; font-weight: 500 !important; margin: 0 !important; }
-
-              /* ======================================================= */
-              /* 🚀 ডান দিক (লগইন অবস্থা): Virtual Balance & Deposit (+) */
-              /* ======================================================= */
-              .virtual-loggedin-ui {
-                  position: fixed !important;
-                  top: 10px !important;
-                  right: 12px !important;
                   display: flex !important;
                   align-items: center !important;
-                  gap: 8px !important;
-                  z-index: 99999 !important;
+                  gap: 12px !important; /* মেনু, লোগো এবং স্পন্সরের মাঝে গ্যাপ */
+                  position: static !important; 
+                  transform: none !important;
               }
 
-              /* ব্যালেন্স ও ডিপোজিট গ্রুপ */
-              .v-bal-dep-group {
+              /* মেনু আইকন শো করা (আগে হাইড করা ছিল) */
+              .css-1vvjgde button[aria-label="menu"] {
                   display: flex !important;
-                  align-items: stretch !important; 
-                  background-color: transparent !important;
-                  border-radius: 4px !important;
-                  overflow: hidden !important; 
-                  height: 34px !important; 
-              }
-
-              /* 🚀 ব্যালেন্স বক্স (পারফেক্ট সাইজ ও কালার) */
-              .v-balance-box {
-                  background-color: #2c2e35 !important; /* ডার্ক গ্রে */
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: flex-start !important;
-                  min-width: 105px !important; /* বক্সের সাইজ বড় করা হয়েছে */
-                  padding: 0 10px !important; 
-                  gap: 8px !important; 
-              }
-
-              /* ৳ আইকন */
-              .v-cur-circle {
-                  background-color: #1d9154 !important;
-                  color: white !important;
-                  width: 20px !important;
-                  height: 20px !important;
-                  min-width: 20px !important;
-                  border-radius: 50% !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  font-size: 13px !important;
-                  font-weight: bold !important;
-              }
-
-              /* ব্যালেন্স নাম্বার */
-              .v-bal-text {
-                  color: #e5e7eb !important;
-                  font-size: 14px !important;
-                  font-weight: 500 !important;
-                  white-space: nowrap !important;
-                  flex-grow: 1 !important;
-              }
-
-              /* রিফ্রেশ বাটন */
-              .v-refresh-btn {
                   background: transparent !important;
-                  border: none !important;
                   padding: 0 !important;
                   margin: 0 !important;
-                  height: 18px !important;
-                  width: 18px !important;
-                  cursor: pointer !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-              }
-              .v-refresh-btn svg {
-                  height: 16px !important; width: 16px !important; stroke: #e5e7eb !important;
               }
 
-              /* 🚀 ডিপোজিট (+) বাটন */
-              .v-deposit-btn {
-                  background-color: #1d9154 !important; /* Baji Green */
-                  height: 34px !important;
-                  width: 36px !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  border: none !important;
-                  color: white !important;
-                  font-size: 24px !important;
-                  font-weight: 300 !important;
-                  line-height: 1 !important;
-                  cursor: pointer !important;
-                  padding-bottom: 2px !important; /* প্লাস সাইন সেন্টারে রাখার জন্য */
+              /* মেইন লোগো সাইজ */
+              .css-1vvjgde > img {
+                  height: 22px !important;
+                  width: auto !important;
+                  object-fit: contain !important;
               }
 
-              /* প্রোফাইল আইকন কন্টেইনার */
-              .css-145pjb7 {
-                  display: flex !important;
-                  align-items: center !important;
-                  gap: 8px !important;
+              /* স্পন্সর লোগো স্লাইডার সাইজ ফিক্স */
+              .css-1vvjgde .swiper {
+                  width: 45px !important; 
+                  overflow: hidden !important;
                   margin: 0 !important;
+              }
+              .css-1vvjgde .swiper-slide {
+                  display: flex !important;
+                  justify-content: flex-start !important;
+                  align-items: center !important;
+              }
+              .css-1vvjgde .swiper-slide img {
+                  max-height: 22px !important;
+                  max-width: 45px !important;
+                  object-fit: contain !important;
+              }
+
+              /* 🚀 ডান দিক: লগইন ও সাইনআপ বাটন কন্টেইনার (সম্পূর্ণ ফিক্সড) */
+              .fixed-auth-container {
+                  position: fixed !important; /* স্ক্রিনের ডানদিকে পার্মানেন্টলি ফিক্সড */
+                  top: 11px !important;
+                  right: 12px !important;
+                  display: flex !important;
+                  align-items: center !important; 
+                  gap: 8px !important; 
+                  z-index: 99999 !important;
+                  width: auto !important;
+                  background: transparent !important;
+              }
+
+              /* ফালতু ডিভ হাইড */
+              div.css-h096tp {
+                  display: none !important;
+              }
+
+              /* 🚀 ল্যাঙ্গুয়েজ সিলেক্টর সম্পূর্ণ হাইড */
+              .language-select-div {
+                  display: none !important;
+              }
+
+              /* 🚀 লগইন ও সাইনআপ বাটন ডিজাইন */
+              a[href="/login"], a[href="/signup"] {
+                  border-radius: 4px !important; 
+                  height: 32px !important; 
+                  padding: 0 14px !important;
+                  display: flex !important; 
+                  align-items: center !important; 
+                  justify-content: center !important;
+                  text-decoration: none !important;
+                  box-sizing: border-box !important;
+              }
+
+              /* Log in বাটন */
+              a[href="/login"] { 
+                  background-color: #2c2e35 !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
+                  border: 1px solid rgba(255,255,255,0.05) !important;
+              }
+              a[href="/login"] p { 
+                  color: #e5e7eb !important; 
+                  font-size: 13px !important; 
+                  font-weight: 500 !important; 
+                  margin: 0 !important;
+                  text-transform: none !important;
+              }
+
+              /* Sign up বাটন */
+              a[href="/signup"] { 
+                  background-color: #1d9154 !important; /* অরিজিনাল Baji Green */
+                  border: none !important;
+              }
+              a[href="/signup"] p { 
+                  color: #ffffff !important; 
+                  font-size: 13px !important; 
+                  font-weight: 500 !important; 
+                  margin: 0 !important; 
+                  text-transform: none !important;
+              }
+
+              /* ইনপুট বক্স ডিজাইন (অতিরিক্ত) */
+              input.chakra-input, .chakra-input {
+                  border-radius: 8px !important; 
+                  height: 50px !important; 
+                  background-color: rgba(255, 255, 255, 0.08) !important; 
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+                  color: white !important;
               }
             </style>
 
@@ -273,120 +247,52 @@ export default {
                     const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
                     const prototype = Object.getPrototypeOf(element);
                     const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-                    if (valueSetter && valueSetter !== prototypeValueSetter) { prototypeValueSetter.call(element, value); } else { valueSetter.call(element, value); }
-                    element.dispatchEvent(new Event('input', { bubbles: true }));
-                }
-
-                // 🚀 Virtual UI তৈরি করার ফাংশন
-                function ensureVirtualUI(headerElement, originalIconsBox) {
-                    let vUI = document.getElementById('baji-virtual-ui');
-                    if (!vUI) {
-                        vUI = document.createElement('div');
-                        vUI.id = 'baji-virtual-ui';
-                        vUI.className = 'virtual-loggedin-ui';
-                        
-                        // HTML Structure (1st Screenshot Design)
-                        vUI.innerHTML = \`
-                            <div class="v-bal-dep-group">
-                                <div class="v-balance-box">
-                                    <span class="v-cur-circle">৳</span>
-                                    <span class="v-bal-text" id="v-balance-amount">0.00</span>
-                                    <button class="v-refresh-btn" id="v-refresh-trigger">
-                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h7"></path></svg>
-                                    </button>
-                                </div>
-                                <button class="v-deposit-btn" id="v-deposit-trigger">+</button>
-                            </div>
-                        \`;
-                        headerElement.appendChild(vUI);
-
-                        // 🚀 Click Listeners (React এর অরিজিনাল বাটনে ক্লিক পাঠাবে)
-                        document.getElementById('v-refresh-trigger').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const realRefresh = document.querySelector('.css-1ctwhz0 button.refresh');
-                            if(realRefresh) realRefresh.click();
-                        });
-
-                        document.getElementById('v-deposit-trigger').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const realDeposit = document.querySelector('a[href*="/dw?tab=deposit"]');
-                            if(realDeposit) {
-                                realDeposit.click(); // React Router Safe Navigation
-                            } else {
-                                window.location.href = '/dw?tab=deposit';
-                            }
-                        });
-                    }
-
-                    // প্রোফাইল আইকনগুলো Virtual UI এর ডানপাশে বসানো
-                    if(originalIconsBox && originalIconsBox.parentElement !== vUI) {
-                        vUI.appendChild(originalIconsBox);
-                    }
                     
-                    vUI.style.display = 'flex';
-                    return vUI;
+                    if (valueSetter && valueSetter !== prototypeValueSetter) {
+                        prototypeValueSetter.call(element, value);
+                    } else {
+                        valueSetter.call(element, value);
+                    }
+                    element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
                 const observer = new MutationObserver(() => {
                     
-                    // রেফারেল বক্স হাইড
+                    // রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
-                    if (refInput && refInput.value !== REF_CODE) { setNativeValue(refInput, REF_CODE); }
+                    if (refInput) {
+                        if (refInput.value !== REF_CODE) {
+                            setNativeValue(refInput, REF_CODE);
+                        }
+                        const parentGroup = refInput.closest('.chakra-form-control');
+                        if (parentGroup && parentGroup.style.display !== 'none') {
+                            parentGroup.style.display = 'none';
+                        }
+                    }
 
-                    // LiveChat হাইড
+                    // LiveChat বাটন হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
-                            if (btn.style.display !== 'none') btn.style.display = 'none';
+                            if (btn.style.display !== 'none') {
+                                btn.style.display = 'none';
+                            }
                         }
                     });
 
-                    // স্পন্সর লোগো ফিক্স
-                    const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
-                    if (headerSwiper && headerSwiper.swiper && headerSwiper.swiper.params.slidesPerView !== 1) {
-                        headerSwiper.swiper.params.slidesPerView = 1; headerSwiper.swiper.update();
+                    // 🚀 বাটনের কন্টেইনারে 'fixed-auth-container' ক্লাস যুক্ত করা (নিচে নামা বন্ধ করতে)
+                    const loginBtnNode = document.querySelector('a[href="/login"]');
+                    if (loginBtnNode && loginBtnNode.parentElement) {
+                        if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
+                            loginBtnNode.parentElement.classList.add('fixed-auth-container');
+                        }
                     }
 
-                    // ============================================================
-                    // 🚀 Main Logic: Login State vs Logout State
-                    // ============================================================
-                    const header = document.querySelector('#header');
-                    const realBalanceBox = document.querySelector('.css-1ctwhz0'); // রিয়্যাক্টের অরিজিনাল ব্যালেন্স বক্স
-                    const realIconsBox = document.querySelector('.css-145pjb7');
-                    const authContainer = document.querySelector('.fixed-auth-container'); // লগইন/সাইনআপ বাটন
-
-                    // যদি ইউজার লগইন করা থাকে (ব্যালেন্স বক্স DOM এ থাকে)
-                    if (header && realBalanceBox) {
-                        
-                        // ১. লগইন বাটন হাইড করো
-                        if (authContainer) authContainer.style.display = 'none';
-
-                        // ২. Virtual UI তৈরি করো
-                        const vUI = ensureVirtualUI(header, realIconsBox);
-
-                        // ৩. অরিজিনাল বক্স থেকে ব্যালেন্স এক্সট্রাক্ট করে Virtual UI তে বসাও (ইউজারনেম বাদে)
-                        let balanceValue = "0.00";
-                        const pTags = realBalanceBox.querySelectorAll('p');
-                        pTags.forEach(p => {
-                            // ক্লাস css-1bsgmhw (ইউজারনেম) ইগনোর করবে। শুধুমাত্র সংখ্যা থাকলে ধরবে।
-                            if (!p.classList.contains('css-1bsgmhw') && (p.textContent.includes('BDT') || p.textContent.match(/[0-9]/))) {
-                                balanceValue = p.textContent.replace(/[^0-9.]/g, ''); // শুধুমাত্র সংখ্যা এবং ডট রাখবে
-                            }
-                        });
-                        
-                        const vBalText = document.getElementById('v-balance-amount');
-                        if(vBalText && balanceValue !== "") {
-                            vBalText.innerText = balanceValue;
-                        }
-
-                    } else {
-                        // যদি লগআউট অবস্থায় থাকে
-                        if (authContainer) authContainer.style.display = 'flex';
-                        const vUI = document.getElementById('baji-virtual-ui');
-                        if(vUI) vUI.style.display = 'none'; // Virtual UI হাইড করো
-                        
-                        const loginBtnNode = document.querySelector('a[href="/login"]');
-                        if (loginBtnNode && loginBtnNode.parentElement && !loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
-                            loginBtnNode.parentElement.classList.add('fixed-auth-container');
+                    // 🚀 স্পন্সর লোগো স্লাইডার ফোর্স করে ১টি করে স্লাইড করানো
+                    const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
+                    if (headerSwiper && headerSwiper.swiper) {
+                        if (headerSwiper.swiper.params.slidesPerView !== 1) {
+                            headerSwiper.swiper.params.slidesPerView = 1;
+                            headerSwiper.swiper.update();
                         }
                     }
                 });
