@@ -193,7 +193,7 @@ export default {
                   overflow: hidden !important; 
               }
 
-              /* 🚀 আইকন সাইজ বড় করা হলো (24px) */
+              /* 🚀 আইকন সাইজ */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] img {
                   margin-bottom: 4px !important;
                   width: 24px !important;
@@ -254,22 +254,22 @@ export default {
                             if(signupBtnNode) signupBtnNode.style.setProperty('display', 'none', 'important');
                         }
 
-                        // হেডারের ডান দিকে আমাদের নিজস্ব ফিক্সড লগইন বাটন তৈরি (যদি আগে থেকে না থাকে)
+                        // হেডারের ডান দিকে আমাদের নিজস্ব ফিক্সড লগইন বাটন তৈরি
                         if (headerNode && !document.querySelector('.arfan-auth-box')) {
                             const authBox = document.createElement('div');
                             authBox.className = 'arfan-auth-box';
                             authBox.style.cssText = 'position: absolute !important; right: 12px !important; top: 11px !important; display: flex !important; gap: 8px !important; align-items: center !important; z-index: 99999 !important;';
                             
-                            // কাস্টম Login বাটন
+                            // 🚀 কাস্টম Login বাটন (চওড়া করা হলো)
                             const logBtn = document.createElement('div');
                             logBtn.innerHTML = 'Login';
-                            logBtn.style.cssText = 'background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 4px !important; height: 32px !important; padding: 0 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #e5e7eb !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
+                            logBtn.style.cssText = 'background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 4px !important; height: 32px !important; padding: 0 20px !important; min-width: 75px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #e5e7eb !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
                             logBtn.onclick = () => { const real = document.querySelector('a[href="/login"]'); if(real) real.click(); };
 
-                            // কাস্টম Sign up বাটন
+                            // 🚀 কাস্টম Sign up বাটন (চওড়া করা হলো)
                             const signBtn = document.createElement('div');
                             signBtn.innerHTML = 'Sign up';
-                            signBtn.style.cssText = 'background-color: #1d9154 !important; border: none !important; border-radius: 4px !important; height: 32px !important; padding: 0 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #ffffff !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
+                            signBtn.style.cssText = 'background-color: #1d9154 !important; border: none !important; border-radius: 4px !important; height: 32px !important; padding: 0 20px !important; min-width: 75px !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #ffffff !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; user-select: none;';
                             signBtn.onclick = () => { const real = document.querySelector('a[href="/signup"]'); if(real) real.click(); };
 
                             authBox.appendChild(logBtn);
@@ -282,7 +282,7 @@ export default {
                         if (authBox) authBox.style.display = 'none';
                     }
 
-                    // 🚀 100% সেফ: Deposit/Withdraw আইকন এবং টেক্সট সাইজ বড় করা
+                    // 🚀 100% সেফ: Deposit/Withdraw আইকন এবং টেক্সট সাইজ ফিক্স
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
                     if (topDepositBtnContainer) {
                         
@@ -293,7 +293,7 @@ export default {
                             imgIcon.style.filter = 'brightness(0) invert(1)'; 
                         }
 
-                        // টেক্সট স্পেসিং এবং বড় সাইজ (13px)
+                        // টেক্সট স্পেসিং এবং বোল্ডনেস কমানো (600)
                         if (!topDepositBtnContainer.querySelector('.arfan-custom-text')) {
                             const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
                             let textNodes = [];
@@ -307,8 +307,8 @@ export default {
                             textNodes.forEach(n => {
                                 const spanWrapper = document.createElement('span');
                                 spanWrapper.className = 'arfan-custom-text';
-                                // 🚀 ফন্ট সাইজ বড় করে 13px করা হলো
-                                spanWrapper.innerHTML = '<span style="font-weight: 800; font-size: 13px !important; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 4px; font-size: 13px !important; color: #ffffff !important;"> / </span><span style="font-weight: 800; font-size: 13px !important; color: #ffffff !important;">Withdraw</span>';
+                                // 🚀 ফন্ট ওয়েট কমিয়ে 600 করা হলো
+                                spanWrapper.innerHTML = '<span style="font-weight: 600; font-size: 13px !important; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 4px; font-size: 13px !important; color: #ffffff !important;"> / </span><span style="font-weight: 600; font-size: 13px !important; color: #ffffff !important;">Withdraw</span>';
                                 spanWrapper.style.setProperty('display', 'inline-flex', 'important');
                                 spanWrapper.style.setProperty('align-items', 'center', 'important');
                                 
