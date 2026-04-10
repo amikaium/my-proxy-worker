@@ -103,9 +103,17 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Advanced PURE CSS)
+            // 🚀 NEW: UI Customizer (Strictly Scoped CSS)
             const customStylesAndScripts = `
             <style>
+              /* ==========================================
+                 🚫 সাদা বক্স এবং ফালতু এলিমেন্ট হাইড
+                 ========================================== */
+              div.css-h096tp, 
+              .language-select-div { 
+                  display: none !important; 
+              }
+
               /* ==========================================
                  🚀 হেডার ডিজাইন 
                  ========================================== */
@@ -120,12 +128,7 @@ export default {
               .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
               .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
 
-              .fixed-auth-container {
-                  position: fixed !important; top: 11px !important; right: 12px !important;
-                  display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important;
-              }
-              .language-select-div { display: none !important; }
-
+              /* লগইন/সাইনআপ বাটন ডিজাইন */
               a[href="/login"], a[href="/signup"] {
                   border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
                   display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
@@ -137,7 +140,7 @@ export default {
 
 
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Directly targeting your classes)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Strict Scoping)
                  ========================================== */
 
               /* 🚀 মেইন কন্টেইনার (div.css-1rfmqpc) */
@@ -148,13 +151,13 @@ export default {
                   align-items: stretch !important;
                   padding: 10px 12px 14px 12px !important;
                   gap: 12px !important;
-                  background-color: #121418 !important; /* মেইন সেকশনের ডার্ক ব্যাকগ্রাউন্ড */
+                  background-color: #121418 !important; 
                   width: 100% !important;
                   box-sizing: border-box !important;
               }
 
-              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (div.css-1ctwhz0) */
-              div.css-1ctwhz0 {
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (div.css-1rfmqpc এর ভেতরের div.css-1ctwhz0) */
+              div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
                   background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
                   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -165,11 +168,11 @@ export default {
                   justify-content: center !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   position: relative !important;
-                  border-right: none !important; /* অরিজিনাল হলুদ দাগ রিমুভ */
+                  border-right: none !important;
               }
 
               /* Username Text */
-              div.css-1ctwhz0 p.css-1bsgmhw {
+              div.css-1rfmqpc > div.css-1ctwhz0 > p.css-1bsgmhw {
                   color: #e5e7eb !important;
                   font-size: 13px !important;
                   font-weight: 600 !important;
@@ -178,15 +181,15 @@ export default {
               }
 
               /* BDT Balance */
-              div.css-1ctwhz0 p.css-0 {
-                  color: #FEAC04 !important; /* গোল্ডেন কালার */
+              div.css-1rfmqpc > div.css-1ctwhz0 > p.css-0 {
+                  color: #FEAC04 !important; 
                   font-size: 16px !important;
                   font-weight: 700 !important;
                   margin: 0 !important;
               }
 
               /* Refresh Icon */
-              div.css-1ctwhz0 button {
+              div.css-1rfmqpc > div.css-1ctwhz0 > button {
                   position: absolute !important;
                   right: 14px !important;
                   bottom: 12px !important;
@@ -198,27 +201,30 @@ export default {
                   height: auto !important;
                   transition: transform 0.3s !important;
               }
-              div.css-1ctwhz0 button svg {
+              div.css-1rfmqpc > div.css-1ctwhz0 > button svg {
                   fill: #FEAC04 !important;
                   width: 18px !important;
                   height: 18px !important;
               }
-              div.css-1ctwhz0 button:active { transform: rotate(180deg) !important; }
+              div.css-1rfmqpc > div.css-1ctwhz0 > button:active { transform: rotate(180deg) !important; }
 
 
-              /* 📦 Box 2: প্রমোশন এবং ডিপোজিট (div.css-145pjb7) */
-              div.css-145pjb7 {
+              /* 📦 Box 2: প্রমোশন এবং ডিপোজিট (div.css-1rfmqpc এর ভেতরের div.css-145pjb7) */
+              div.css-1rfmqpc > div.css-145pjb7 {
                   flex: 0.9 !important;
                   display: flex !important;
                   gap: 8px !important;
                   justify-content: space-between !important;
                   align-items: stretch !important;
-                  border: none !important; /* অরিজিনাল বর্ডার রিমুভ */
+                  border: none !important; 
                   padding: 0 !important;
               }
-              div.css-145pjb7::before, div.css-145pjb7::after { display: none !important; } /* ফালতু দাগ হাইড */
+              div.css-1rfmqpc > div.css-145pjb7::before, 
+              div.css-1rfmqpc > div.css-145pjb7::after { 
+                  display: none !important; 
+              }
 
-              div.css-145pjb7 a {
+              div.css-1rfmqpc > div.css-145pjb7 > a {
                   flex: 1 !important;
                   background: linear-gradient(135deg, #252830 0%, #1a1c22 100%) !important;
                   border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -232,24 +238,26 @@ export default {
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
               }
 
-              div.css-145pjb7 a svg {
+              div.css-1rfmqpc > div.css-145pjb7 > a svg {
                   margin-bottom: 4px !important;
                   width: 20px !important;
                   height: 20px !important;
               }
 
-              div.css-145pjb7 a span, div.css-145pjb7 a p, div.css-145pjb7 a div {
+              div.css-1rfmqpc > div.css-145pjb7 > a span, 
+              div.css-1rfmqpc > div.css-145pjb7 > a p, 
+              div.css-1rfmqpc > div.css-145pjb7 > a div {
                   font-size: 11px !important;
                   margin: 0 !important;
                   color: #e5e7eb !important;
               }
 
               /* স্পেশাল ডিপোজিট বাটন হাইলাইট */
-              div.css-145pjb7 a[href="/dw?tab=deposit"] {
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   border: 1px solid rgba(254, 172, 4, 0.4) !important;
                   background: linear-gradient(135deg, rgba(254, 172, 4, 0.1) 0%, #1a1c22 100%) !important;
               }
-              div.css-145pjb7 a[href="/dw?tab=deposit"] * {
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
                   color: #FEAC04 !important;
                   font-weight: 600 !important;
               }
@@ -292,10 +300,14 @@ export default {
                         }
                     });
 
-                    // লগইন বাটন ফিক্স
+                    // 🚀 লগইন ও সাইনআপ বাটন ফিক্সড করা (Force CSS in DOM)
                     const loginBtnNode = document.querySelector('a[href="/login"]');
-                    if (loginBtnNode && loginBtnNode.parentElement && !loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
-                        loginBtnNode.parentElement.classList.add('fixed-auth-container');
+                    if (loginBtnNode && loginBtnNode.parentElement) {
+                        // React যেন রিমুভ করতে না পারে তাই ডাইরেক্ট ইনলাইন স্টাইল বসালাম
+                        loginBtnNode.parentElement.setAttribute(
+                            'style', 
+                            'position: fixed !important; top: 11px !important; right: 12px !important; display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important; width: auto !important; background: transparent !important;'
+                        );
                     }
 
                     // স্পন্সর লোগো স্লাইডার
