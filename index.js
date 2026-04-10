@@ -15,22 +15,14 @@ export default {
     // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route
     if (url.pathname === '/__secure_core.js') {
         const referer = request.headers.get("Referer");
-        
         if (!referer || !referer.includes(url.hostname)) {
             return new Response(`console.log("Access Denied: Highly Secured Proxy System 😎");`, {
-                status: 200,
-                headers: { "Content-Type": "application/javascript" }
+                status: 200, headers: { "Content-Type": "application/javascript" }
             });
         }
-
         const secretCode = `!function(){const r="/__api_proxy/",e=["liveapi247.live","tv.nginx0.com"];function t(r){return"string"==typeof r&&!r.includes("__api_proxy")&&e.some((e=>r.includes(e)))}const n=window.fetch;window.fetch=async function(...e){try{let o=e[0];"string"==typeof o&&t(o)?e[0]=r+o:o instanceof Request&&t(o.url)&&(e[0]=new Request(r+o.url,o))}catch(r){}return n.apply(this,e)};const o=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,n,...c){try{"string"==typeof n&&t(n)&&(n=r+n)}catch(r){}return o.call(this,e,n,...c)}}();`;
-
         return new Response(secretCode, {
-            status: 200,
-            headers: { 
-                "Content-Type": "application/javascript",
-                "Cache-Control": "no-cache, no-store, must-revalidate"
-            }
+            status: 200, headers: { "Content-Type": "application/javascript", "Cache-Control": "no-cache, no-store, must-revalidate" }
         });
     }
 
@@ -50,9 +42,7 @@ export default {
     // ২. API এবং Video Stream (m3u8/ts) প্রক্সি
     if (url.pathname.startsWith('/__api_proxy/')) {
       let actualApiUrl = request.url.substring(request.url.indexOf('/__api_proxy/') + 13);
-      if (!actualApiUrl.startsWith('http')) {
-         actualApiUrl = 'https://' + actualApiUrl;
-      }
+      if (!actualApiUrl.startsWith('http')) actualApiUrl = 'https://' + actualApiUrl;
       try {
         const targetApi = new URL(actualApiUrl);
         const apiReq = new Request(targetApi.toString(), request);
@@ -67,9 +57,7 @@ export default {
         if (contentType.includes("mpegurl") || contentType.includes("m3u8") || url.pathname.endsWith(".m3u8")) {
             let m3u8Text = await apiRes.text();
             const proxyPrefix = `https://${url.host}/__api_proxy/`;
-            ALL_TARGETS.forEach(api => {
-                m3u8Text = m3u8Text.replaceAll(`https://${api}`, `${proxyPrefix}https://${api}`);
-            });
+            ALL_TARGETS.forEach(api => { m3u8Text = m3u8Text.replaceAll(`https://${api}`, `${proxyPrefix}https://${api}`); });
             const modHeaders = new Headers(apiRes.headers);
             modHeaders.delete("content-length"); 
             newApiRes = new Response(m3u8Text, { status: apiRes.status, statusText: apiRes.statusText, headers: modHeaders });
@@ -119,77 +107,28 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🚀 হেডার এবং মেনু ডিজাইন (আগের মতোই ফিক্সড)
+                 🚀 হেডার ডিজাইন
                  ========================================== */
               div#header {
-                  display: flex !important;
-                  align-items: center !important;
-                  padding: 0 12px !important;
-                  background-color: #17191c !important; 
-                  height: 55px !important;
-                  z-index: 1000 !important;
+                  display: flex !important; align-items: center !important; padding: 0 12px !important;
+                  background-color: #17191c !important; height: 55px !important; z-index: 1000 !important;
               }
-
-              .css-1vvjgde {
-                  display: flex !important;
-                  align-items: center !important;
-                  gap: 12px !important; 
-                  position: static !important; 
-                  transform: none !important;
-              }
-
-              .css-1vvjgde button[aria-label="menu"] {
-                  display: flex !important;
-                  background: transparent !important;
-                  padding: 0 !important;
-                  margin: 0 !important;
-              }
-
-              .css-1vvjgde > img {
-                  height: 22px !important;
-                  width: auto !important;
-                  object-fit: contain !important;
-              }
-
-              .css-1vvjgde .swiper {
-                  width: 45px !important; 
-                  overflow: hidden !important;
-                  margin: 0 !important;
-              }
-              .css-1vvjgde .swiper-slide {
-                  display: flex !important;
-                  justify-content: flex-start !important;
-                  align-items: center !important;
-              }
-              .css-1vvjgde .swiper-slide img {
-                  max-height: 22px !important;
-                  max-width: 45px !important;
-                  object-fit: contain !important;
-              }
+              .css-1vvjgde { display: flex !important; align-items: center !important; gap: 12px !important; }
+              .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
+              .css-1vvjgde > img { height: 22px !important; width: auto !important; object-fit: contain !important; }
+              .css-1vvjgde .swiper { width: 45px !important; overflow: hidden !important; margin: 0 !important; }
+              .css-1vvjgde .swiper-slide { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
+              .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
 
               .fixed-auth-container {
-                  position: fixed !important; 
-                  top: 11px !important;
-                  right: 12px !important;
-                  display: flex !important;
-                  align-items: center !important; 
-                  gap: 8px !important; 
-                  z-index: 99999 !important;
-                  width: auto !important;
-                  background: transparent !important;
+                  position: fixed !important; top: 11px !important; right: 12px !important;
+                  display: flex !important; align-items: center !important; gap: 8px !important; z-index: 99999 !important;
               }
-
               .language-select-div { display: none !important; }
 
               a[href="/login"], a[href="/signup"] {
-                  border-radius: 4px !important; 
-                  height: 32px !important; 
-                  padding: 0 14px !important;
-                  display: flex !important; 
-                  align-items: center !important; 
-                  justify-content: center !important;
-                  text-decoration: none !important;
-                  box-sizing: border-box !important;
+                  border-radius: 4px !important; height: 32px !important; padding: 0 14px !important;
+                  display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;
               }
               a[href="/login"] { background-color: #2c2e35 !important; border: 1px solid rgba(255,255,255,0.05) !important; }
               a[href="/login"] p { color: #e5e7eb !important; font-size: 13px !important; margin: 0 !important; }
@@ -197,75 +136,118 @@ export default {
               a[href="/signup"] p { color: #ffffff !important; font-size: 13px !important; margin: 0 !important; }
 
               /* ==========================================
-                 💎 প্রিমিয়াম ব্যালেন্স সেকশন ডিজাইন (VIP Look)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Perfect 2-Box Layout)
                  ========================================== */
-              .premium-balance-container {
-                  background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
-                  border: 1px solid rgba(254, 172, 4, 0.15) !important;
-                  border-left: 4px solid #FEAC04 !important; /* গোল্ডেন আকৃতি */
-                  border-radius: 8px !important;
-                  padding: 12px 16px !important;
-                  margin: 10px 12px 16px 12px !important; /* চারপাশে সুন্দর স্পেসিং */
+              .arfan-dashboard-panel {
                   display: flex !important;
-                  flex-direction: row !important;
-                  justify-content: space-between !important; /* ইউজারনেম একপাশে, ব্যালেন্স অন্যপাশে */
-                  align-items: center !important;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+                  justify-content: space-between !important;
+                  align-items: stretch !important; /* দুইটা বক্সের হাইট সমান রাখার জন্য */
+                  padding: 10px 12px 14px 12px !important;
+                  gap: 12px !important;
+                  background-color: #121418 !important; /* সেকশনের ব্যাকগ্রাউন্ড */
+                  width: 100% !important;
+                  box-sizing: border-box !important;
+              }
+
+              /* 📦 বক্স ১: ইউজারনেম এবং ব্যালেন্স */
+              .arfan-balance-box {
+                  flex: 1.1 !important; /* একটু বড় স্পেস নিবে */
+                  background: linear-gradient(135deg, #1f2229 0%, #15171a 100%) !important;
+                  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                  border-radius: 10px !important;
+                  padding: 10px 14px !important;
+                  display: flex !important;
+                  flex-direction: column !important;
+                  justify-content: center !important;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
                   position: relative !important;
-                  overflow: hidden !important;
               }
-
-              /* হালকা গ্লাস ইফেক্ট বা শাইন */
-              .premium-balance-container::before {
-                  content: '' !important;
-                  position: absolute !important;
-                  top: 0; left: -100%; width: 50%; height: 100%;
-                  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent) !important;
-                  transform: skewX(-20deg) !important;
-                  animation: shineEffect 5s infinite !important;
-              }
-              @keyframes shineEffect {
-                  0% { left: -100%; }
-                  20% { left: 200%; }
-                  100% { left: 200%; }
-              }
-
-              /* ভিতরের টেক্সট সাইজ ও কালার */
-              .premium-balance-container * {
-                  position: relative !important;
-                  z-index: 2 !important;
-              }
-
-              /* প্রথম চাইল্ড (সাধারণত Username) */
-              .premium-balance-container > :first-child {
+              
+              /* Username Text (DEMOBAJI) */
+              .arfan-balance-box > p:first-child, .arfan-balance-box > div:first-child {
                   color: #e5e7eb !important;
-                  font-size: 14px !important;
+                  font-size: 13px !important;
                   font-weight: 600 !important;
+                  margin: 0 0 6px 0 !important;
                   letter-spacing: 0.5px !important;
               }
-
-              /* দ্বিতীয় চাইল্ড (সাধারণত Balance) */
-              .premium-balance-container > :last-child {
+              
+              /* Balance & SVG Wrapper */
+              .arfan-balance-box > :last-child {
                   display: flex !important;
+                  justify-content: space-between !important;
                   align-items: center !important;
-                  gap: 10px !important;
-                  color: #FEAC04 !important; /* গোল্ডেন কালার */
+                  margin: 0 !important;
+              }
+              .arfan-balance-box > :last-child p, .arfan-balance-box > :last-child span {
+                  color: #FEAC04 !important; /* ব্যালেন্সের গোল্ডেন কালার */
                   font-size: 16px !important;
                   font-weight: 700 !important;
+                  margin: 0 !important;
               }
-
-              /* রিফ্রেশ আইকন অ্যানিমেশন */
-              .premium-balance-container svg {
+              .arfan-balance-box svg {
                   fill: #FEAC04 !important;
                   width: 18px !important;
                   height: 18px !important;
                   cursor: pointer !important;
-                  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
               }
-              .premium-balance-container svg:active {
-                  transform: rotate(360deg) !important; /* ক্লিক করলে ঘুরবে */
+              .arfan-balance-box svg:active { transform: rotate(180deg) !important; }
+
+              /* 📦 বক্স ২: প্রমোশন এবং ডিপোজিট কন্টেইনার */
+              .arfan-action-box {
+                  flex: 0.9 !important;
+                  display: flex !important;
+                  gap: 8px !important;
+                  justify-content: space-between !important;
+                  align-items: stretch !important;
               }
 
+              /* প্রমোশন এবং ডিপোজিট বাটন ডিজাইন */
+              .arfan-action-box a[href="/promotions"],
+              .arfan-action-box a[href="/dw?tab=deposit"] {
+                  flex: 1 !important;
+                  background: linear-gradient(135deg, #252830 0%, #1a1c22 100%) !important;
+                  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+                  border-radius: 10px !important;
+                  display: flex !important;
+                  flex-direction: column !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  padding: 8px 4px !important;
+                  text-decoration: none !important;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+                  transition: all 0.2s !important;
+              }
+              
+              .arfan-action-box a:active { transform: scale(0.95) !important; }
+
+              /* আইকন এবং টেক্সট সাইজ ফিক্স */
+              .arfan-action-box a svg {
+                  margin-bottom: 4px !important;
+                  width: 20px !important; height: 20px !important;
+              }
+              .arfan-action-box a span, .arfan-action-box a p, .arfan-action-box a div {
+                  font-size: 11px !important;
+                  margin: 0 !important;
+                  color: #e5e7eb !important;
+              }
+
+              /* 🌟 স্পেশাল ডিপোজিট বাটন হাইলাইট */
+              .arfan-action-box a[href="/dw?tab=deposit"] {
+                  border: 1px solid rgba(254, 172, 4, 0.4) !important;
+                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.1) 0%, #1a1c22 100%) !important;
+              }
+              .arfan-action-box a[href="/dw?tab=deposit"] span, 
+              .arfan-action-box a[href="/dw?tab=deposit"] p,
+              .arfan-action-box a[href="/dw?tab=deposit"] div {
+                  color: #FEAC04 !important;
+                  font-weight: 600 !important;
+              }
+
+              /* অরিজিনাল হলুদ ডিভাইডার লাইন হাইড করা */
+              .hide-original-divider { display: none !important; border: none !important; }
+              
               /* ইনপুট বক্স ডিজাইন */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; height: 50px !important; 
@@ -282,30 +264,23 @@ export default {
                     const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
                     const prototype = Object.getPrototypeOf(element);
                     const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-                    
-                    if (valueSetter && valueSetter !== prototypeValueSetter) {
-                        prototypeValueSetter.call(element, value);
-                    } else {
-                        valueSetter.call(element, value);
-                    }
+                    if (valueSetter && valueSetter !== prototypeValueSetter) prototypeValueSetter.call(element, value);
+                    else valueSetter.call(element, value);
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                // টেক্সট খোঁজার ফাংশন
                 function findTextNode(text) {
                     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
                     let node;
                     while (node = walker.nextNode()) {
-                        if (node.nodeValue.includes(text)) {
-                            return node;
-                        }
+                        if (node.nodeValue.includes(text)) return node;
                     }
                     return null;
                 }
 
                 const observer = new MutationObserver(() => {
                     
-                    // রেফারেল কোড
+                    // রেফারেল কোড অটো-ফিল
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
@@ -313,7 +288,7 @@ export default {
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
-                    // চ্যাট হাইড
+                    // লাইভ চ্যাট হাইড
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
                             if (btn.style.display !== 'none') btn.style.display = 'none';
@@ -322,41 +297,61 @@ export default {
 
                     // লগইন বাটন ফিক্স
                     const loginBtnNode = document.querySelector('a[href="/login"]');
-                    if (loginBtnNode && loginBtnNode.parentElement) {
-                        if (!loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
-                            loginBtnNode.parentElement.classList.add('fixed-auth-container');
-                        }
+                    if (loginBtnNode && loginBtnNode.parentElement && !loginBtnNode.parentElement.classList.contains('fixed-auth-container')) {
+                        loginBtnNode.parentElement.classList.add('fixed-auth-container');
                     }
 
-                    // 🚀 ব্যালেন্স ডিজাইন আপডেট (কোনো স্থান পরিবর্তন ছাড়াই)
+                    // 🚀 Perfect Two-Box UI Logic
                     const bdtTextNode = findTextNode('BDT:');
-                    if (bdtTextNode) {
-                        let originalWrapper = bdtTextNode.parentElement;
-                        
-                        // মেইন কন্টেইনার খোঁজা (ঠিক আগের মতোই, কিন্তু মুভ না করে শুধু ক্লাস অ্যাড করবো)
+                    const promoBtn = document.querySelector('a[href="/promotions"]');
+                    const depositBtn = document.querySelector('a[href="/dw?tab=deposit"]');
+
+                    if (bdtTextNode && promoBtn && depositBtn) {
+                        // ব্যালেন্স কন্টেইনার বের করা
+                        let balanceWrapper = bdtTextNode.parentElement;
                         for(let i=0; i<4; i++){
-                            if(originalWrapper.parentElement && 
-                               !originalWrapper.parentElement.innerText.includes('Promotions') && 
-                               !originalWrapper.parentElement.innerText.includes('Deposit')) {
-                                originalWrapper = originalWrapper.parentElement;
-                            } else {
-                                break;
-                            }
+                            if(balanceWrapper.parentElement && 
+                               !balanceWrapper.parentElement.innerText.includes('Promotions') && 
+                               !balanceWrapper.parentElement.innerText.includes('Deposit')) {
+                                balanceWrapper = balanceWrapper.parentElement;
+                            } else break;
                         }
                         
-                        // আমাদের নতুন প্রিমিয়াম ক্লাস যুক্ত করা
-                        if (!originalWrapper.classList.contains('premium-balance-container')) {
-                            originalWrapper.classList.add('premium-balance-container');
+                        // অ্যাকশন (প্রমো/ডিপোজিট) কন্টেইনার বের করা
+                        let actionWrapper = promoBtn.parentElement;
+                        if (!actionWrapper.contains(depositBtn)) {
+                            actionWrapper = actionWrapper.parentElement; // যদি আলাদা flex row তে থাকে
+                        }
+
+                        // মেইন প্যানেল (যাতে ব্যালেন্স ও অ্যাকশন দুইটাই আছে)
+                        let mainRow = balanceWrapper.parentElement;
+
+                        // ক্লাসগুলো অ্যাপ্লাই করা
+                        if (mainRow && !mainRow.classList.contains('arfan-dashboard-panel')) {
+                            mainRow.classList.add('arfan-dashboard-panel');
+                        }
+                        if (!balanceWrapper.classList.contains('arfan-balance-box')) {
+                            balanceWrapper.classList.add('arfan-balance-box');
+                        }
+                        if (actionWrapper && !actionWrapper.classList.contains('arfan-action-box')) {
+                            actionWrapper.classList.add('arfan-action-box');
+                        }
+
+                        // ফালতু বর্ডার/ডিভাইডার লাইন হাইড করে দেওয়া
+                        if (mainRow) {
+                            Array.from(mainRow.children).forEach(child => {
+                                if (child !== balanceWrapper && child !== actionWrapper) {
+                                    child.classList.add('hide-original-divider');
+                                }
+                            });
                         }
                     }
 
-                    // স্পন্সর লোগো
+                    // স্পন্সর লোগো স্লাইডার
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
-                    if (headerSwiper && headerSwiper.swiper) {
-                        if (headerSwiper.swiper.params.slidesPerView !== 1) {
-                            headerSwiper.swiper.params.slidesPerView = 1;
-                            headerSwiper.swiper.update();
-                        }
+                    if (headerSwiper && headerSwiper.swiper && headerSwiper.swiper.params.slidesPerView !== 1) {
+                        headerSwiper.swiper.params.slidesPerView = 1;
+                        headerSwiper.swiper.update();
                     }
                 });
 
