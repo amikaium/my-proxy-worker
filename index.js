@@ -251,13 +251,12 @@ export default {
                   overflow: hidden !important; 
               }
 
-              /* 🤍 ডিপোজিট আইকন এবং টেক্সটের ব্রুট-ফোর্স সিএসএস */
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
-                  color: #ffffff !important;
-                  fill: #ffffff !important;
-              }
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg path {
-                  fill: #ffffff !important;
+              /* 🤍 <img> আইকন সম্পূর্ণ সাদা করার স্পেশাল ট্রিক */
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] img {
+                  margin-bottom: 2px !important;
+                  width: 18px !important;
+                  height: 18px !important;
+                  filter: brightness(0) invert(1) !important; /* এই ট্রিকটি ছবিকে ১০০% সাদা করে দেয় */
               }
 
               /* ইনপুট বক্স ডিজাইন */
@@ -307,29 +306,36 @@ export default {
                         );
                     }
 
-                    // 🚀 100% গ্যারান্টেড: Deposit/Withdraw লেখা বসানো এবং জোর করে সাদা কালার দেওয়া
+                    // 🚀 100% গ্যারান্টেড: Deposit/Withdraw স্টাইলড লেখা এবং <img> আইকন ফিক্স
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
                     if (topDepositBtnContainer) {
                         
-                        // ভেতরের সব এলিমেন্টের (SVG সহ) কালার জাভাস্ক্রিপ্ট দিয়ে জোর করে সাদা করে দেওয়া হচ্ছে
-                        topDepositBtnContainer.querySelectorAll('*').forEach(el => {
-                            el.style.setProperty('color', '#ffffff', 'important');
-                            if(el.tagName.toLowerCase() === 'svg' || el.tagName.toLowerCase() === 'path') {
-                                el.style.setProperty('fill', '#ffffff', 'important');
-                            }
-                        });
+                        // ছবিকে সাদা করার জন্য ইনলাইন ফিল্টার (ব্যাকআপ হিসেবে)
+                        const imgIcon = topDepositBtnContainer.querySelector('img');
+                        if (imgIcon) {
+                            imgIcon.style.setProperty('filter', 'brightness(0) invert(1)', 'important');
+                        }
 
-                        // টেক্সট চেঞ্জ লজিক
+                        // টেক্সট চেঞ্জ এবং বোল্ড/অপাসিটি ডিজাইন লজিক
                         const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
+                        let textNodes = [];
                         let node;
                         while (node = walker.nextNode()) {
                             if (node.nodeValue.trim() === 'Deposit' || node.nodeValue.trim() === 'Deposit/Withdraw') {
-                                node.nodeValue = 'Deposit/Withdraw';
-                                if (node.parentElement) {
-                                    node.parentElement.style.setProperty('color', '#ffffff', 'important');
-                                }
+                                textNodes.push(node);
                             }
                         }
+
+                        textNodes.forEach(n => {
+                            const spanWrapper = document.createElement('span');
+                            // Deposit এবং Withdraw বোল্ড, মাঝখানের স্ল্যাশ (/) নরমাল ও হালকা অপাসিটি
+                            spanWrapper.innerHTML = '<span style="font-weight: 800; color: #ffffff !important;">Deposit</span><span style="opacity: 0.5; font-weight: 400; margin: 0 2px; color: #ffffff !important;">/</span><span style="font-weight: 800; color: #ffffff !important;">Withdraw</span>';
+                            spanWrapper.style.setProperty('font-size', '11px', 'important');
+                            spanWrapper.style.setProperty('display', 'inline-flex', 'important');
+                            spanWrapper.style.setProperty('align-items', 'center', 'important');
+                            
+                            n.parentNode.replaceChild(spanWrapper, n);
+                        });
                     }
 
                     // স্পন্সর লোগো স্লাইডার
