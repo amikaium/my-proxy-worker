@@ -7,8 +7,8 @@ export default {
     const TARGET_DOMAIN = env.TARGET_URL || "https://www.baji11.live";
     const API_DOMAINS = ["liveapi247.live"]; 
     
-    // ভিডিও বা লাইভ টিভির এপিআই পেলে এখানে কমা দিয়ে বসাবেন, আপাতত ফাঁকা
-    const MEDIA_AND_SCORE_DOMAINS = []; 
+    // আপনার দেওয়া নতুন লাইভ টিভির ডোমেইন যুক্ত করা হলো
+    const MEDIA_AND_SCORE_DOMAINS = ["tv.nginx0.com"]; 
     
     // ==========================================
     // 🛑 কোর ইঞ্জিন (Ghost Scripting Architecture)
@@ -17,7 +17,7 @@ export default {
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
 
-    // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route (For liveapi247.live)
+    // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route
     if (url.pathname === '/__secure_core.js') {
         const referer = request.headers.get("Referer");
         
@@ -28,8 +28,8 @@ export default {
             });
         }
 
-        // ప్రొఫెషనల్ Minified & Packaged Code (IIFE)
-        const secretCode = `!function(){const r="/__api_proxy/",e=["liveapi247.live"];function t(r){return"string"==typeof r&&!r.includes("__api_proxy")&&e.some((e=>r.includes(e)))}const n=window.fetch;window.fetch=async function(...e){try{let o=e[0];"string"==typeof o&&t(o)?e[0]=r+o:o instanceof Request&&t(o.url)&&(e[0]=new Request(r+o.url,o))}catch(r){}return n.apply(this,e)};const o=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,n,...c){try{"string"==typeof n&&t(n)&&(n=r+n)}catch(r){}return o.call(this,e,n,...c)}}();`;
+        // প্রফেশনাল Minified & Packaged Code (লাইভ টিভির ডোমেইন সহ আপডেটেড)
+        const secretCode = `!function(){const r="/__api_proxy/",e=["liveapi247.live","tv.nginx0.com"];function t(r){return"string"==typeof r&&!r.includes("__api_proxy")&&e.some((e=>r.includes(e)))}const n=window.fetch;window.fetch=async function(...e){try{let o=e[0];"string"==typeof o&&t(o)?e[0]=r+o:o instanceof Request&&t(o.url)&&(e[0]=new Request(r+o.url,o))}catch(r){}return n.apply(this,e)};const o=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,n,...c){try{"string"==typeof n&&t(n)&&(n=r+n)}catch(r){}return o.call(this,e,n,...c)}}();`;
 
         return new Response(secretCode, {
             status: 200,
@@ -53,7 +53,7 @@ export default {
       });
     }
 
-    // ২. API এবং Video Stream প্রক্সি
+    // ২. API এবং Video Stream (m3u8/ts) প্রক্সি
     if (url.pathname.startsWith('/__api_proxy/')) {
       let actualApiUrl = request.url.substring(request.url.indexOf('/__api_proxy/') + 13);
       if (!actualApiUrl.startsWith('http')) {
