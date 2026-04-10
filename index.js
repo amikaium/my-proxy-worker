@@ -142,6 +142,37 @@ export default {
                   margin: auto !important;
                   display: block !important;
               }
+
+              /* 🚀 NEW: শুধুমাত্র লগইন এবং সাইনআপ বাটন হেডারে ফিক্সড করার স্টাইল */
+              .custom-header-auth-buttons {
+                  position: fixed !important;
+                  top: 10px !important; /* হেডারের মাঝামাঝি পজিশন */
+                  right: 15px !important; /* ডানদিকে সেট করার জন্য */
+                  bottom: auto !important;
+                  left: auto !important;
+                  display: flex !important;
+                  gap: 10px !important;
+                  z-index: 99999 !important;
+                  width: auto !important;
+                  background: transparent !important;
+              }
+
+              /* বাটনগুলোকে স্কয়ার শেপ এবং হালকা রেডিয়াস দেওয়া হলো */
+              .custom-header-auth-buttons a {
+                  border-radius: 8px !important; /* স্কয়ার শেপ, হালকা কর্নার রেডিয়াস */
+                  height: 38px !important; /* হেডারের জন্য মানানসই হাইট */
+                  padding: 0 15px !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+              }
+
+              /* বাটনের ভেতরের টেক্সট যাতে ঠিকমতো সেন্টারে থাকে */
+              .custom-header-auth-buttons a p {
+                  margin: 0 !important;
+                  text-align: center !important;
+                  flex-grow: 0 !important;
+              }
             </style>
             <script>
               (function(){
@@ -196,6 +227,17 @@ export default {
                             }
                         }
                     });
+
+                    // 🚀 NEW: লগইন ও সাইনআপ বাটনের মেইন ডিভ টার্গেট করে হেডারে নেওয়ার ক্লাস যুক্ত করা
+                    const loginBtnNode = document.querySelector('a[href="/login"]');
+                    const signupBtnNode = document.querySelector('a[href="/signup"]');
+                    if (loginBtnNode && signupBtnNode && loginBtnNode.parentElement === signupBtnNode.parentElement) {
+                        const wrapperDiv = loginBtnNode.parentElement;
+                        if (!wrapperDiv.classList.contains('custom-header-auth-buttons')) {
+                            wrapperDiv.classList.add('custom-header-auth-buttons');
+                        }
+                    }
+
                 });
 
                 window.addEventListener('load', () => {
