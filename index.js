@@ -115,7 +115,7 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: React State Hijacker & Auto-Hide Script
+            // 🚀 NEW: React State Hijacker + UI Customizer
             const refScript = `
             <script>
               (function(){
@@ -135,23 +135,41 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                // পাহারাদার (Observer) যা ফর্ম লোড হওয়া মাত্রই কাজ করবে
+                // পাহারাদার (Observer) যা ফর্ম বা পেজ লোড হওয়া মাত্রই কাজ করবে
                 const observer = new MutationObserver(() => {
-                    // স্ক্রিনশট অনুযায়ী প্লেসহোল্ডার দিয়ে ইনপুট বক্স খোঁজা
-                    const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     
+                    // ১. রেফারেল বক্স হাইড এবং কোড বসানো (আগের মতো)
+                    const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
-                        // ভ্যালু যদি বসানো না থাকে, তবে সাথে সাথে বসিয়ে দেবে
                         if (refInput.value !== REF_CODE) {
                             setNativeValue(refInput, REF_CODE);
                         }
-                        
-                        // পুরো বক্সটাকে (লেবেল সহ) স্ক্রিন থেকে লুকিয়ে ফেলবে
                         const parentGroup = refInput.closest('.chakra-form-control');
                         if (parentGroup && parentGroup.style.display !== 'none') {
                             parentGroup.style.display = 'none';
                         }
                     }
+
+                    // ২. LiveChat বাটন পার্মানেন্টলি হাইড করা
+                    document.querySelectorAll('button').forEach(btn => {
+                        if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
+                            if (btn.style.display !== 'none') {
+                                btn.style.display = 'none';
+                            }
+                        }
+                    });
+
+                    // ৩. Sign Up লেখাকে বামে (Back বাটনের পাশে) আনা
+                    document.querySelectorAll('p').forEach(p => {
+                        if(p.textContent.trim() === 'Sign up' || p.textContent.trim() === 'Sign Up') {
+                            if (p.style.textAlign !== 'left') {
+                                p.style.flexGrow = '1';
+                                p.style.textAlign = 'left';
+                                p.style.marginLeft = '15px'; // Back বাটন থেকে একটু গ্যাপ
+                                p.style.fontWeight = 'bold'; // দেখতে আরো সুন্দর লাগবে
+                            }
+                        }
+                    });
                 });
 
                 // পাহারাদার চালু করা হলো
