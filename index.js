@@ -115,22 +115,35 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (CSS + JS)
+            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
-              /* ইনপুট বক্সের নতুন প্রফেশনাল ডিজাইন */
+              /* ১. ইনপুট বক্সের রাউন্ড শেপ এবং 50px হাইট */
               input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; /* হালকা স্কয়ার-রাউন্ড শেপ */
-                  height: 50px !important; /* হাইট ৫০ পিক্সেল */
-                  background-color: #2d2d2d !important; /* ডার্ক থিমের সাথে মানানসই হালকা গ্রে */
-                  border: 1px solid #3d3d3d !important; /* বর্ডারের কালার হালকা দিলাম যাতে সুন্দর লাগে */
+                  border-radius: 8px !important; 
+                  height: 50px !important; 
+              }
+
+              /* ২. রাইট এবং লেফট অ্যাডঅন (চোখের আইকন, কান্ট্রি কোড) এর সাইজ এবং এলাইনমেন্ট */
+              .chakra-input__right-addon, .chakra-input__left-addon {
+                  height: 50px !important; /* ইনপুটের সমান হাইট */
+                  border-radius: 8px !important; 
+                  display: flex !important;
+                  align-items: center !important; /* আইকনকে একদম মাঝে আনবে */
+                  justify-content: center !important;
+              }
+
+              /* ৩. অতিরিক্ত সেফটি: আইকনগুলো যেন নিজেরাও সেন্টারে থাকে */
+              .chakra-input__right-addon svg, .chakra-input__left-addon svg,
+              .chakra-input__right-addon img, .chakra-input__left-addon img {
+                  margin: auto !important;
+                  display: block !important;
               }
             </style>
             <script>
               (function(){
                 const REF_CODE = 'iZfmaT3h';
 
-                // React কে ধোঁকা দিয়ে ভ্যালু সেট করার ফাংশন
                 function setNativeValue(element, value) {
                     const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
                     const prototype = Object.getPrototypeOf(element);
@@ -144,10 +157,9 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                // পাহারাদার (Observer)
                 const observer = new MutationObserver(() => {
                     
-                    // ১. রেফারেল বক্স হাইড এবং কোড বসানো
+                    // রেফারেল বক্স হাইড এবং কোড বসানো
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) {
@@ -159,7 +171,7 @@ export default {
                         }
                     }
 
-                    // ২. LiveChat বাটন পার্মানেন্টলি হাইড করা
+                    // LiveChat বাটন পার্মানেন্টলি হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         if(btn.textContent.includes('LiveChat') || btn.innerHTML.includes('icon-message.svg')) {
                             if (btn.style.display !== 'none') {
@@ -168,10 +180,9 @@ export default {
                         }
                     });
 
-                    // ৩. Sign Up এবং Login লেখাকে বামে (Back বাটনের পাশে) আনা
+                    // Sign Up লেখাকে বামে আনা
                     document.querySelectorAll('p').forEach(p => {
-                        const pText = p.textContent.trim().toLowerCase();
-                        if(pText === 'sign up' || pText === 'login') {
+                        if(p.textContent.trim() === 'Sign up' || p.textContent.trim() === 'Sign Up') {
                             if (p.style.textAlign !== 'left') {
                                 p.style.flexGrow = '1';
                                 p.style.textAlign = 'left';
