@@ -103,7 +103,7 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Strictly Scoped CSS)
+            // 🚀 NEW: UI Customizer
             const customStylesAndScripts = `
             <style>
               /* ==========================================
@@ -140,7 +140,7 @@ export default {
 
 
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (Distinct Backgrounds)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল 
                  ========================================== */
 
               /* 🚀 মেইন কন্টেইনার */
@@ -156,19 +156,19 @@ export default {
                   box-sizing: border-box !important;
               }
 
-              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (Dark Distinct BG) */
+              /* 📦 Box 1: ইউজারনেম এবং ব্যালেন্স (হালকা কমলা ব্যাকগ্রাউন্ড) */
               div.css-1rfmqpc > div.css-1ctwhz0 {
                   flex: 1.1 !important;
-                  background: linear-gradient(135deg, #1e2126 0%, #15171a 100%) !important; /* ডার্ক গ্রে ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(254, 172, 4, 0.4) !important; 
+                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.20) 0%, rgba(254, 172, 4, 0.05) 100%) !important; /* হালকা কমলা কালার */
+                  border: 1px solid rgba(254, 172, 4, 0.5) !important; 
                   border-radius: 8px !important;
                   padding: 8px 12px !important; 
                   display: flex !important;
                   flex-direction: column !important;
                   justify-content: center !important;
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
                   position: relative !important;
-                  border-right: 1px solid rgba(254, 172, 4, 0.4) !important; 
+                  border-right: 1px solid rgba(254, 172, 4, 0.5) !important; 
               }
 
               /* Username Text */
@@ -201,7 +201,7 @@ export default {
                   margin: 0 !important;
                   min-width: auto !important;
                   height: auto !important;
-                  transition: none !important; /* ট্রানজিশন বাতিল */
+                  transition: none !important; 
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button svg {
                   fill: none !important; 
@@ -210,7 +210,7 @@ export default {
                   height: 18px !important;
               }
               div.css-1rfmqpc > div.css-1ctwhz0 > button:active { 
-                  transform: translateY(-50%) !important; /* রোটেশন বাতিল */
+                  transform: translateY(-50%) !important; 
               }
 
 
@@ -234,12 +234,12 @@ export default {
                   display: none !important;
               }
 
-              /* 💰 Deposit/Withdraw বাটন (Golden Tint BG) */
+              /* 💰 Deposit/Withdraw বাটন (বামে সবুজ, ডানে লাল) */
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   flex: 1 !important;
                   width: 100% !important;
-                  background: linear-gradient(135deg, rgba(254, 172, 4, 0.15) 0%, rgba(254, 172, 4, 0.05) 100%) !important; /* একটু গোল্ডেন হাইলাইট ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(254, 172, 4, 0.5) !important; 
+                  background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; /* বামে সবুজ, ডানে লাল */
+                  border: 1px solid rgba(255, 255, 255, 0.15) !important; 
                   border-radius: 8px !important;
                   display: flex !important;
                   flex-direction: column !important;
@@ -247,18 +247,19 @@ export default {
                   justify-content: center !important;
                   padding: 6px 4px !important; 
                   text-decoration: none !important;
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
               }
 
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg {
                   margin-bottom: 2px !important;
                   width: 18px !important;
                   height: 18px !important;
+                  fill: #ffffff !important; /* আইকন সাদা */
               }
 
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
-                  color: #FEAC04 !important;
-                  font-weight: 600 !important;
+                  color: #ffffff !important; /* ভেতরের টেক্সট সাদা */
+                  font-weight: 700 !important;
                   font-size: 11px !important;
                   margin: 0 !important;
               }
@@ -310,13 +311,17 @@ export default {
                         );
                     }
 
-                    // 🚀 Deposit লেখাকে পরিবর্তন করে "Deposit/Withdraw" করা (শুধুমাত্র ওপরের বক্সের জন্য)
-                    const topDepositTextNodes = document.querySelectorAll('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] p, div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] span, div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"] div');
-                    topDepositTextNodes.forEach(node => {
-                        if (node.textContent.trim() === 'Deposit') {
-                            node.textContent = 'Deposit/Withdraw';
+                    // 🚀 100% সেফ: শুধুমাত্র ওপরের বক্সে Deposit/Withdraw লেখা বসানো
+                    const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
+                    if (topDepositBtnContainer) {
+                        const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
+                        let node;
+                        while (node = walker.nextNode()) {
+                            if (node.nodeValue.trim() === 'Deposit') {
+                                node.nodeValue = 'Deposit/Withdraw';
+                            }
                         }
-                    });
+                    }
 
                     // স্পন্সর লোগো স্লাইডার
                     const headerSwiper = document.querySelector('.css-1vvjgde .swiper');
