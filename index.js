@@ -237,8 +237,8 @@ export default {
               div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] {
                   flex: 1 !important;
                   width: 100% !important;
-                  background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; /* বামে সবুজ, ডানে লাল */
-                  border: 0px none !important; /* বর্ডার পুরোপুরি রিমুভ করা হলো */
+                  background: linear-gradient(90deg, #1d9154 0%, #d32f2f 100%) !important; 
+                  border: 0px none !important; 
                   outline: none !important;
                   border-radius: 8px !important;
                   display: flex !important;
@@ -248,27 +248,16 @@ export default {
                   padding: 6px 4px !important; 
                   text-decoration: none !important;
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
-                  overflow: hidden !important; /* চিকন দাগ হাইড করার জন্য */
+                  overflow: hidden !important; 
               }
 
-              /* 🤍 আইকন সম্পূর্ণ সাদা */
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg {
-                  margin-bottom: 2px !important;
-                  width: 18px !important;
-                  height: 18px !important;
-                  fill: #ffffff !important; 
-                  stroke: #ffffff !important; 
+              /* 🤍 ডিপোজিট আইকন এবং টেক্সটের ব্রুট-ফোর্স সিএসএস */
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] * {
                   color: #ffffff !important;
+                  fill: #ffffff !important;
               }
-
-              /* 🤍 ভেতরের টেক্সট সম্পূর্ণ সাদা */
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] p,
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] span,
-              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] div {
-                  color: #ffffff !important; 
-                  font-weight: 700 !important;
-                  font-size: 11px !important;
-                  margin: 0 !important;
+              div.css-1rfmqpc > div.css-145pjb7 > a[href*="deposit"] svg path {
+                  fill: #ffffff !important;
               }
 
               /* ইনপুট বক্স ডিজাইন */
@@ -318,14 +307,27 @@ export default {
                         );
                     }
 
-                    // 🚀 100% সেফ: শুধুমাত্র ওপরের বক্সে Deposit/Withdraw লেখা বসানো
+                    // 🚀 100% গ্যারান্টেড: Deposit/Withdraw লেখা বসানো এবং জোর করে সাদা কালার দেওয়া
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
                     if (topDepositBtnContainer) {
+                        
+                        // ভেতরের সব এলিমেন্টের (SVG সহ) কালার জাভাস্ক্রিপ্ট দিয়ে জোর করে সাদা করে দেওয়া হচ্ছে
+                        topDepositBtnContainer.querySelectorAll('*').forEach(el => {
+                            el.style.setProperty('color', '#ffffff', 'important');
+                            if(el.tagName.toLowerCase() === 'svg' || el.tagName.toLowerCase() === 'path') {
+                                el.style.setProperty('fill', '#ffffff', 'important');
+                            }
+                        });
+
+                        // টেক্সট চেঞ্জ লজিক
                         const walker = document.createTreeWalker(topDepositBtnContainer, NodeFilter.SHOW_TEXT, null, false);
                         let node;
                         while (node = walker.nextNode()) {
-                            if (node.nodeValue.trim() === 'Deposit') {
+                            if (node.nodeValue.trim() === 'Deposit' || node.nodeValue.trim() === 'Deposit/Withdraw') {
                                 node.nodeValue = 'Deposit/Withdraw';
+                                if (node.parentElement) {
+                                    node.parentElement.style.setProperty('color', '#ffffff', 'important');
+                                }
                             }
                         }
                     }
