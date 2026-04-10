@@ -115,31 +115,29 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 NEW: UI Customizer (Fixed Layout)
+            // 🚀 NEW: UI Customizer (Advanced CSS + JS)
             const customStylesAndScripts = `
             <style>
               /* ১. ইনপুট বক্সের রাউন্ড শেপ, 50px হাইট এবং হালকা গ্রে ব্যাকগ্রাউন্ড */
               input.chakra-input, .chakra-input {
                   border-radius: 8px !important; 
                   height: 50px !important; 
-                  background-color: rgba(255, 255, 255, 0.08) !important; 
-                  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+                  background-color: rgba(255, 255, 255, 0.08) !important; /* ডার্ক মোডের জন্য পারফেক্ট হালকা গ্রে */
+                  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* চারপাশের সুন্দর বর্ডার */
                   color: white !important;
               }
 
-              /* ২. লেআউট না ভেঙে আইকনগুলোকে সেন্টারে রাখার সেফ লজিক */
-              .chakra-input__right-addon, .chakra-input__left-addon,
-              .chakra-input__right-element, .chakra-input__left-element {
+              /* ২. রাইট এবং লেফট অ্যাডঅন (চোখের আইকন, কান্ট্রি কোড) এর সাইজ এবং এলাইনমেন্ট */
+              .chakra-input__right-addon, .chakra-input__left-addon {
                   height: 50px !important; 
+                  border-radius: 8px !important; 
                   display: flex !important;
                   align-items: center !important; 
                   justify-content: center !important;
-                  /* আগের ক্ষতিকর পজিশন এবং মার্জিন রিমুভ করা হয়েছে */
               }
 
-              /* ৩. আইকনগুলো যেন নিখুঁতভাবে সেন্টারে থাকে */
+              /* ৩. আইকনগুলো যেন নিজেরাও সেন্টারে থাকে */
               .chakra-input__right-addon svg, .chakra-input__left-addon svg,
-              .chakra-input__right-element svg, .chakra-input__left-element svg,
               .chakra-input__right-addon img, .chakra-input__left-addon img {
                   margin: auto !important;
                   display: block !important;
@@ -185,7 +183,7 @@ export default {
                         }
                     });
 
-                    // Sign Up এবং Login লেখাকে বামে আনা
+                    // 🚀 NEW: Sign Up এবং Login লেখাকে বামে আনা
                     document.querySelectorAll('p').forEach(p => {
                         const text = p.textContent.trim().toLowerCase();
                         if(text === 'sign up' || text === 'login') {
@@ -194,7 +192,7 @@ export default {
                                 p.style.textAlign = 'left';
                                 p.style.marginLeft = '15px'; 
                                 p.style.fontWeight = 'bold'; 
-                                p.style.textTransform = 'capitalize'; 
+                                p.style.textTransform = 'capitalize'; // প্রথম অক্ষর বড় হাতের হবে
                             }
                         }
                     });
