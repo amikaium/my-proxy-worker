@@ -229,7 +229,7 @@ export default {
               }
 
               /* ==========================================
-                 🔥 আগের ফিক্স (বক্স মার্জিন এবং লগইন বাটন হাইট)
+                 🔥 বক্স মার্জিন এবং লগইন বাটন হাইট
                  ========================================== */
               .css-fpyqtb {
                   margin-bottom: 10px !important;
@@ -250,42 +250,26 @@ export default {
                   display: none !important;
               }
 
-              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল (ফাস্ট লোডিং ব্যাকগ্রাউন্ড সহ) */
-              .custom-video-wrapper {
-                  width: 100% !important;
-                  padding: 0 !important;
-                  margin: 0 !important;
-                  display: block !important;
-                  background-color: #121212 !important; /* ভিডিও লোড হওয়ার আগে ডার্ক ব্যাকগ্রাউন্ড */
-                  min-height: 150px; 
-              }
-              .custom-video-wrapper video {
-                  width: 100% !important;
-                  height: auto !important;
-                  display: block !important;
-                  object-fit: cover !important;
-                  pointer-events: none !important; 
-              }
-
               /* ==========================================
-                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স (Swipe-to-refresh সচল রেখে)
+                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স
                  ========================================== */
+              .page-login body, .page-signup body,
+              .page-login html, .page-signup html {
+                  overscroll-behavior-y: none !important;
+              }
 
-              /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
               .page-login .css-b13tmd {
                   height: 100vh !important;
                   max-height: 100vh !important;
                   overflow: hidden !important; 
               }
 
-              /* সাইনআপ পেজে অতিরিক্ত স্পেস রিমুভ করা হলো (কিন্তু নরমাল স্ক্রল থাকবে) */
               .page-signup .css-16ff8oy,
               .page-signup .css-b13tmd {
                   padding-bottom: 10px !important; 
                   margin-bottom: 0 !important;
               }
 
-              /* চাকরা ইউআই এর অটোমেটিক জেনারেট হওয়া অদৃশ্য স্পেসার হাইড করা হলো */
               .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
               .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
               .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
@@ -295,6 +279,52 @@ export default {
                   display: none !important;
                   height: 0 !important;
                   min-height: 0 !important;
+              }
+
+              /* ==========================================
+                 🔥 অটোমেটিক ভিডিও প্লেয়ার ও iOS স্পিনার স্টাইল 
+                 ========================================== */
+              .custom-video-wrapper {
+                  position: relative !important;
+                  width: 100% !important;
+                  padding: 0 !important;
+                  margin: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  background-color: transparent !important; /* কালো বক্স রিমুভ */
+                  min-height: 150px; 
+              }
+              
+              .custom-video-wrapper video {
+                  width: 100% !important;
+                  height: auto !important;
+                  display: block !important;
+                  object-fit: cover !important;
+                  pointer-events: none !important; 
+                  opacity: 0; /* ভিডিও প্লে হওয়ার আগে হাইড থাকবে */
+                  transition: opacity 0.5s ease-in-out; /* স্মুথ ভাবে ভেসে উঠবে */
+              }
+
+              /* আইফোন (iOS) স্টাইল ৮-লাইনের স্পিনার */
+              .ios-spinner {
+                  position: absolute;
+                  width: 32px;
+                  height: 32px;
+                  z-index: 10;
+                  transition: opacity 0.3s ease-out;
+              }
+              .ios-spinner::after {
+                  content: "";
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M50 15V25' opacity='.2'/%3E%3Cpath d='M50 15V25' transform='rotate(45 50 50)' opacity='.3'/%3E%3Cpath d='M50 15V25' transform='rotate(90 50 50)' opacity='.4'/%3E%3Cpath d='M50 15V25' transform='rotate(135 50 50)' opacity='.5'/%3E%3Cpath d='M50 15V25' transform='rotate(180 50 50)' opacity='.6'/%3E%3Cpath d='M50 15V25' transform='rotate(225 50 50)' opacity='.7'/%3E%3Cpath d='M50 15V25' transform='rotate(270 50 50)' opacity='.8'/%3E%3Cpath d='M50 15V25' transform='rotate(315 50 50)' opacity='1'/%3E%3C/g%3E%3C/svg%3E");
+                  background-size: cover;
+                  animation: ios-spin 1s steps(8, end) infinite;
+              }
+              @keyframes ios-spin {
+                  100% { transform: rotate(360deg); }
               }
             </style>
 
@@ -335,7 +365,6 @@ export default {
                 }
 
                 const domObserver = new MutationObserver(() => {
-                    // বর্তমান পাথ চেক করা
                     let currentPath = window.location.pathname.replace(/\\//g, '');
                     
                     // ১. রেফারেল কোড অটো-ফিল
@@ -390,7 +419,7 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (শুধুমাত্র Login এবং Signup পেজের জন্য)
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (iOS Spinner ও Smooth Fade-in সহ)
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -406,21 +435,29 @@ export default {
 
                             const videoHTML = \`
                             <div id="arfan-custom-video" class="custom-video-wrapper">
-                                <video id="arfan-vid" autoplay loop muted playsinline preload="auto" poster="\${VIDEO_URL}#t=0.001">
-                                    <source src="\${VIDEO_URL}#t=0.001" type="video/mp4">
+                                <div id="arfan-spinner" class="ios-spinner"></div>
+                                <video id="arfan-vid" autoplay loop muted playsinline preload="auto">
+                                    <source src="\${VIDEO_URL}" type="video/mp4">
                                 </video>
                             </div>\`;
                             targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
 
                             setTimeout(() => {
                                 const vidElement = document.getElementById('arfan-vid');
+                                const spinnerElement = document.getElementById('arfan-spinner');
+                                
                                 if(vidElement) {
+                                    // ভিডিও প্লে শুরু হলে স্পিনার হাইড হবে এবং ভিডিও শো হবে
+                                    vidElement.addEventListener('playing', () => {
+                                        if(spinnerElement) spinnerElement.style.opacity = '0';
+                                        vidElement.style.opacity = '1';
+                                    });
+
                                     vidElement.play().catch(e => console.log("Auto-play ready."));
                                 }
-                            }, 200);
+                            }, 100);
                         }
                     } else {
-                        // অন্য কোনো পেজে ভিডিও থাকলে তা রিমুভ করে দেবে
                         const existingVideo = document.getElementById('arfan-custom-video');
                         if (existingVideo) {
                             existingVideo.remove();
