@@ -107,8 +107,11 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🚫 সাদা বক্স এবং ফালতু এলিমেন্ট হাইড
+                 🚫 গ্লোবাল ট্যাপ হাইলাইট এবং ফালতু এলিমেন্ট হাইড
                  ========================================== */
+              * {
+                  -webkit-tap-highlight-color: transparent !important; /* ক্লিক করলে আসা চিকন লাইন বন্ধ */
+              }
               div.css-h096tp, 
               .language-select-div { display: none !important; }
 
@@ -170,14 +173,12 @@ export default {
               /* ==========================================
                  🖋️ 100% SCOPED: শুধুমাত্র ডিপোজিট ফর্মের ইনপুট ডিজাইন 
                  ========================================== */
-
-              /* গ্লোবাল ইনপুট ওভাররাইড পুরোপুরি বাদ দেওয়া হয়েছে, তাই লগইন পেইজে ইফেক্ট পড়বে না */
               
-              /* শুধুমাত্র ডিপোজিট পেইজের ইনপুট (Bank Name, Account Number) */
+              /* শুধুমাত্র ডিপোজিট পেইজের ইনপুট */
               div.css-cipbx3 input.chakra-input,
               div.css-qx6nre input.chakra-input {
-                  background-color: #1a1d24 !important; /* ডার্ক ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(254, 172, 4, 0.6) !important; /* গোল্ডেন বর্ডার */
+                  background-color: #1a1d24 !important; 
+                  border: 1px solid rgba(254, 172, 4, 0.6) !important; 
                   border-radius: 8px !important;
                   color: #ffffff !important;
                   height: 50px !important;
@@ -195,29 +196,48 @@ export default {
               }
 
               /* 📁 Upload Receipt ফিক্স */
-              div.css-cipbx3 div[style*="background"], 
-              div.css-cipbx3 .chakra-input__group > div {
-                  background-color: transparent !important;
+              .arfan-premium-upload {
+                  background-color: #1a1d24 !important;
+                  background: #1a1d24 !important;
+                  border: 1px solid rgba(254, 172, 4, 0.6) !important;
+                  border-radius: 8px !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  height: 50px !important;
+                  padding: 0 16px !important;
+                  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
               }
-              div.css-cipbx3 svg {
-                  fill: #FEAC04 !important; color: #FEAC04 !important;
+              .arfan-premium-upload * {
+                  color: #e5e7eb !important; /* লেখার কালার সাদা/হালকা গ্রে */
+              }
+              .arfan-premium-upload svg {
+                  fill: #FEAC04 !important; /* আপলোড আইকন গোল্ডেন */
+                  color: #FEAC04 !important;
+                  margin-right: 8px !important;
               }
 
-              /* 🎛️ প্রি-সেট অ্যামাউন্ট বাটন (100, 500, 1000) */
+              /* 🎛️ প্রি-সেট অ্যামাউন্ট বাটন (100, 500, 1000) গ্লিচ ফিক্স */
               div.css-cipbx3 button.chakra-button:not([type="submit"]),
               div.css-qx6nre button.chakra-button:not([type="submit"]) {
                   background-color: #1a1d24 !important; 
+                  background: #1a1d24 !important;
                   border: 1px solid rgba(255, 255, 255, 0.15) !important;
                   color: #e5e7eb !important;
                   border-radius: 6px !important;
                   font-weight: 600 !important;
-                  transition: all 0.3s ease !important;
+                  transition: all 0.2s ease !important;
                   box-shadow: none !important;
                   outline: none !important;
               }
+              /* হোভার বা সিলেক্টেড অবস্থায় সাদা হওয়া বন্ধ করা হলো */
               div.css-cipbx3 button.chakra-button:not([type="submit"])[data-active],
-              div.css-cipbx3 button.chakra-button:not([type="submit"]):active {
+              div.css-qx6nre button.chakra-button:not([type="submit"])[data-active],
+              div.css-cipbx3 button.chakra-button:not([type="submit"])[aria-pressed="true"],
+              div.css-qx6nre button.chakra-button:not([type="submit"])[aria-pressed="true"],
+              div.css-cipbx3 button.chakra-button:not([type="submit"]):active,
+              div.css-qx6nre button.chakra-button:not([type="submit"]):active {
                   background-color: rgba(254, 172, 4, 0.15) !important;
+                  background: rgba(254, 172, 4, 0.15) !important;
                   border-color: #FEAC04 !important;
                   color: #FEAC04 !important;
                   box-shadow: 0 0 8px rgba(254, 172, 4, 0.4) !important;
@@ -338,13 +358,31 @@ export default {
                         if (authBox) authBox.style.display = 'none';
                     }
 
-                    // 🚀 100% সেফ: BDT Amount Box ডিজাইন (শুধুমাত্র BDT বক্সে কাজ করবে)
+                    // 🚀 100% সেফ: Upload Receipt বক্স ডিজাইন
+                    const allTextNodes = document.querySelectorAll('div.css-cipbx3 p, div.css-cipbx3 span, div.css-cipbx3 div');
+                    allTextNodes.forEach(el => {
+                        if (el.textContent.trim() === 'Select an Image') {
+                            const uploadWrapper = el.closest('div[style*="background"]') || el.parentElement;
+                            if (uploadWrapper && !uploadWrapper.classList.contains('arfan-premium-upload')) {
+                                uploadWrapper.classList.add('arfan-premium-upload');
+                            }
+                        }
+                    });
+
+                    // 🚀 100% সেফ: BDT Amount Box ডিজাইন ও type="number" সেট করা
                     const bdtAddons = document.querySelectorAll('div.chakra-input__left-addon');
                     bdtAddons.forEach(addon => {
                         if (addon.textContent.includes('BDT')) {
                             const parentGroup = addon.parentElement; 
-                            if (parentGroup && parentGroup.classList.contains('chakra-input__group') && !parentGroup.classList.contains('arfan-amount-group')) {
-                                parentGroup.classList.add('arfan-amount-group'); 
+                            if (parentGroup && parentGroup.classList.contains('chakra-input__group')) {
+                                if (!parentGroup.classList.contains('arfan-amount-group')) {
+                                    parentGroup.classList.add('arfan-amount-group'); 
+                                }
+                                // ইনপুটের টাইপ পরিবর্তন করে number করে দেওয়া হলো
+                                const inputField = parentGroup.querySelector('input');
+                                if(inputField && inputField.type !== 'number') {
+                                    inputField.type = 'number';
+                                }
                             }
                         }
                     });
