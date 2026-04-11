@@ -107,22 +107,24 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন
+                 🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন
                  ========================================== */
               
-              /* মেইন পেজ ব্যাকগ্রাউন্ড */
-              .page-signup body {
+              /* মেইন পেজ ব্যাকগ্রাউন্ড (.page-signup এবং .page-login উভয়ের জন্য) */
+              .page-signup body, .page-login body {
                   background-color: #121212 !important; 
               }
 
               /* ইনপুট গ্রুপ কন্টেইনার */
-              .page-signup .chakra-form-control .chakra-input-group {
+              .page-signup .chakra-form-control .chakra-input-group,
+              .page-login .chakra-form-control .chakra-input-group {
                   background-color: transparent !important; 
                   border: none !important; 
               }
 
               /* মেইন ইনপুট বক্স (উচ্চতা 45px) */
-              .page-signup .chakra-input {
+              .page-signup .chakra-input,
+              .page-login .chakra-input {
                   height: 45px !important; 
                   background-color: #2c2c2c !important; 
                   border-radius: 4px !important; 
@@ -131,29 +133,24 @@ export default {
               }
 
               /* প্লেসহোল্ডার টেক্সট কালার */
-              .page-signup .chakra-input::placeholder {
+              .page-signup .chakra-input::placeholder,
+              .page-login .chakra-input::placeholder {
                   color: #808080 !important; 
-              }
-
-              /* -------------------------------------------
-                 🔥 কনফার্ম বাটন (Confirm Button) ফিক্স
-                 ------------------------------------------- */
-              .page-signup button.chakra-button {
-                  height: 45px !important; 
-                  border-radius: 4px !important; 
               }
 
               /* -------------------------------------------
                  🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
                  ------------------------------------------- */
-              .page-signup .chakra-input__right-element {
+              .page-signup .chakra-input__right-element,
+              .page-login .chakra-input__right-element {
                   height: 45px !important; 
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
                   top: 0 !important;
               }
-              .page-signup .chakra-input__right-element button {
+              .page-signup .chakra-input__right-element button,
+              .page-login .chakra-input__right-element button {
                   height: 100% !important;
                   width: 100% !important;
                   display: flex !important;
@@ -163,7 +160,8 @@ export default {
                   padding: 0 !important; 
                   margin: 0 !important;  
               }
-              .page-signup .chakra-input__right-element svg {
+              .page-signup .chakra-input__right-element svg,
+              .page-login .chakra-input__right-element svg {
                   display: block !important;
                   margin: auto !important; 
                   /* 🔥 চোখের আইকনকে ফোর্স করে আরেকটু নিচে নামানো হলো */
@@ -172,7 +170,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড)
+                 লেফট অ্যাডঅন (দেশের কোড) - শুধুমাত্র সাইনআপে
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #2c2c2c !important; 
@@ -188,7 +186,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) ও রিফ্রেশ বাটন ফিক্স
+                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - শুধুমাত্র সাইনআপে
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
@@ -203,20 +201,20 @@ export default {
                   align-items: center !important;
                   justify-content: center !important;
               }
-              /* 🔥 রিফ্রেশ বাটন কন্টেইনার (উচ্চতা ছোট করে বক্সের ভেতর ফিট করা হলো) */
+              /* রিফ্রেশ বাটন কন্টেইনার */
               .page-signup .chakra-input__right-addon button {
-                  margin: auto 0 auto 5px !important; /* সেন্টারিং এবং বামে একটু স্পেস */
+                  margin: auto 0 auto 5px !important; 
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  height: 26px !important; /* বাটন হাইট ছোট করা হলো */
-                  width: 26px !important; /* বাটন উইডথ ছোট করা হলো */
+                  height: 26px !important; 
+                  width: 26px !important; 
                   min-width: 26px !important;
                   border-radius: 4px !important; 
                   padding: 0 !important; 
                   background-color: transparent !important;
               }
-              /* 🔥 রিফ্রেশ SVG আইকনকে টার্গেট করে ছোট করা হলো */
+              /* রিফ্রেশ SVG আইকন */
               .page-signup .chakra-input__right-addon button svg,
               .page-signup .chakra-input__right-addon svg {
                   height: 16px !important; 
@@ -290,6 +288,15 @@ export default {
                         }
                         agreeCheckbox.setAttribute('data-auto-checked', 'true');
                     }
+
+                    // ৫. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা (হেডার সেভ করার জন্য)
+                    document.querySelectorAll('button.chakra-button').forEach(btn => {
+                        const btnText = btn.textContent.trim();
+                        if (btnText === 'Confirm' || btnText === 'Login') {
+                            btn.style.setProperty('height', '45px', 'important');
+                            btn.style.setProperty('border-radius', '4px', 'important');
+                        }
+                    });
                 });
 
                 window.addEventListener('load', () => {
