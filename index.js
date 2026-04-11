@@ -229,6 +229,18 @@ export default {
                   margin: auto !important;
                   color: #121212 !important; 
               }
+
+              /* ==========================================
+                 🔥 নতুন যুক্ত করা ফিক্স (বক্স মার্জিন এবং লগইন বাটন হাইট)
+                 ========================================== */
+              .css-fpyqtb {
+                  margin-bottom: 10px !important;
+              }
+              
+              button.chakra-button.css-lutoi4 {
+                  height: 45px !important;
+                  border-radius: 4px !important;
+              }
             </style>
 
             <script>
