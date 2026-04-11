@@ -107,7 +107,7 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (মার্জিন সহ)
+                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (মার্জিন ও 45px উচ্চতা সহ)
                  ========================================== */
               
               /* মেইন পেজ ব্যাকগ্রাউন্ড */
@@ -115,15 +115,15 @@ export default {
                   background-color: #121212 !important; 
               }
 
-              /* ইনপুট গ্রুপ কন্টেইনার (যেহেতু গ্যাপ থাকবে, তাই এর ব্যাকগ্রাউন্ড ট্রান্সপারেন্ট করে দিলাম) */
+              /* ইনপুট গ্রুপ কন্টেইনার */
               .page-signup .chakra-form-control .chakra-input-group {
                   background-color: transparent !important; 
                   border: none !important; 
               }
 
-              /* মেইন ইনপুট বক্স (উচ্চতা 35px) */
+              /* মেইন ইনপুট বক্স (উচ্চতা 45px) */
               .page-signup .chakra-input {
-                  height: 35px !important; 
+                  height: 45px !important; 
                   background-color: #2c2c2c !important; 
                   border-radius: 12px !important; 
                   border: 1px solid #4e4e4e !important; 
@@ -140,12 +140,12 @@ export default {
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #cbd5e0 !important; 
-                  border-radius: 12px !important; /* আলাদা বক্স তাই রাউন্ড করা হলো */
+                  border-radius: 12px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 500 !important;
-                  height: 35px !important;
-                  margin-right: 10px !important; /* 🔥 আপনার নির্দেশমতো ডানপাশে 10px গ্যাপ */
+                  height: 45px !important;
+                  margin-right: 10px !important; /* ডানপাশে 10px গ্যাপ */
               }
               .page-signup .chakra-input__left-addon img.chakra-image {
                   margin-right: 5px !important;
@@ -156,14 +156,16 @@ export default {
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #cbd5e0 !important; 
-                  border-radius: 12px !important; /* আলাদা বক্স তাই রাউন্ড করা হলো */
+                  border-radius: 12px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 700 !important; 
-                  height: 35px !important;
-                  margin-left: 10px !important; /* 🔥 আপনার নির্দেশমতো বাঁপাশে 10px গ্যাপ */
+                  height: 45px !important;
+                  margin-left: 10px !important; /* বাঁপাশে 10px গ্যাপ */
+                  padding: 5px !important; /* 🔥 আপনার নির্দেশমতো 5px প্যাডিং */
                   display: flex !important;
                   align-items: center !important;
+                  justify-content: center !important;
               }
               .page-signup .chakra-input__right-addon .chakra-image {
                   filter: brightness(0.1) !important;
