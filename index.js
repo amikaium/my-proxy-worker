@@ -107,7 +107,7 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন - 4px Radius
+                 🎨 সাইনআপ পেজের আপডেট ডিজাইন
                  ========================================== */
               
               /* মেইন পেজ ব্যাকগ্রাউন্ড */
@@ -125,7 +125,7 @@ export default {
               .page-signup .chakra-input {
                   height: 45px !important; 
                   background-color: #2c2c2c !important; 
-                  border-radius: 4px !important; /* 🔥 4px রাউন্ড */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #ffffff !important; 
               }
@@ -133,6 +133,14 @@ export default {
               /* প্লেসহোল্ডার টেক্সট কালার */
               .page-signup .chakra-input::placeholder {
                   color: #808080 !important; 
+              }
+
+              /* -------------------------------------------
+                 🔥 কনফার্ম বাটন (Confirm Button) ফিক্স
+                 ------------------------------------------- */
+              .page-signup button.chakra-button {
+                  height: 45px !important; 
+                  border-radius: 4px !important; 
               }
 
               /* -------------------------------------------
@@ -158,16 +166,17 @@ export default {
               .page-signup .chakra-input__right-element svg {
                   display: block !important;
                   margin: auto !important; 
-                  /* 🔥 মাইক্রোস্কোপিক অ্যাডজাস্টমেন্ট: আইকনটিকে হালকা নিচে নামানো হলো ভার্টিক্যাল মিডিলের জন্য */
-                  transform: translateY(1.5px) !important; 
+                  /* 🔥 চোখের আইকনকে ফোর্স করে আরেকটু নিচে নামানো হলো */
+                  position: relative !important;
+                  top: 2.5px !important; 
               }
 
               /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড) - ব্যাকগ্রাউন্ড #2c2c2c
+                 লেফট অ্যাডঅন (দেশের কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #2c2c2c !important; 
-                  border-radius: 4px !important; /* 🔥 4px রাউন্ড */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #ffffff !important; 
                   font-weight: 500 !important;
@@ -179,39 +188,41 @@ export default {
               }
 
               /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - পেডিং 5px
+                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) ও রিফ্রেশ বাটন ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
-                  border-radius: 4px !important; /* 🔥 4px রাউন্ড */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 700 !important; 
                   height: 45px !important;
                   margin-left: 10px !important; 
-                  padding: 5px !important; 
+                  padding: 5px 8px !important; 
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
               }
-              /* 🔥 রিফ্রেশ বাটনকে ছোট করা হলো যাতে #EEEEEE বক্সের ভেতর ফিট থাকে */
+              /* 🔥 রিফ্রেশ বাটন কন্টেইনার (উচ্চতা ছোট করে বক্সের ভেতর ফিট করা হলো) */
               .page-signup .chakra-input__right-addon button {
-                  margin: auto !important; /* সেন্টারিং */
+                  margin: auto 0 auto 5px !important; /* সেন্টারিং এবং বামে একটু স্পেস */
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  height: 24px !important; /* বাটন উচ্চতা ছোট করা হলো */
-                  width: 24px !important; /* বাটন চওড়া ছোট করা হলো */
-                  border-radius: 50% !important; /* চাইলে স্কয়ার বা গোল রাখতে পারেন */
-                  padding: 0 !important; /* ভিতরের প্যাডিং জিরো */
-                  min-width: unset !important;
+                  height: 26px !important; /* বাটন হাইট ছোট করা হলো */
+                  width: 26px !important; /* বাটন উইডথ ছোট করা হলো */
+                  min-width: 26px !important;
+                  border-radius: 4px !important; 
+                  padding: 0 !important; 
+                  background-color: transparent !important;
               }
-              /* ไอকনটিকে বাটন অনুযায়ী ছোট করা */
-              .page-signup .chakra-input__right-addon .chakra-image {
-                  filter: brightness(0.1) !important;
-                  margin: 0 !important; /* আগের মার্জিন রিমুভ */
-                  height: 18px !important; /* আইকন উচ্চতা ছোট করা হলো */
-                  width: 18px !important; /* আইকন চওড়া ছোট করা হলো */
+              /* 🔥 রিফ্রেশ SVG আইকনকে টার্গেট করে ছোট করা হলো */
+              .page-signup .chakra-input__right-addon button svg,
+              .page-signup .chakra-input__right-addon svg {
+                  height: 16px !important; 
+                  width: 16px !important; 
+                  margin: auto !important;
+                  color: #121212 !important; 
               }
             </style>
 
@@ -271,7 +282,7 @@ export default {
                         codeInput.type = 'number';
                     }
 
-                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া (যেকোনো সময় ব্যাক করলেও কাজ করবে)
+                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া
                     const agreeCheckbox = document.querySelector('input[type="checkbox"]');
                     if (agreeCheckbox && !agreeCheckbox.hasAttribute('data-auto-checked')) {
                         if (!agreeCheckbox.checked) {
