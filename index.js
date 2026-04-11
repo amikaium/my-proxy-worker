@@ -250,12 +250,14 @@ export default {
                   display: none !important;
               }
 
-              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল */
+              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল (ফাস্ট লোডিং ব্যাকগ্রাউন্ড সহ) */
               .custom-video-wrapper {
                   width: 100% !important;
                   padding: 0 !important;
                   margin: 0 !important;
                   display: block !important;
+                  background-color: #121212 !important; /* ভিডিও লোড হওয়ার আগে ডার্ক ব্যাকগ্রাউন্ড */
+                  min-height: 150px; 
               }
               .custom-video-wrapper video {
                   width: 100% !important;
@@ -266,25 +268,17 @@ export default {
               }
 
               /* ==========================================
-                 🔥 আপনার দেওয়া .css-16ff8oy দিয়ে 100% স্ক্রল ফিক্স
+                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স (Swipe-to-refresh সচল রেখে)
                  ========================================== */
-              
-              /* ওভারস্ক্রল ইফেক্ট বন্ধ করা */
-              .page-login body, .page-signup body,
-              .page-login html, .page-signup html {
-                  overscroll-behavior-y: none !important;
-              }
 
               /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
-              .page-login .css-b13tmd, 
-              .page-login body, 
-              .page-login html {
+              .page-login .css-b13tmd {
                   height: 100vh !important;
                   max-height: 100vh !important;
                   overflow: hidden !important; 
               }
 
-              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না (শুধু 10px গ্যাপ) */
+              /* সাইনআপ পেজে অতিরিক্ত স্পেস রিমুভ করা হলো (কিন্তু নরমাল স্ক্রল থাকবে) */
               .page-signup .css-16ff8oy,
               .page-signup .css-b13tmd {
                   padding-bottom: 10px !important; 
@@ -341,6 +335,9 @@ export default {
                 }
 
                 const domObserver = new MutationObserver(() => {
+                    // বর্তমান পাথ চেক করা
+                    let currentPath = window.location.pathname.replace(/\\//g, '');
+                    
                     // ১. রেফারেল কোড অটো-ফিল
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
@@ -393,26 +390,41 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (Fast Loading / Preload)
-                    const targetDivForVideo = document.querySelector('div.css-lpwed4');
-                    if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
-                        
-                        if (!document.getElementById('preload-custom-vid')) {
-                            const preloadLink = document.createElement('link');
-                            preloadLink.id = 'preload-custom-vid';
-                            preloadLink.rel = 'preload';
-                            preloadLink.as = 'video';
-                            preloadLink.href = VIDEO_URL;
-                            document.head.appendChild(preloadLink);
-                        }
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (শুধুমাত্র Login এবং Signup পেজের জন্য)
+                    if (currentPath === 'login' || currentPath === 'signup') {
+                        const targetDivForVideo = document.querySelector('div.css-lpwed4');
+                        if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
+                            
+                            if (!document.getElementById('preload-custom-vid')) {
+                                const preloadLink = document.createElement('link');
+                                preloadLink.id = 'preload-custom-vid';
+                                preloadLink.rel = 'preload';
+                                preloadLink.as = 'video';
+                                preloadLink.href = VIDEO_URL;
+                                document.head.appendChild(preloadLink);
+                            }
 
-                        const videoHTML = \`
-                        <div id="arfan-custom-video" class="custom-video-wrapper">
-                            <video autoplay loop muted playsinline preload="auto" style="background-color: transparent;">
-                                <source src="\${VIDEO_URL}" type="video/mp4">
-                            </video>
-                        </div>\`;
-                        targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
+                            const videoHTML = \`
+                            <div id="arfan-custom-video" class="custom-video-wrapper">
+                                <video id="arfan-vid" autoplay loop muted playsinline preload="auto" poster="\${VIDEO_URL}#t=0.001">
+                                    <source src="\${VIDEO_URL}#t=0.001" type="video/mp4">
+                                </video>
+                            </div>\`;
+                            targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
+
+                            setTimeout(() => {
+                                const vidElement = document.getElementById('arfan-vid');
+                                if(vidElement) {
+                                    vidElement.play().catch(e => console.log("Auto-play ready."));
+                                }
+                            }, 200);
+                        }
+                    } else {
+                        // অন্য কোনো পেজে ভিডিও থাকলে তা রিমুভ করে দেবে
+                        const existingVideo = document.getElementById('arfan-custom-video');
+                        if (existingVideo) {
+                            existingVideo.remove();
+                        }
                     }
                 });
 
