@@ -103,10 +103,61 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 শুধুমাত্র সাইনআপ পেজের রেফারেল বক্স হাইড করার স্ক্রিপ্ট রাখা হলো
+            // 🚀 CSS & JS ইনজেকশন: ডাইনামিক বডি ক্লাস এবং কাস্টম ডিজাইন
             const customStylesAndScripts = `
+            <style>
+              /* ==========================================
+                 🎨 শুধুমাত্র সাইনআপ পেজের ডিজাইন (.page-signup)
+                 ========================================== */
+              .page-signup input.chakra-input {
+                  height: 50px !important;
+                  border-radius: 6px !important; /* হালকা স্কয়ার/রাউন্ড শেপ */
+                  border: 0.5px solid #22c55e !important; /* সবুজ বর্ডার লাইন */
+                  background-color: #e5e7eb !important; /* হালকা ধূসর ব্যাকগ্রাউন্ড */
+                  color: #000000 !important; /* টেক্সট কালার কালো */
+              }
+
+              /* ইনপুট বক্সে ক্লিক (Focus) করলে যেন বর্ডার সুন্দর দেখায় */
+              .page-signup input.chakra-input:focus {
+                  border: 1px solid #16a34a !important;
+                  box-shadow: 0 0 0 1px #16a34a !important;
+              }
+
+              /* যদি ইনপুটের সাথে আইকন বক্স থাকে, তার ব্যাকগ্রাউন্ড ঠিক করা */
+              .page-signup .chakra-input__left-addon, 
+              .page-signup .chakra-input__right-addon {
+                  border: none !important;
+              }
+            </style>
+
             <script>
               (function(){
+                // ==========================================
+                // 🔄 ডাইনামিক বডি ক্লাস সিস্টেম
+                // ==========================================
+                function updateBodyClass() {
+                    // আগের পেজের ক্লাস মুছে ফেলা
+                    document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
+                    
+                    // বর্তমান URL অনুযায়ী নতুন ক্লাস যুক্ত করা (যেমন: /signup হলে page-signup হবে)
+                    let path = window.location.pathname.replace(/\\//g, '');
+                    if(path === '') path = 'home';
+                    document.body.classList.add('page-' + path);
+                }
+
+                // URL পরিবর্তনের দিকে নজর রাখা (React/SPA সাইটের জন্য)
+                let lastUrl = location.href; 
+                const urlObserver = new MutationObserver(() => {
+                  const url = location.href;
+                  if (url !== lastUrl) {
+                    lastUrl = url;
+                    updateBodyClass(); // URL চেঞ্জ হলেই ক্লাস আপডেট হবে
+                  }
+                });
+
+                // ==========================================
+                // 📝 রেফারেল কোড অটো-ফিল সিস্টেম
+                // ==========================================
                 const REF_CODE = 'iZfmaT3h';
 
                 function setNativeValue(element, value) {
@@ -118,8 +169,7 @@ export default {
                     element.dispatchEvent(new Event('input', { bubbles: true }));
                 }
 
-                const observer = new MutationObserver(() => {
-                    // রেফারেল কোড অটো-ফিল এবং হাইড
+                const domObserver = new MutationObserver(() => {
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
@@ -129,7 +179,9 @@ export default {
                 });
 
                 window.addEventListener('load', () => {
-                    observer.observe(document.body, { childList: true, subtree: true });
+                    updateBodyClass(); // প্রথমবার লোড হওয়ার সময় ক্লাস বসাবে
+                    urlObserver.observe(document, {subtree: true, childList: true});
+                    domObserver.observe(document.body, { childList: true, subtree: true });
                 });
               })();
             </script>`;
