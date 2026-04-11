@@ -299,47 +299,47 @@ export default {
               }
 
               /* ==========================================
-                 🛑 ডিপোজিট পেজ (/dw) কাস্টম ডিজাইন (Height 45px & Radius 4px)
+                 🛑 ডিপোজিট পেজ (/dw) কাস্টম ডিজাইন (Height 45px & Radius)
                  ========================================== */
               
               /* ১. ফ্রিজ করা বক্সগুলো (Bank, Acc Number) */
               .page-dw .custom-frozen-box {
                   height: 45px !important;
-                  border-radius: 4px !important; /* ৪ পিক্সেল রেডিয়াস যুক্ত */
+                  border-radius: 4px !important; 
                   pointer-events: none !important;
                   user-select: none !important;
                   opacity: 0.9 !important;
               }
 
-              /* ২. পেজের অন্যান্য সমস্ত সাধারণ ইনপুট (Amount, Transaction ID) */
+              /* ২. পেজের অন্যান্য সমস্ত সাধারণ ইনপুট (Transaction ID) */
               .page-dw .chakra-input {
                   height: 45px !important;
                   border-radius: 4px !important;
               }
 
-              /* ৩. BDT লেখা লেফট অ্যাডঅন (Amount এর বাম পাশে) */
-              .page-dw .chakra-input__left-addon {
+              /* ৩. Amount বক্স (বাম দিক জিরো, ডান দিক ৪ পিক্সেল) */
+              .page-dw .custom-amount-input {
                   height: 45px !important;
-                  border-radius: 4px 0 0 4px !important; /* শুধু বাম দিকে কার্ভ */
-              }
-              
-              /* BDT অ্যাডঅন থাকলে মূল Amount ইনপুটের বাম দিকের কার্ভ সোজা করে দেওয়া */
-              .page-dw .chakra-input-group > .chakra-input__left-addon + .chakra-input {
-                  border-top-left-radius: 0 !important;
-                  border-bottom-left-radius: 0 !important;
+                  border-radius: 0 4px 4px 0 !important; /* Top-Left & Bottom-Left = 0 */
               }
 
-              /* ৪. কপি আইকন বাটন (Acc Number এর ডানে) এরিয়া ফিক্স */
+              /* ৪. BDT লেখা লেফট অ্যাডঅন (Amount এর বাম পাশে) */
+              .page-dw .chakra-input__left-addon {
+                  height: 45px !important;
+                  border-radius: 4px 0 0 4px !important; 
+              }
+
+              /* ৫. কপি আইকন বাটন (Acc Number এর ডানে) এরিয়া ফিক্স */
               .page-dw .chakra-input__right-element {
                   height: 45px !important;
               }
 
-              /* ৫. Upload Receipt ইমেজ আপলোড বক্স (JS থেকে ক্লাস বসবে) */
+              /* ৬. Upload Receipt ইমেজ আপলোড বক্স */
               .page-dw .custom-upload-box {
                   height: 45px !important;
                   border-radius: 4px !important;
                   display: flex !important;
-                  align-items: center !important; /* ভিতরের লেখা মাঝে রাখার জন্য */
+                  align-items: center !important; 
               }
 
             </style>
@@ -477,38 +477,75 @@ export default {
                     // ৮. 🛑 শুধুমাত্র Deposit পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
                         
-                        // [A] নির্দিষ্ট বক্স ফ্রিজ করা
+                        // [A] নির্দিষ্ট বক্স ফ্রিজ করা এবং Amount বক্স মডিফাই করা
                         document.querySelectorAll('input').forEach(input => {
                             let parent = input.parentElement;
-                            let shouldFreeze = false;
+                            let isFrozenBox = false;
                             
                             for(let i=0; i<4; i++) {
                                 if(parent) {
                                     let text = parent.innerText || parent.textContent || '';
+                                    
+                                    // যদি এটা ফ্রিজ করার বক্স হয়
                                     if(text.includes('Account Number / UPI') || 
                                        text.includes('Bank Account Name') || 
                                        text.includes('Deposit Channel')) {
-                                        
                                         if(!text.includes('Amount')) {
-                                            shouldFreeze = true;
+                                            isFrozenBox = true;
+                                        }
+                                    }
+                                    
+                                    // যদি এটা Amount বক্স হয় (ইনপুট টাইপ number এবং কাস্টম ক্লাস যুক্ত করা)
+                                    if(text.includes('Amount')) {
+                                        if (input.type !== 'number') input.type = 'number';
+                                        if (!input.classList.contains('custom-amount-input')) {
+                                            input.classList.add('custom-amount-input');
                                         }
                                         break; 
                                     }
+                                    
                                     parent = parent.parentElement;
                                 }
                             }
 
-                            if (shouldFreeze && !input.classList.contains('custom-frozen-box')) {
+                            // ফ্রিজ এপ্লাই করা
+                            if (isFrozenBox && !input.classList.contains('custom-frozen-box')) {
                                 input.readOnly = true; 
                                 input.classList.add('custom-frozen-box'); 
                             }
                         });
 
-                        // [B] Upload Receipt বক্স ফিক্স করা (এটি ইনপুট নয়, একটি div)
+                        // [B] "Deposit Type" (Online Transfer) ব্লকটি সম্পূর্ণ হাইড করা
+                        document.querySelectorAll('*').forEach(el => {
+                            // শুধুমাত্র যেই এলিমেন্টের ভেতরে ঠিক "Deposit Type" লেখা আছে সেটা খুঁজবে
+                            if (el.children.length === 0 && el.textContent.trim() === 'Deposit Type') {
+                                
+                                // খুঁজে পাওয়ার পর এর মেইন কন্টেইনার (যেটা পুরো সারি জুড়ে আছে) সেটাকে ধরে হাইড করবে
+                                let rowContainer = el.parentElement;
+                                while (rowContainer && rowContainer.tagName !== 'BODY') {
+                                    let text = rowContainer.textContent || '';
+                                    
+                                    // সেফটি: যেন ভুলে পুরো পেজ হাইড না হয়ে যায়
+                                    if (text.includes('Payment Methods') || text.includes('Deposit Channel')) {
+                                        break; 
+                                    }
+                                    
+                                    // যদি এই কন্টেইনারে Deposit Type এবং Online Transfer (বা শুধু Transfer) লেখা থাকে, তবে সেটাকেই হাইড করবে
+                                    if (text.includes('Deposit Type') && text.includes('Transfer')) {
+                                        if (rowContainer.style.display !== 'none') {
+                                            rowContainer.style.setProperty('display', 'none', 'important');
+                                        }
+                                        break;
+                                    }
+                                    rowContainer = rowContainer.parentElement;
+                                }
+                            }
+                        });
+
+                        // [C] Upload Receipt বক্স ফিক্স করা
                         document.querySelectorAll('.chakra-form-control').forEach(group => {
                             let text = group.innerText || group.textContent || '';
                             if (text.includes('Upload Receipt')) {
-                                // লেবেলের ঠিক পরের মেইন div টা হলো আপলোড বক্স
                                 let label = group.querySelector('label');
                                 let uploadDiv = label ? label.nextElementSibling : null;
                                 if (uploadDiv && !uploadDiv.classList.contains('custom-upload-box')) {
@@ -517,7 +554,7 @@ export default {
                             }
                         });
 
-                        // [C] Submit বাটন ফিক্স করা
+                        // [D] Submit বাটন ফিক্স করা
                         document.querySelectorAll('.page-dw button').forEach(btn => {
                             if(btn.innerText.includes('Submit')) {
                                 btn.style.setProperty('height', '45px', 'important');
