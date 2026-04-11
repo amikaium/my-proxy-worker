@@ -229,7 +229,7 @@ export default {
               }
 
               /* ==========================================
-                 🔥 আগের ফিক্স (বক্স মার্জিন এবং লগইন বাটন হাইট)
+                 🔥 বক্স মার্জিন এবং লগইন বাটন হাইট
                  ========================================== */
               .css-fpyqtb {
                   margin-bottom: 10px !important;
@@ -250,21 +250,60 @@ export default {
                   display: none !important;
               }
 
-              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল (ফাস্ট লোডিং ব্যাকগ্রাউন্ড সহ) */
+              /* ==========================================
+                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স
+                 ========================================== */
+              .page-login body, .page-signup body,
+              .page-login html, .page-signup html {
+                  overscroll-behavior-y: none !important;
+              }
+
+              .page-login .css-b13tmd {
+                  height: 100vh !important;
+                  max-height: 100vh !important;
+                  overflow: hidden !important; 
+              }
+
+              .page-signup .css-16ff8oy,
+              .page-signup .css-b13tmd {
+                  padding-bottom: 10px !important; 
+                  margin-bottom: 0 !important;
+              }
+
+              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
+              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
+              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
+              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"],
+              .page-signup .css-16ff8oy > div[style*="height"],
+              .page-signup .css-b13tmd > div[style*="height"] {
+                  display: none !important;
+                  height: 0 !important;
+                  min-height: 0 !important;
+              }
+
+              /* ==========================================
+                 🔥 অটোমেটিক ভিডিও প্লেয়ার ও iOS স্পিনার স্টাইল 
+                 ========================================== */
               .custom-video-wrapper {
+                  position: relative !important;
                   width: 100% !important;
                   padding: 0 !important;
                   margin: 0 !important;
-                  display: block !important;
-                  background-color: #121212 !important; /* ভিডিও লোড হওয়ার আগে ডার্ক ব্যাকগ্রাউন্ড */
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  background-color: transparent !important; /* কালো বক্স রিমুভ */
                   min-height: 150px; 
               }
+              
               .custom-video-wrapper video {
                   width: 100% !important;
                   height: auto !important;
                   display: block !important;
                   object-fit: cover !important;
                   pointer-events: none !important; 
+                  opacity: 0; /* ভিডিও প্লে হওয়ার আগে হাইড থাকবে */
+                  transition: opacity 0.5s ease-in-out; /* স্মুথ ভাবে ভেসে উঠবে */
               }
 
               /* আইফোন (iOS) স্টাইল ৮-লাইনের স্পিনার */
@@ -274,9 +313,6 @@ export default {
                   height: 32px;
                   z-index: 10;
                   transition: opacity 0.3s ease-out;
-                  left: 50%;
-                  top: 50%;
-                  transform: translate(-50%, -50%);
               }
               .ios-spinner::after {
                   content: "";
@@ -290,43 +326,6 @@ export default {
               @keyframes ios-spin {
                   100% { transform: rotate(360deg); }
               }
-
-              /* ==========================================
-                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স (Swipe-to-refresh সচল রেখে)
-                 ========================================== */
-
-              /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
-              .page-login .css-b13tmd {
-                  height: 100vh !important;
-                  max-height: 100vh !important;
-                  overflow: hidden !important; 
-              }
-
-              /* সাইনআপ পেজে অতিরিক্ত স্পেস রিমুভ করা হলো (কিন্তু নরমাল স্ক্রল থাকবে) */
-              .page-signup .css-16ff8oy,
-              .page-signup .css-b13tmd {
-                  padding-bottom: 10px !important; 
-                  margin-bottom: 0 !important;
-              }
-
-              /* চাকরা ইউআই এর অটোমেটিক জেনারেট হওয়া অদৃশ্য স্পেসার হাইড করা হলো */
-              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
-              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
-              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
-              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"],
-              .page-signup .css-16ff8oy > div[style*="height"],
-              .page-signup .css-b13tmd > div[style*="height"] {
-                  display: none !important;
-                  height: 0 !important;
-                  min-height: 0 !important;
-              }
-
-              /* ==========================================
-                 🔥 Deposit পেজের Payment Method Hide/Show CSS
-                 ========================================== */
-              .arfan-hide-amount-box {
-                  display: none !important;
-              }
             </style>
 
             <script>
@@ -337,10 +336,6 @@ export default {
                 function updateBodyClass() {
                     document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                     let path = window.location.pathname.replace(/\\//g, '');
-                    
-                    // URL-এ query parameter থাকলে তা ক্লিন করা
-                    path = path.split('?')[0]; 
-                    
                     if(path === '') path = 'home';
                     document.body.classList.add('page-' + path);
                 }
@@ -424,7 +419,7 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (শুধুমাত্র Login এবং Signup পেজের জন্য)
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (iOS Spinner ও Smooth Fade-in সহ)
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -452,6 +447,7 @@ export default {
                                 const spinnerElement = document.getElementById('arfan-spinner');
                                 
                                 if(vidElement) {
+                                    // ভিডিও প্লে শুরু হলে স্পিনার হাইড হবে এবং ভিডিও শো হবে
                                     vidElement.addEventListener('playing', () => {
                                         if(spinnerElement) spinnerElement.style.opacity = '0';
                                         vidElement.style.opacity = '1';
@@ -468,74 +464,6 @@ export default {
                         }
                     }
                 });
-
-                // ==========================================
-                // 🔥 Deposit পেজের Payment Method Logic
-                // ==========================================
-                setInterval(() => {
-                    // শুধুমাত্র Deposit পেজে লজিকটি চলবে
-                    if (window.location.href.includes('/dw?tab=deposit')) {
-                        // Payment Method কন্টেইনার এবং Amount/Upload বক্স খোঁজা
-                        const paymentMethodsContainer = document.querySelector('.css-qx6nre');
-                        const amountBox = document.querySelector('.css-q9ajxl');
-                        
-                        if (paymentMethodsContainer && amountBox) {
-                            // Payment Method-এর মধ্যে কোনোটিতে 'border' বা 'active' স্টাইল আছে কি না চেক করা
-                            // সাধারণত চাকরা UI সিলেক্ট করলে বর্ডার কালার বা ব্যাকগ্রাউন্ড চেঞ্জ করে
-                            const methods = paymentMethodsContainer.querySelectorAll('div, button');
-                            let isAnyMethodSelected = false;
-
-                            methods.forEach(method => {
-                                const style = window.getComputedStyle(method);
-                                // এখানে সাধারণত সিলেক্ট হলে বর্ডার কালার #00a859 বা নির্দিষ্ট কোনো হাইলাইট কালার হয়
-                                // আমরা চেক করছি বর্ডার 1px এর বেশি কি না, অথবা ব্যাকগ্রাউন্ড হাইলাইটেড কি না।
-                                // (এটি সাইটের ডিজাইনের ওপর নির্ভর করে, সাধারণ লজিক হলো border-color বা opacity চেঞ্জ হওয়া)
-                                if (style.borderColor !== 'rgba(0, 0, 0, 0)' && style.borderWidth !== '0px' && style.opacity === '1') {
-                                    // যদি কোনো স্পেসিফিক একটিভ ক্লাস থাকে, তবে അത് চেক করতে পারেন। এখানে একটি সাধারণ এপ্রোচ দেওয়া হলো।
-                                    // আপনি চাইলে Inspector থেকে একটিভ হওয়ার পর ঠিক কী CSS প্রোপার্টি চেঞ্জ হয় সেটা দেখে এখানে কন্ডিশন বসাতে পারেন।
-                                    // আপাতত ধরে নিচ্ছি, সিলেক্ট করলে তার ভেতরের কোনো child div এর স্টাইল চেঞ্জ হয়।
-                                    if(method.innerHTML.includes('border') || method.getAttribute('data-selected') === 'true' || method.style.border.includes('solid')) {
-                                         isAnyMethodSelected = true;
-                                    }
-                                }
-                                
-                                // সবচেয়ে পারফেক্ট উপায়: চাকরা UI সাধারণত সিলেক্টেড বক্সে 'aria-selected' বা 'data-active' দেয়
-                                if(method.getAttribute('aria-selected') === 'true' || method.getAttribute('data-active') === '') {
-                                    isAnyMethodSelected = true;
-                                }
-                                
-                                // Baji11-এর ডিফল্ট লজিক অনুযায়ী, সিলেক্ট করলে বক্সের বর্ডার বা আইকনের পরিবর্তন হয়
-                                // এখানে আমরা একটি সাধারণ চেক দিচ্ছি: যদি ভেতরের কোনো SVG বা div-এ চেঞ্জ আসে
-                                const innerDiv = method.querySelector('div');
-                                if (innerDiv && innerDiv.style.borderColor !== '' && innerDiv.style.borderColor !== 'transparent') {
-                                    isAnyMethodSelected = true;
-                                }
-                            });
-
-                            // Baji11 এর Payment Method-এ সিলেক্ট করলে সাধারণত এর border-color চেঞ্জ হয়।
-                            // আমরা চেক করছি paymentMethodsContainer এর ভেতরের div গুলোর border color।
-                            const childDivs = paymentMethodsContainer.children;
-                            for (let i = 0; i < childDivs.length; i++) {
-                                const childStyle = window.getComputedStyle(childDivs[i]);
-                                // চেক করছি বর্ডার কালার ট্রান্সপারেন্ট বা জিরো কি না (যদি না হয়, মানে সিলেক্টেড)
-                                if (childStyle.borderColor !== 'rgba(0, 0, 0, 0)' && childStyle.borderWidth !== '0px' && childStyle.borderWidth !== '') {
-                                     // Baji11-এর স্পেসিফিক সিলেক্টেড কালার (যেমন- #048259) চেক করা যেতে পারে।
-                                     // এখানে ধরে নিচ্ছি বর্ডার ভিজিবল হলেই তা সিলেক্টেড।
-                                     if(childStyle.borderColor !== 'rgb(39, 44, 49)') { // Assuming rgb(39,44,49) is default unselected border
-                                         isAnyMethodSelected = true;
-                                     }
-                                }
-                            }
-
-                            // যদি কোনো মেথড সিলেক্টেড না থাকে, তবে Amount বক্স হাইড করো
-                            if (!isAnyMethodSelected) {
-                                amountBox.classList.add('arfan-hide-amount-box');
-                            } else {
-                                amountBox.classList.remove('arfan-hide-amount-box');
-                            }
-                        }
-                    }
-                }, 500); // প্রতি আধা সেকেন্ড পরপর চেক করবে
 
                 window.addEventListener('load', () => {
                     updateBodyClass(); 
