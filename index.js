@@ -125,7 +125,7 @@ export default {
               .page-signup .chakra-input {
                   height: 45px !important; 
                   background-color: #2c2c2c !important; 
-                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে (হালকা রাউন্ড) */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #ffffff !important; 
               }
@@ -139,7 +139,7 @@ export default {
                  🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element {
-                  height: 45px !important; /* বক্সের সমান উচ্চতা */
+                  height: 45px !important; 
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
@@ -152,15 +152,15 @@ export default {
                   justify-content: center !important;
               }
               .page-signup .chakra-input__right-element svg {
-                  margin: auto !important; /* একদম মাঝে রাখার জন্য */
+                  margin: auto !important; 
               }
 
               /* -------------------------------------------
                  লেফট অ্যাডঅন (দেশের কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
-                  background-color: #cbd5e0 !important; 
-                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে */
+                  background-color: #EEEEEE !important; /* 🔥 আপনার দেওয়া নতুন কালার */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 500 !important;
@@ -175,8 +175,8 @@ export default {
                  রাইট অ্যাডঅন (ভেরিফিকেশন কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
-                  background-color: #cbd5e0 !important; 
-                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে */
+                  background-color: #EEEEEE !important; /* 🔥 আপনার দেওয়া নতুন কালার */
+                  border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 700 !important; 
