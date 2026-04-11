@@ -107,7 +107,7 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (মার্জিন ও 45px উচ্চতা সহ)
+                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (Eye Icon Fix & 4px Radius)
                  ========================================== */
               
               /* মেইন পেজ ব্যাকগ্রাউন্ড */
@@ -125,7 +125,7 @@ export default {
               .page-signup .chakra-input {
                   height: 45px !important; 
                   background-color: #2c2c2c !important; 
-                  border-radius: 12px !important; 
+                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে (হালকা রাউন্ড) */
                   border: 1px solid #4e4e4e !important; 
                   color: #ffffff !important; 
               }
@@ -136,16 +136,36 @@ export default {
               }
 
               /* -------------------------------------------
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
+                 ------------------------------------------- */
+              .page-signup .chakra-input__right-element {
+                  height: 45px !important; /* বক্সের সমান উচ্চতা */
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  top: 0 !important;
+              }
+              .page-signup .chakra-input__right-element button {
+                  height: 100% !important;
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+              }
+              .page-signup .chakra-input__right-element svg {
+                  margin: auto !important; /* একদম মাঝে রাখার জন্য */
+              }
+
+              /* -------------------------------------------
                  লেফট অ্যাডঅন (দেশের কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #cbd5e0 !important; 
-                  border-radius: 12px !important; 
+                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে */
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 500 !important;
                   height: 45px !important;
-                  margin-right: 10px !important; /* ডানপাশে 10px গ্যাপ */
+                  margin-right: 10px !important; 
               }
               .page-signup .chakra-input__left-addon img.chakra-image {
                   margin-right: 5px !important;
@@ -156,13 +176,13 @@ export default {
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #cbd5e0 !important; 
-                  border-radius: 12px !important; 
+                  border-radius: 4px !important; /* 🔥 একবারে কমানো হয়েছে */
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
                   font-weight: 700 !important; 
                   height: 45px !important;
-                  margin-left: 10px !important; /* বাঁপাশে 10px গ্যাপ */
-                  padding: 5px !important; /* 🔥 আপনার নির্দেশমতো 5px প্যাডিং */
+                  margin-left: 10px !important; 
+                  padding: 5px !important; 
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
