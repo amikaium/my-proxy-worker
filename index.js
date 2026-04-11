@@ -147,7 +147,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
@@ -292,7 +292,7 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  background-color: transparent !important; /* কালো বক্স রিমুভ */
+                  background-color: transparent !important; 
                   min-height: 150px; 
               }
               
@@ -302,11 +302,10 @@ export default {
                   display: block !important;
                   object-fit: cover !important;
                   pointer-events: none !important; 
-                  opacity: 0; /* ভিডিও প্লে হওয়ার আগে হাইড থাকবে */
-                  transition: opacity 0.5s ease-in-out; /* স্মুথ ভাবে ভেসে উঠবে */
+                  opacity: 0; 
+                  transition: opacity 0.5s ease-in-out; 
               }
 
-              /* আইফোন (iOS) স্টাইল ৮-লাইনের স্পিনার */
               .ios-spinner {
                   position: absolute;
                   width: 32px;
@@ -326,6 +325,18 @@ export default {
               @keyframes ios-spin {
                   100% { transform: rotate(360deg); }
               }
+
+              /* ==========================================
+                 🛑 ডিপোজিট পেজ (/dw) কাস্টম বক্স ফ্রিজ স্টাইল 
+                 ========================================== */
+              /* শুধুমাত্র dw পেজেই এই ক্লাস কাজ করবে অন্য কোথাও নয় */
+              .page-dw .custom-frozen-box {
+                  height: 45px !important;          /* হাইট ৪৫ পিক্সেল */
+                  pointer-events: none !important;  /* ক্লিক করা বা এডিট করা বন্ধ */
+                  user-select: none !important;     /* টেক্সট সিলেক্ট করা বন্ধ */
+                  opacity: 0.9 !important;          /* হালকা অপাসিটি দিয়ে ফিক্সড বোঝানো */
+              }
+
             </style>
 
             <script>
@@ -337,7 +348,9 @@ export default {
                     document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                     let path = window.location.pathname.replace(/\\//g, '');
                     if(path === '') path = 'home';
-                    document.body.classList.add('page-' + path);
+                    // query string বাদ দিয়ে শুধু পাথ এর নাম নেওয়া হচ্ছে (যেমন dw?tab=deposit থেকে শুধু dw)
+                    let basePage = path.split('?')[0]; 
+                    document.body.classList.add('page-' + basePage);
                 }
 
                 let lastUrl = location.href; 
@@ -365,7 +378,8 @@ export default {
                 }
 
                 const domObserver = new MutationObserver(() => {
-                    let currentPath = window.location.pathname.replace(/\\//g, '');
+                    let fullPath = window.location.pathname.replace(/\\//g, '');
+                    let currentPath = fullPath.split('?')[0]; // URL প্যারামিটার বাদ দিয়ে শুধু মেইন পেজ নেম
                     
                     // ১. রেফারেল কোড অটো-ফিল
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
@@ -419,7 +433,7 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (iOS Spinner ও Smooth Fade-in সহ)
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -447,7 +461,6 @@ export default {
                                 const spinnerElement = document.getElementById('arfan-spinner');
                                 
                                 if(vidElement) {
-                                    // ভিডিও প্লে শুরু হলে স্পিনার হাইড হবে এবং ভিডিও শো হবে
                                     vidElement.addEventListener('playing', () => {
                                         if(spinnerElement) spinnerElement.style.opacity = '0';
                                         vidElement.style.opacity = '1';
@@ -463,6 +476,42 @@ export default {
                             existingVideo.remove();
                         }
                     }
+
+                    // ৮. 🛑 শুধুমাত্র Deposit পেজ (/dw) এর নির্দিষ্ট ২টা বক্স ফ্রিজ করা
+                    if (currentPath === 'dw') {
+                        // পেজের সব input টার্গেট করে তার উপরের লেবেল চেক করা হচ্ছে
+                        document.querySelectorAll('input').forEach(input => {
+                            let parent = input.parentElement;
+                            let shouldFreeze = false;
+                            
+                            // ইনপুটের উপরের ৩-৪ লেভেল পর্যন্ত কন্টেইনার চেক করা হচ্ছে যে লেবেল কি আছে
+                            for(let i=0; i<4; i++) {
+                                if(parent) {
+                                    let text = parent.innerText || parent.textContent || '';
+                                    
+                                    // যদি লেবেলের টেক্সট এগুলোর যেকোনো একটি হয়
+                                    if(text.includes('Account Number / UPI') || 
+                                       text.includes('Bank Account Name') || 
+                                       text.includes('Deposit Channel')) {
+                                        
+                                        // Amount বক্স যেন ভুলে ফ্রিজ না হয় তার সেফটি
+                                        if(!text.includes('Amount')) {
+                                            shouldFreeze = true;
+                                        }
+                                        break; // লেবেল পেয়ে গেলে লুপ ব্রেক করবে
+                                    }
+                                    parent = parent.parentElement;
+                                }
+                            }
+
+                            // যদি এটা টার্গেটেড বক্স হয় এবং আগে থেকে ফ্রিজ করা না থাকে
+                            if (shouldFreeze && !input.classList.contains('custom-frozen-box')) {
+                                input.readOnly = true; // টাইপ করা বন্ধ করবে
+                                input.classList.add('custom-frozen-box'); // CSS এড করে হাইট ৪৫ করবে
+                            }
+                        });
+                    }
+
                 });
 
                 window.addEventListener('load', () => {
