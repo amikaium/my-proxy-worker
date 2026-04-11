@@ -266,27 +266,28 @@ export default {
               }
 
               /* ==========================================
-                 🔥 স্ক্রল ফিক্স (অতিরিক্ত স্ক্রল এবং স্পেস বন্ধ করা)
+                 🔥 আপনার দেওয়া .css-b13tmd দিয়ে 100% স্ক্রল ফিক্স
                  ========================================== */
-              /* ওভারস্ক্রল ইফেক্ট বন্ধ করা */
-              .page-login body, .page-signup body,
-              .page-login html, .page-signup html {
-                  overscroll-behavior-y: none !important;
+              
+              /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
+              .page-login .css-b13tmd, 
+              .page-login body, 
+              .page-login html {
+                  height: 100vh !important;
+                  max-height: 100vh !important;
+                  overflow: hidden !important; 
               }
 
-              /* কন্টেইনারের নিচের অতিরিক্ত প্যাডিং রিমুভ করে 10px করা */
-              .page-login body > div > div, 
-              .page-signup body > div > div,
-              .page-login main, 
-              .page-signup main {
-                  padding-bottom: 10px !important;
+              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না (শুধু 10px প্যাডিং) */
+              .page-signup .css-b13tmd {
+                  min-height: 100vh !important;
+                  overflow-y: auto !important;
+                  padding-bottom: 10px !important; 
               }
 
-              /* নেভিগেশন বারের খালি স্পেসারগুলো হাইড করা */
-              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
-              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
-              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
-              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"] {
+              /* চাকরা ইউআই এর অটোমেটিক জেনারেট হওয়া অদৃশ্য স্পেসার হাইড করা হলো */
+              .page-login .css-b13tmd > div[style*="height"],
+              .page-signup .css-b13tmd > div[style*="height"] {
                   display: none !important;
                   height: 0 !important;
               }
@@ -385,7 +386,6 @@ export default {
                     const targetDivForVideo = document.querySelector('div.css-lpwed4');
                     if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
                         
-                        // ভিডিও দ্রুত লোড করার জন্য হেডে Preload যুক্ত করা
                         if (!document.getElementById('preload-custom-vid')) {
                             const preloadLink = document.createElement('link');
                             preloadLink.id = 'preload-custom-vid';
@@ -395,7 +395,6 @@ export default {
                             document.head.appendChild(preloadLink);
                         }
 
-                        // ভিডিও এলিমেন্ট ইনজেক্ট করা (preload="auto" সহ)
                         const videoHTML = \`
                         <div id="arfan-custom-video" class="custom-video-wrapper">
                             <video autoplay loop muted playsinline preload="auto" style="background-color: transparent;">
