@@ -133,14 +133,11 @@ export default {
               .page-login .css-b13tmd { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
               .page-signup .css-16ff8oy, .page-signup .css-b13tmd { padding-bottom: 10px !important; margin-bottom: 0 !important; }
               .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"], .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"], .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"], .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"], .page-signup .css-16ff8oy > div[style*="height"], .page-signup .css-b13tmd > div[style*="height"] { display: none !important; height: 0 !important; min-height: 0 !important; }
-
-              /* Video Styles */
               .custom-video-wrapper { position: relative !important; width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: transparent !important; min-height: 150px; }
               .custom-video-wrapper video { width: 100% !important; height: auto !important; display: block !important; object-fit: cover !important; pointer-events: none !important; opacity: 0; transition: opacity 0.5s ease-in-out; }
               .ios-spinner { position: absolute; width: 32px; height: 32px; z-index: 10; transition: opacity 0.3s ease-out; }
               .ios-spinner::after { content: ""; display: block; width: 100%; height: 100%; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M50 15V25' opacity='.2'/%3E%3Cpath d='M50 15V25' transform='rotate(45 50 50)' opacity='.3'/%3E%3Cpath d='M50 15V25' transform='rotate(90 50 50)' opacity='.4'/%3E%3Cpath d='M50 15V25' transform='rotate(135 50 50)' opacity='.5'/%3E%3Cpath d='M50 15V25' transform='rotate(180 50 50)' opacity='.6'/%3E%3Cpath d='M50 15V25' transform='rotate(225 50 50)' opacity='.7'/%3E%3Cpath d='M50 15V25' transform='rotate(270 50 50)' opacity='.8'/%3E%3Cpath d='M50 15V25' transform='rotate(315 50 50)' opacity='1'/%3E%3C/g%3E%3C/svg%3E"); background-size: cover; animation: ios-spin 1s steps(8, end) infinite; }
               @keyframes ios-spin { 100% { transform: rotate(360deg); } }
-
 
               /* ==========================================
                  🛑 ডিপোজিট ও উইথড্রয়াল পেজ (/dw) কাস্টম ডিজাইন
@@ -151,38 +148,44 @@ export default {
                   display: none !important;
               }
 
-              /* ২. Bank Name ও Acc Number ফ্রিজ করা (আপনার দেওয়া ক্লাস দিয়ে) */
+              /* ২. 🛑 লেবেল ফ্রিজ (Label Disable): লেখার উপর ক্লিক করে ইনপুট আনলক করা বন্ধ */
+              .page-dw label.chakra-form__label {
+                  pointer-events: none !important;
+                  user-select: none !important;
+              }
+
+              /* ৩. Bank Name ও Acc Number ফ্রিজ করা */
               .page-dw .css-1kzylc3,
               .page-dw .css-109ik7k,
               .page-dw .css-1h8d01g {
                   height: 45px !important;
                   border-radius: 4px !important; 
-                  pointer-events: none !important; /* ফ্রিজ কোড */
+                  pointer-events: none !important;
                   user-select: none !important;
                   opacity: 0.9 !important;
               }
 
-              /* ৩. ইউনিভার্সাল ইনপুট হাইট (Withdrawal Amount, Phone Number, Transaction ID সব 45px হবে) */
+              /* ৪. ইউনিভার্সাল ইনপুট হাইট */
               .page-dw .chakra-input {
                   height: 45px !important;
                   border-radius: 4px !important;
               }
 
-              /* ৪. ইউনিভার্সাল লেফট অ্যাডঅন (BDT লেবেল এবং পতাকার বক্স 45px হবে) */
+              /* ৫. ইউনিভার্সাল লেফট অ্যাডঅন */
               .page-dw .chakra-input__left-addon {
                   height: 45px !important;
                   border-radius: 4px 0 0 4px !important; 
               }
 
-              /* ৫. 🔥 মাস্টার আনলক (Master Unlock): Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
+              /* ৬. 🔥 মাস্টার আনলক: Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
               .page-dw .chakra-input__left-addon + .chakra-input {
-                  border-radius: 0 4px 4px 0 !important; /* বামের কার্ভ জিরো */
-                  pointer-events: auto !important; /* জোর করে ফ্রিজ ছুটানো */
-                  user-select: auto !important;    /* জোর করে টাইপিং এনাবল করা */
-                  opacity: 1 !important;           /* নরমাল অপাসিটি */
+                  border-radius: 0 4px 4px 0 !important; 
+                  pointer-events: auto !important; 
+                  user-select: auto !important;
+                  opacity: 1 !important;
               }
 
-              /* ৬. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
+              /* ৭. Upload Receipt বক্স */
               .page-dw .css-8w1h6v {
                   height: 45px !important;
                   border-radius: 4px !important;
@@ -190,18 +193,14 @@ export default {
                   align-items: center !important; 
               }
 
-              /* ৭. কপি আইকন বাটন ফিক্স */
+              /* ৮. কপি আইকন বাটন ফিক্স */
               .page-dw .chakra-input__right-element {
                   height: 45px !important;
               }
-
             </style>
 
             <script>
               (function(){
-                // ==========================================
-                // 🔄 ডাইনামিক বডি ক্লাস সিস্টেম
-                // ==========================================
                 function updateBodyClass() {
                     document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                     let path = window.location.pathname.replace(/\\//g, '');
@@ -219,9 +218,6 @@ export default {
                   }
                 });
 
-                // ==========================================
-                // 📝 কাস্টম স্ক্রিপ্ট
-                // ==========================================
                 const REF_CODE = 'iZfmaT3h';
                 const VIDEO_URL = 'https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97';
 
@@ -245,7 +241,6 @@ export default {
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
-                    // Signup / Login Phone Number 
                     const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
                     if (phoneInput && phoneInput.type !== 'tel') {
                         phoneInput.type = 'tel';
@@ -284,7 +279,6 @@ export default {
                         }
                     });
 
-                    // Video Player
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -321,10 +315,7 @@ export default {
                         if (existingVideo) { existingVideo.remove(); }
                     }
 
-                    // ৮. 🛑 শুধুমাত্র Deposit / Withdrawal পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
-                        
-                        // [A] Amount বক্সগুলোতে Number Keypad আনা
                         document.querySelectorAll('.page-dw .chakra-input__left-addon').forEach(addon => {
                             if (addon.textContent.includes('BDT')) {
                                 let amountInput = addon.nextElementSibling;
@@ -337,7 +328,6 @@ export default {
                             }
                         });
 
-                        // [B] Submit বাটন ফিক্স করা
                         document.querySelectorAll('.page-dw button').forEach(btn => {
                             if(btn.innerText.includes('Submit')) {
                                 btn.style.setProperty('height', '45px', 'important');
@@ -345,7 +335,6 @@ export default {
                             }
                         });
                     }
-
                 });
 
                 window.addEventListener('load', () => {
