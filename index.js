@@ -144,7 +144,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element {
                   height: 45px !important; 
@@ -155,23 +155,27 @@ export default {
               }
               .page-signup .chakra-input__right-element button {
                   height: 100% !important;
+                  width: 100% !important;
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
                   border-radius: 0 !important; 
+                  padding: 0 !important; /* ডিফল্ট প্যাডিং রিমুভ */
+                  margin: 0 !important;  /* ডিফল্ট মার্জিন রিমুভ */
               }
               .page-signup .chakra-input__right-element svg {
+                  display: block !important;
                   margin: auto !important; 
               }
 
               /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড) - আপডেট: ব্যাকগ্রাউন্ড #2c2c2c
+                 লেফট অ্যাডঅন (দেশের কোড) - ব্যাকগ্রাউন্ড #2c2c2c
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
-                  background-color: #2c2c2c !important; /* ইনপুট বক্সের সেম কালার */
+                  background-color: #2c2c2c !important; 
                   border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
-                  color: #ffffff !important; /* টেক্সট সাদা করা হলো */
+                  color: #ffffff !important; 
                   font-weight: 500 !important;
                   height: 45px !important;
                   margin-right: 10px !important; 
@@ -181,7 +185,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - আপডেট: পেডিং 5px
+                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - পেডিং 5px
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
@@ -191,7 +195,15 @@ export default {
                   font-weight: 700 !important; 
                   height: 45px !important;
                   margin-left: 10px !important; 
-                  padding: 5px !important; /* 🔥 পেডিং ৫ পিক্সেল কনফার্ম করা হলো */
+                  padding: 5px !important; 
+                  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+              }
+              /* 🔥 রিফ্রেশ বাটনে উপরে নিচে 5px মার্জিন */
+              .page-signup .chakra-input__right-addon button {
+                  margin-top: 5px !important;
+                  margin-bottom: 5px !important;
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
@@ -258,13 +270,14 @@ export default {
                         codeInput.type = 'number';
                     }
 
-                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া
+                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া (যেকোনো সময় ব্যাক করলেও কাজ করবে)
                     const agreeCheckbox = document.querySelector('input[type="checkbox"]');
-                    if (agreeCheckbox && !window.hasAutoCheckedTerms) {
+                    // 'data-auto-checked' অ্যাট্রিবিউট চেক করা হচ্ছে, যাতে নতুন করে পেজ বা কম্পোনেন্ট এলেই কাজ করে
+                    if (agreeCheckbox && !agreeCheckbox.hasAttribute('data-auto-checked')) {
                         if (!agreeCheckbox.checked) {
-                            agreeCheckbox.click();
+                            agreeCheckbox.click(); // রিয়েক্টে ক্লিক ফায়ার করে চেক করা
                         }
-                        window.hasAutoCheckedTerms = true;
+                        agreeCheckbox.setAttribute('data-auto-checked', 'true'); // মার্ক করে দেওয়া হলো
                     }
                 });
 
