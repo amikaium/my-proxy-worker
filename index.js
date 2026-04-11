@@ -250,14 +250,12 @@ export default {
                   display: none !important;
               }
 
-              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল (ফাস্ট লোডিং ব্যাকগ্রাউন্ড সহ) */
+              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল */
               .custom-video-wrapper {
                   width: 100% !important;
                   padding: 0 !important;
                   margin: 0 !important;
                   display: block !important;
-                  background-color: #121212 !important; /* ভিডিও লোড হওয়ার আগে ডার্ক ব্যাকগ্রাউন্ড */
-                  min-height: 150px; /* একটি বেসিক হাইট যাতে কন্টেন্ট লাফ না মারে */
               }
               .custom-video-wrapper video {
                   width: 100% !important;
@@ -268,30 +266,29 @@ export default {
               }
 
               /* ==========================================
-                 🔥 100% স্ক্রল বাউন্স (রাবার-ব্যান্ড) ফিক্স
+                 🔥 আপনার দেওয়া .css-16ff8oy দিয়ে 100% স্ক্রল ফিক্স
                  ========================================== */
               
-              /* ওভারস্ক্রল ইফেক্ট একদম রুট থেকে বন্ধ করা */
-              html, body, .page-login body, .page-signup body {
+              /* ওভারস্ক্রল ইফেক্ট বন্ধ করা */
+              .page-login body, .page-signup body,
+              .page-login html, .page-signup html {
                   overscroll-behavior-y: none !important;
-                  overscroll-behavior: none !important;
-                  -webkit-overflow-scrolling: auto !important;
               }
 
               /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
-              .page-login .css-b13tmd {
+              .page-login .css-b13tmd, 
+              .page-login body, 
+              .page-login html {
                   height: 100vh !important;
                   max-height: 100vh !important;
                   overflow: hidden !important; 
               }
 
-              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না এবং বাউন্স করবে না */
+              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না (শুধু 10px গ্যাপ) */
               .page-signup .css-16ff8oy,
               .page-signup .css-b13tmd {
                   padding-bottom: 10px !important; 
                   margin-bottom: 0 !important;
-                  overscroll-behavior-y: none !important; /* 🔥 বাউন্স বন্ধ করবে */
-                  overscroll-behavior: none !important;
               }
 
               /* চাকরা ইউআই এর অটোমেটিক জেনারেট হওয়া অদৃশ্য স্পেসার হাইড করা হলো */
@@ -396,11 +393,10 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (Fast Loading Trick + Auto Play Force)
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (Fast Loading / Preload)
                     const targetDivForVideo = document.querySelector('div.css-lpwed4');
                     if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
                         
-                        // ভিডিও দ্রুত লোড করার জন্য হেডে Preload যুক্ত করা
                         if (!document.getElementById('preload-custom-vid')) {
                             const preloadLink = document.createElement('link');
                             preloadLink.id = 'preload-custom-vid';
@@ -410,22 +406,13 @@ export default {
                             document.head.appendChild(preloadLink);
                         }
 
-                        // 🔥 #t=0.001 ট্রিকটি ব্রাউজারকে ভিডিওর প্রথম ফ্রেমটিকে সাথে সাথে থাম্বনেইল হিসেবে দেখাতে বাধ্য করে
                         const videoHTML = \`
                         <div id="arfan-custom-video" class="custom-video-wrapper">
-                            <video id="arfan-vid" autoplay loop muted playsinline preload="auto" poster="\${VIDEO_URL}#t=0.001">
-                                <source src="\${VIDEO_URL}#t=0.001" type="video/mp4">
+                            <video autoplay loop muted playsinline preload="auto" style="background-color: transparent;">
+                                <source src="\${VIDEO_URL}" type="video/mp4">
                             </video>
                         </div>\`;
                         targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
-
-                        // রিয়েক্ট স্পা (SPA)-তে অনেক সময় ডিফল্ট অটোপ্লে কাজ করে না, তাই জাভাস্ক্রিপ্ট দিয়ে ফোর্স প্লে করানো হলো
-                        setTimeout(() => {
-                            const vidElement = document.getElementById('arfan-vid');
-                            if(vidElement) {
-                                vidElement.play().catch(e => console.log("Auto-play ready."));
-                            }
-                        }, 200);
                     }
                 });
 
