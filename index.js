@@ -12,7 +12,7 @@ export default {
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
 
-    // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route (লগইন ফিক্স করে আপডেট করা হয়েছে)
+    // 🛡️ প্রফেশনাল সিকিউরিটি: Anti-DevTools
     if (url.pathname === '/__secure_core.js') {
         const secretCode = `
         document.addEventListener('contextmenu', e => e.preventDefault());
@@ -93,21 +93,51 @@ export default {
 
       if (contentType.includes("text/html") || contentType.includes("application/javascript") || contentType.includes("text/javascript")) {
         let text = await response.text();
-        const proxyPrefix = `https://${url.host}/__api_proxy/`;
         
+        // Find & Replace is a fallback, main work is done by Monkey Patch now.
+        const proxyPrefix = `https://${url.host}/__api_proxy/`;
         MEDIA_AND_SCORE_DOMAINS.forEach(api => {
             const originalUrl = `https://${api}`;
             const proxyUrl = `${proxyPrefix}${originalUrl}`;
             text = text.replaceAll(originalUrl, proxyUrl);
-            text = text.replaceAll(originalUrl.replace(/\//g, '\\/'), proxyUrl.replace(/\//g, '\\/'));
+            text = text.replaceAll(originalUrl.replace(/\\//g, '\\/'), proxyUrl.replace(/\\//g, '\\/'));
         });
 
         if (contentType.includes("text/html")) {
             
-            // =====================================================================
-            // 🚀 মূল কাস্টম লজিক (যা এনক্রিপ্ট হয়ে ব্রাউজারে যাবে এবং পরে ডিলিট হবে)
-            // =====================================================================
             const rawCustomLogic = `
+                // --- 🔥 মাস্টার ফিক্স: API পাথফাইন্ডার বা Monkey Patch ---
+                (function() {
+                    const PROXY_PREFIX = '/__api_proxy/';
+                    const TARGET_DOMAINS = ["liveapi247.live", "tv.nginx0.com"];
+
+                    function isTarget(url) {
+                        return typeof url === 'string' && !url.includes(PROXY_PREFIX) && TARGET_DOMAINS.some(domain => url.includes(domain));
+                    }
+
+                    const originalFetch = window.fetch;
+                    window.fetch = async function(...args) {
+                        try {
+                            if (isTarget(args[0])) {
+                                args[0] = PROXY_PREFIX + args[0];
+                            } else if (args[0] instanceof Request && isTarget(args[0].url)) {
+                                args[0] = new Request(PROXY_PREFIX + args[0].url, args[0]);
+                            }
+                        } catch (e) {}
+                        return originalFetch.apply(this, args);
+                    };
+
+                    const originalXHR = XMLHttpRequest.prototype.open;
+                    XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+                        try {
+                            if (isTarget(url)) {
+                                url = PROXY_PREFIX + url;
+                            }
+                        } catch (e) {}
+                        return originalXHR.call(this, method, url, ...rest);
+                    };
+                })();
+
                 // --- কাস্টম CSS ইনজেকশন ---
                 const customStyle = document.createElement('style');
                 customStyle.textContent = \`
@@ -141,7 +171,6 @@ export default {
                   .ios-spinner::after { content: ""; display: block; width: 100%; height: 100%; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' stroke=\\'%23ffffff\\' stroke-width=\\'8\\' stroke-linecap=\\'round\\'%3E%3Cpath d=\\'M50 15V25\\' opacity=\\'.2\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(45 50 50)\\' opacity=\\'.3\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(90 50 50)\\' opacity=\\'.4\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(135 50 50)\\' opacity=\\'.5\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(180 50 50)\\' opacity=\\'.6\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(225 50 50)\\' opacity=\\'.7\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(270 50 50)\\' opacity=\\'.8\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(315 50 50)\\' opacity=\\'1\\'/%3E%3C/g%3E%3C/svg%3E"); background-size: cover; animation: ios-spin 1s steps(8, end) infinite; }
                   @keyframes ios-spin { 100% { transform: rotate(360deg); } }
 
-                  /* === DW পেজ ডিজাইন === */
                   .page-dw .css-10ici4o { display: none !important; }
                   .page-dw label.chakra-form__label { pointer-events: none !important; user-select: none !important; }
                   .page-dw .css-1kzylc3, .page-dw .css-109ik7k, .page-dw .css-1h8d01g { height: 45px !important; border-radius: 4px !important; pointer-events: none !important; user-select: none !important; opacity: 0.9 !important; }
@@ -238,7 +267,7 @@ export default {
                                         if(spinnerElement) spinnerElement.style.opacity = '0';
                                         vidElement.style.opacity = '1';
                                     });
-                                    vidElement.play().catch(e => console.log("Auto-play ready."));
+                                    vidElement.play().catch(e => {});
                                 }
                             }, 100);
                         }
@@ -276,24 +305,18 @@ export default {
                 });
             `;
 
-            // =====================================================================
-            // 🔒 ক্লাউডফ্লেয়ারের ভেতরেই কোডটি Base64 এ এনকোড করা হচ্ছে
-            // =====================================================================
             const base64Logic = btoa(unescape(encodeURIComponent(rawCustomLogic)));
 
-            // 🔥 HTML এ এমন একটি স্ক্রিপ্ট পাঠানো হচ্ছে যা দেখতে হিবিজিবি, রান করেই নিজেকে ডিলিট করে দেবে
             const secureInjectorScript = `
             <script src="/__secure_core.js"></script>
-            <script id="arfan_secure_init">
+            <script>
                 (function(){
                     try {
-                        var _0xabc123 = decodeURIComponent(escape(atob("${base64Logic}")));
-                        var _0xsc = document.createElement('script');
-                        _0xsc.textContent = _0xabc123;
-                        document.documentElement.appendChild(_0xsc);
-                        _0xsc.remove(); // ভিতরের স্ক্রিপ্ট ডিলিট
+                        var decoded = decodeURIComponent(escape(atob("${base64Logic}")));
+                        var scriptTag = document.createElement('script');
+                        scriptTag.textContent = decoded;
+                        document.documentElement.appendChild(scriptTag);
                     } catch(e) {}
-                    document.getElementById("arfan_secure_init").remove(); // মেইন ট্যাগ ডিলিট
                 })();
             </script>
             `;
