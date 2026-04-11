@@ -103,30 +103,78 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 CSS & JS ইনজেকশন: ডাইনামিক বডি ক্লাস এবং কাস্টম ডিজাইন
+            // 🚀 CSS & JS ইনজেকশন: ডাইনামিক বডি ক্লাস এবং হুবহু কাস্টম ডিজাইন
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 শুধুমাত্র সাইনআপ পেজের ডিজাইন (.page-signup)
+                 🎨 হুবহু স্ক্রিনশটের মতো সাইনআপ পেজের ডিজাইন (.page-signup)
                  ========================================== */
-              .page-signup input.chakra-input {
-                  height: 50px !important;
-                  border-radius: 6px !important; /* হালকা স্কয়ার/রাউন্ড শেপ */
-                  border: 0.5px solid #22c55e !important; /* সবুজ বর্ডার লাইন */
-                  background-color: #e5e7eb !important; /* হালকা ধূসর ব্যাকগ্রাউন্ড */
-                  color: #000000 !important; /* টেক্সট কালার কালো */
+              
+              /* মেইন পেজ ব্যাকগ্রাউন্ড */
+              .page-signup body {
+                  background-color: #121212 !important; /* স্ক্রিনশটের মতো গাঢ় কালো ব্যাকগ্রাউন্ড */
               }
 
-              /* ইনপুট বক্সে ক্লিক (Focus) করলে যেন বর্ডার সুন্দর দেখায় */
-              .page-signup input.chakra-input:focus {
-                  border: 1px solid #16a34a !important;
-                  box-shadow: 0 0 0 1px #16a34a !important;
+              /* ইনপুট বক্স ও ইনপুট গ্রুপের (অ্যাডঅন সহ) মেইন কন্টেইনার */
+              .page-signup .chakra-form-control .chakra-input-group,
+              .page-signup .chakra-form-control > .chakra-input {
+                  height: 55px !important; /* স্ক্রিনশটের মতো উচ্চতা */
+                  background-color: #2c2c2c !important; /* ইনপুট বক্সের ব্যাকগ্রাউন্ড, গাঢ় ধূসর */
+                  border-radius: 12px !important; /* কোণাগুলো অনেক বেশি রাউন্ড */
+                  border: 1px solid #4e4e4e !important; /* সলিড গাঢ় ধূসর বর্ডার লাইন */
+                  color: #ffffff !important; /* ভেতরের টেক্সট কালার */
+                  overflow: hidden !important; /* অ্যাডঅন বক্সের কালার যেন ভেতরে থাকে */
               }
 
-              /* যদি ইনপুটের সাথে আইকন বক্স থাকে, তার ব্যাকগ্রাউন্ড ঠিক করা */
-              .page-signup .chakra-input__left-addon, 
-              .page-signup .chakra-input__right-addon {
+              /* ইনপুট বক্সের মেইন ফিল্ডের ভেতরের স্টাইল (গ্রুপের ভেতর থাকলে) */
+              .page-signup .chakra-input-group .chakra-input {
                   border: none !important;
+                  background-color: transparent !important;
+                  color: #ffffff !important;
+                  height: 100% !important;
+                  border-radius: 0 !important;
+              }
+
+              /* প্লেসহোল্ডার টেক্সট কালার */
+              .page-signup .chakra-input::placeholder {
+                  color: #808080 !important; /* মিডিয়াম ধূসর প্লেসহোল্ডার */
+              }
+
+              /* লেফট অ্যাডঅন (ফোন নম্বর পেজের দেশের পতাকা ও কোড) - হালকা ধূসর বক্স */
+              .page-signup .chakra-input__left-addon {
+                  background-color: #cbd5e0 !important; /* হালকা ধূসর অ্যাডঅন ব্যাকগ্রাউন্ড */
+                  border: none !important;
+                  border-right: 1px solid #4e4e4e !important; /* মেইন ইনপুট আর অ্যাডঅনের মাঝের লাইন */
+                  color: #121212 !important; /* দেশের কোড (+880) টেক্সট কালো */
+                  font-weight: 500 !important;
+                  height: 100% !important;
+                  padding-left: 1rem !important;
+                  padding-right: 1rem !important;
+                  margin-right: 0 !important;
+              }
+              /* পতাকা ইমেজের মার্জিন ঠিক করা */
+              .page-signup .chakra-input__left-addon img.chakra-image {
+                  margin-right: 8px !important;
+              }
+
+              /* রাইট অ্যাডঅন (ভেরিফিকেশন কোডের বক্স) - হালকা ধূসর বক্স */
+              .page-signup .chakra-input__right-addon {
+                  background-color: #cbd5e0 !important; /* হালকা ধূসর অ্যাডঅন ব্যাকগ্রাউন্ড */
+                  border: none !important;
+                  border-left: 1px solid #4e4e4e !important; /* মেইন ইনপুট আর অ্যাডঅনের মাঝের লাইন */
+                  color: #121212 !important; /* ভেরিফিকেশন কোড টেক্সট কালো */
+                  font-weight: 700 !important; /* ভেরিফিকেশন কোড মোটা */
+                  height: 100% !important;
+                  padding-left: 1.5rem !important; /* নম্বর বসানোর জন্য প্যাডিং */
+                  padding-right: 1rem !important;
+                  margin-left: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;
+              }
+              /* রিফ্রেশ আইকন গাঢ় কালার করা (হালকা ব্যাকগ্রাউন্ডে যেন দেখা যায়) */
+              .page-signup .chakra-input__right-addon .chakra-image {
+                  filter: brightness(0.1) !important;
+                  margin-left: 10px !important;
               }
             </style>
 
