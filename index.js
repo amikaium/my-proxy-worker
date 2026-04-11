@@ -147,7 +147,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
@@ -266,9 +266,15 @@ export default {
               }
 
               /* ==========================================
-                 🔥 আপনার দেওয়া .css-b13tmd দিয়ে 100% স্ক্রল ফিক্স
+                 🔥 আপনার দেওয়া .css-16ff8oy দিয়ে 100% স্ক্রল ফিক্স
                  ========================================== */
               
+              /* ওভারস্ক্রল ইফেক্ট বন্ধ করা */
+              .page-login body, .page-signup body,
+              .page-login html, .page-signup html {
+                  overscroll-behavior-y: none !important;
+              }
+
               /* লগইন পেজে কন্টেন্ট কম, তাই স্ক্রলিং সম্পূর্ণ ব্লক */
               .page-login .css-b13tmd, 
               .page-login body, 
@@ -278,18 +284,23 @@ export default {
                   overflow: hidden !important; 
               }
 
-              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না (শুধু 10px প্যাডিং) */
+              /* সাইনআপ পেজে স্ক্রল হবে, কিন্তু অতিরিক্ত স্পেস থাকবে না (শুধু 10px গ্যাপ) */
+              .page-signup .css-16ff8oy,
               .page-signup .css-b13tmd {
-                  min-height: 100vh !important;
-                  overflow-y: auto !important;
                   padding-bottom: 10px !important; 
+                  margin-bottom: 0 !important;
               }
 
               /* চাকরা ইউআই এর অটোমেটিক জেনারেট হওয়া অদৃশ্য স্পেসার হাইড করা হলো */
-              .page-login .css-b13tmd > div[style*="height"],
+              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
+              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
+              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
+              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"],
+              .page-signup .css-16ff8oy > div[style*="height"],
               .page-signup .css-b13tmd > div[style*="height"] {
                   display: none !important;
                   height: 0 !important;
+                  min-height: 0 !important;
               }
             </style>
 
