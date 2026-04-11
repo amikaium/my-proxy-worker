@@ -107,7 +107,7 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (Button Fix & Type inputs)
+                 🎨 সাইনআপ পেজের আপডেট ডিজাইন
                  ========================================== */
               
               /* মেইন পেজ ব্যাকগ্রাউন্ড */
@@ -139,8 +139,8 @@ export default {
                  🔥 কনফার্ম বাটন (Confirm Button) ফিক্স
                  ------------------------------------------- */
               .page-signup button.chakra-button {
-                  height: 45px !important; /* ইনপুট বক্সের সমান উচ্চতা */
-                  border-radius: 4px !important; /* ইনপুট বক্সের সমান রাউন্ড */
+                  height: 45px !important; 
+                  border-radius: 4px !important; 
               }
 
               /* -------------------------------------------
@@ -158,20 +158,20 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
-                  border-radius: 0 !important; /* ভিতরের বাটনে রেডিয়াস দরকার নেই */
+                  border-radius: 0 !important; 
               }
               .page-signup .chakra-input__right-element svg {
                   margin: auto !important; 
               }
 
               /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড)
+                 লেফট অ্যাডঅন (দেশের কোড) - আপডেট: ব্যাকগ্রাউন্ড #2c2c2c
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
-                  background-color: #EEEEEE !important; 
+                  background-color: #2c2c2c !important; /* ইনপুট বক্সের সেম কালার */
                   border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
-                  color: #121212 !important; 
+                  color: #ffffff !important; /* টেক্সট সাদা করা হলো */
                   font-weight: 500 !important;
                   height: 45px !important;
                   margin-right: 10px !important; 
@@ -181,7 +181,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড)
+                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - আপডেট: পেডিং 5px
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
@@ -191,7 +191,7 @@ export default {
                   font-weight: 700 !important; 
                   height: 45px !important;
                   margin-left: 10px !important; 
-                  padding: 5px !important; 
+                  padding: 5px !important; /* 🔥 পেডিং ৫ পিক্সেল কনফার্ম করা হলো */
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
@@ -258,13 +258,13 @@ export default {
                         codeInput.type = 'number';
                     }
 
-                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া (শুধুমাত্র একবার)
+                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া
                     const agreeCheckbox = document.querySelector('input[type="checkbox"]');
                     if (agreeCheckbox && !window.hasAutoCheckedTerms) {
                         if (!agreeCheckbox.checked) {
-                            agreeCheckbox.click(); // React-এ ক্লিক করলেই টিক হয়ে যায়
+                            agreeCheckbox.click();
                         }
-                        window.hasAutoCheckedTerms = true; // ফ্ল্যাগ সেট করা হলো, যাতে বারবার ক্লিক না করে
+                        window.hasAutoCheckedTerms = true;
                     }
                 });
 
