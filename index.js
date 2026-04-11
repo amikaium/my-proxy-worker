@@ -109,20 +109,16 @@ export default {
               /* ==========================================
                  🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন
                  ========================================== */
-              
-              /* মেইন পেজ ব্যাকগ্রাউন্ড */
               .page-signup body, .page-login body {
                   background-color: #121212 !important; 
               }
 
-              /* ইনপুট গ্রুপ কন্টেইনার */
               .page-signup .chakra-form-control .chakra-input-group,
               .page-login .chakra-form-control .chakra-input-group {
                   background-color: transparent !important; 
                   border: none !important; 
               }
 
-              /* মেইন ইনপুট বক্স (উচ্চতা 45px) */
               .page-signup .chakra-input,
               .page-login .chakra-input {
                   height: 45px !important; 
@@ -132,23 +128,16 @@ export default {
                   color: #ffffff !important; 
               }
 
-              /* প্লেসহোল্ডার টেক্সট কালার */
               .page-signup .chakra-input::placeholder,
               .page-login .chakra-input::placeholder {
                   color: #808080 !important; 
               }
 
-              /* -------------------------------------------
-                 🔥 Forgot Password হাইড করা (লগইন পেজ)
-                 ------------------------------------------- */
               .page-login button.css-1u9t1b5,
               .page-login .css-1u9t1b5 {
                   display: none !important;
               }
 
-              /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
-                 ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
                   height: 45px !important; 
@@ -176,9 +165,6 @@ export default {
                   top: 2.5px !important; 
               }
 
-              /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড) - সাইনআপ পেজ
-                 ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #2c2c2c !important; 
                   border-radius: 4px !important; 
@@ -192,9 +178,6 @@ export default {
                   margin-right: 5px !important;
               }
 
-              /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - সাইনআপ পেজ
-                 ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
                   border-radius: 4px !important; 
@@ -228,9 +211,6 @@ export default {
                   color: #121212 !important; 
               }
 
-              /* ==========================================
-                 🔥 বক্স মার্জিন এবং লগইন বাটন হাইট
-                 ========================================== */
               .css-fpyqtb {
                   margin-bottom: 10px !important;
               }
@@ -240,19 +220,14 @@ export default {
                   border-radius: 4px !important;
               }
 
-              /* লগইন পেজে লোগো ইমেজ হাইড */
               .page-login img.css-if5ddh {
                   display: none !important;
               }
 
-              /* সাইনআপ পেজে "Most trusted site..." টেক্সট হাইড */
               .page-signup p.css-19szwf6 {
                   display: none !important;
               }
 
-              /* ==========================================
-                 🔥 100% স্ক্রল বাউন্স এবং স্পেসিং ফিক্স
-                 ========================================== */
               .page-login body, .page-signup body,
               .page-login html, .page-signup html {
                   overscroll-behavior-y: none !important;
@@ -281,9 +256,6 @@ export default {
                   min-height: 0 !important;
               }
 
-              /* ==========================================
-                 🔥 অটোমেটিক ভিডিও প্লেয়ার ও iOS স্পিনার স্টাইল 
-                 ========================================== */
               .custom-video-wrapper {
                   position: relative !important;
                   width: 100% !important;
@@ -327,14 +299,47 @@ export default {
               }
 
               /* ==========================================
-                 🛑 ডিপোজিট পেজ (/dw) কাস্টম বক্স ফ্রিজ স্টাইল 
+                 🛑 ডিপোজিট পেজ (/dw) কাস্টম ডিজাইন (Height 45px & Radius 4px)
                  ========================================== */
-              /* শুধুমাত্র dw পেজেই এই ক্লাস কাজ করবে অন্য কোথাও নয় */
+              
+              /* ১. ফ্রিজ করা বক্সগুলো (Bank, Acc Number) */
               .page-dw .custom-frozen-box {
-                  height: 45px !important;          /* হাইট ৪৫ পিক্সেল */
-                  pointer-events: none !important;  /* ক্লিক করা বা এডিট করা বন্ধ */
-                  user-select: none !important;     /* টেক্সট সিলেক্ট করা বন্ধ */
-                  opacity: 0.9 !important;          /* হালকা অপাসিটি দিয়ে ফিক্সড বোঝানো */
+                  height: 45px !important;
+                  border-radius: 4px !important; /* ৪ পিক্সেল রেডিয়াস যুক্ত */
+                  pointer-events: none !important;
+                  user-select: none !important;
+                  opacity: 0.9 !important;
+              }
+
+              /* ২. পেজের অন্যান্য সমস্ত সাধারণ ইনপুট (Amount, Transaction ID) */
+              .page-dw .chakra-input {
+                  height: 45px !important;
+                  border-radius: 4px !important;
+              }
+
+              /* ৩. BDT লেখা লেফট অ্যাডঅন (Amount এর বাম পাশে) */
+              .page-dw .chakra-input__left-addon {
+                  height: 45px !important;
+                  border-radius: 4px 0 0 4px !important; /* শুধু বাম দিকে কার্ভ */
+              }
+              
+              /* BDT অ্যাডঅন থাকলে মূল Amount ইনপুটের বাম দিকের কার্ভ সোজা করে দেওয়া */
+              .page-dw .chakra-input-group > .chakra-input__left-addon + .chakra-input {
+                  border-top-left-radius: 0 !important;
+                  border-bottom-left-radius: 0 !important;
+              }
+
+              /* ৪. কপি আইকন বাটন (Acc Number এর ডানে) এরিয়া ফিক্স */
+              .page-dw .chakra-input__right-element {
+                  height: 45px !important;
+              }
+
+              /* ৫. Upload Receipt ইমেজ আপলোড বক্স (JS থেকে ক্লাস বসবে) */
+              .page-dw .custom-upload-box {
+                  height: 45px !important;
+                  border-radius: 4px !important;
+                  display: flex !important;
+                  align-items: center !important; /* ভিতরের লেখা মাঝে রাখার জন্য */
               }
 
             </style>
@@ -348,7 +353,6 @@ export default {
                     document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                     let path = window.location.pathname.replace(/\\//g, '');
                     if(path === '') path = 'home';
-                    // query string বাদ দিয়ে শুধু পাথ এর নাম নেওয়া হচ্ছে (যেমন dw?tab=deposit থেকে শুধু dw)
                     let basePage = path.split('?')[0]; 
                     document.body.classList.add('page-' + basePage);
                 }
@@ -379,9 +383,8 @@ export default {
 
                 const domObserver = new MutationObserver(() => {
                     let fullPath = window.location.pathname.replace(/\\//g, '');
-                    let currentPath = fullPath.split('?')[0]; // URL প্যারামিটার বাদ দিয়ে শুধু মেইন পেজ নেম
+                    let currentPath = fullPath.split('?')[0]; 
                     
-                    // ১. রেফারেল কোড অটো-ফিল
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
@@ -389,19 +392,16 @@ export default {
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
-                    // ২. ফোন নাম্বার বক্সকে Number Keypad (tel) করা
                     const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
                     if (phoneInput && phoneInput.type !== 'tel') {
                         phoneInput.type = 'tel';
                     }
 
-                    // ৩. ভেরিফিকেশন কোড বক্সকে Number Keypad (number) করা
                     const codeInput = document.querySelector('input[placeholder="Enter 4 digit code"]');
                     if (codeInput && codeInput.type !== 'number') {
                         codeInput.type = 'number';
                     }
 
-                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া
                     const agreeCheckbox = document.querySelector('input[type="checkbox"]');
                     if (agreeCheckbox && !agreeCheckbox.hasAttribute('data-auto-checked')) {
                         if (!agreeCheckbox.checked) {
@@ -410,7 +410,6 @@ export default {
                         agreeCheckbox.setAttribute('data-auto-checked', 'true');
                     }
 
-                    // ৫. Forgot Password হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         const txt = btn.textContent.toLowerCase();
                         if (txt.includes('forgot') || txt.includes('password?')) {
@@ -420,7 +419,6 @@ export default {
                         }
                     });
 
-                    // ৬. Login এবং Confirm বাটনের সাইজ 45px করা
                     document.querySelectorAll('button.chakra-button').forEach(btn => {
                         const btnText = btn.textContent.trim();
                         if (btnText === 'Confirm' || btnText === 'Login') {
@@ -433,7 +431,6 @@ export default {
                         }
                     });
 
-                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
@@ -477,37 +474,54 @@ export default {
                         }
                     }
 
-                    // ৮. 🛑 শুধুমাত্র Deposit পেজ (/dw) এর নির্দিষ্ট ২টা বক্স ফ্রিজ করা
+                    // ৮. 🛑 শুধুমাত্র Deposit পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
-                        // পেজের সব input টার্গেট করে তার উপরের লেবেল চেক করা হচ্ছে
+                        
+                        // [A] নির্দিষ্ট বক্স ফ্রিজ করা
                         document.querySelectorAll('input').forEach(input => {
                             let parent = input.parentElement;
                             let shouldFreeze = false;
                             
-                            // ইনপুটের উপরের ৩-৪ লেভেল পর্যন্ত কন্টেইনার চেক করা হচ্ছে যে লেবেল কি আছে
                             for(let i=0; i<4; i++) {
                                 if(parent) {
                                     let text = parent.innerText || parent.textContent || '';
-                                    
-                                    // যদি লেবেলের টেক্সট এগুলোর যেকোনো একটি হয়
                                     if(text.includes('Account Number / UPI') || 
                                        text.includes('Bank Account Name') || 
                                        text.includes('Deposit Channel')) {
                                         
-                                        // Amount বক্স যেন ভুলে ফ্রিজ না হয় তার সেফটি
                                         if(!text.includes('Amount')) {
                                             shouldFreeze = true;
                                         }
-                                        break; // লেবেল পেয়ে গেলে লুপ ব্রেক করবে
+                                        break; 
                                     }
                                     parent = parent.parentElement;
                                 }
                             }
 
-                            // যদি এটা টার্গেটেড বক্স হয় এবং আগে থেকে ফ্রিজ করা না থাকে
                             if (shouldFreeze && !input.classList.contains('custom-frozen-box')) {
-                                input.readOnly = true; // টাইপ করা বন্ধ করবে
-                                input.classList.add('custom-frozen-box'); // CSS এড করে হাইট ৪৫ করবে
+                                input.readOnly = true; 
+                                input.classList.add('custom-frozen-box'); 
+                            }
+                        });
+
+                        // [B] Upload Receipt বক্স ফিক্স করা (এটি ইনপুট নয়, একটি div)
+                        document.querySelectorAll('.chakra-form-control').forEach(group => {
+                            let text = group.innerText || group.textContent || '';
+                            if (text.includes('Upload Receipt')) {
+                                // লেবেলের ঠিক পরের মেইন div টা হলো আপলোড বক্স
+                                let label = group.querySelector('label');
+                                let uploadDiv = label ? label.nextElementSibling : null;
+                                if (uploadDiv && !uploadDiv.classList.contains('custom-upload-box')) {
+                                    uploadDiv.classList.add('custom-upload-box');
+                                }
+                            }
+                        });
+
+                        // [C] Submit বাটন ফিক্স করা
+                        document.querySelectorAll('.page-dw button').forEach(btn => {
+                            if(btn.innerText.includes('Submit')) {
+                                btn.style.setProperty('height', '45px', 'important');
+                                btn.style.setProperty('border-radius', '4px', 'important');
                             }
                         });
                     }
