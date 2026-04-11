@@ -110,17 +110,14 @@ export default {
                  🚫 সাদা বক্স এবং ফালতু এলিমেন্ট হাইড
                  ========================================== */
               div.css-h096tp, 
-              .language-select-div { 
-                  display: none !important; 
-              }
+              .language-select-div { display: none !important; }
 
               /* ==========================================
                  🚀 হেডার ডিজাইন 
                  ========================================== */
               div#header {
                   display: flex !important; align-items: center !important; padding: 0 12px !important;
-                  background-color: #17191c !important; height: 55px !important; z-index: 1000 !important;
-                  position: relative !important;
+                  background-color: #17191c !important; height: 55px !important; z-index: 1000 !important; position: relative !important;
               }
               .css-1vvjgde { display: flex !important; align-items: center !important; gap: 12px !important; }
               .css-1vvjgde button[aria-label="menu"] { display: flex !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
@@ -132,7 +129,6 @@ export default {
               /* ==========================================
                  💎 কাস্টম ড্যাশবোর্ড প্যানেল 
                  ========================================== */
-
               div.css-1rfmqpc {
                   display: flex !important; flex-direction: row !important; justify-content: space-between !important;
                   align-items: stretch !important; padding: 8px 12px !important; gap: 10px !important;
@@ -172,65 +168,81 @@ export default {
 
 
               /* ==========================================
-                 🖋️ গ্লোবাল ইনপুট ফিল্ড (নাম, নাম্বার ইত্যাদি)
+                 🖋️ গ্লোবাল প্রিমিয়াম ইনপুট ফিল্ড (সবগুলো বক্সের জন্য)
                  ========================================== */
-              input.chakra-input, .chakra-input {
-                  border-radius: 8px !important; 
-                  height: 50px !important; 
-                  background-color: #1a1d24 !important; /* ব্যাকগ্রাউন্ড থেকে আলাদা সলিড কালার যাতে পরিষ্কার বোঝা যায় */
-                  border: 1px solid rgba(255, 255, 255, 0.15) !important; 
-                  color: white !important;
+              input.arfan-premium-input, .arfan-premium-input {
+                  background-color: #1a1d24 !important; /* ডার্ক ব্যাকগ্রাউন্ড */
+                  border: 1px solid rgba(254, 172, 4, 0.6) !important; /* গোল্ডেন বর্ডার */
+                  border-radius: 8px !important;
+                  color: #ffffff !important;
+                  height: 50px !important;
+                  font-size: 15px !important;
+                  font-weight: 600 !important;
+                  padding: 0 16px !important;
+                  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+                  transition: all 0.2s ease !important;
               }
+              input.arfan-premium-input:focus {
+                  border: 1px solid #FEAC04 !important;
+                  box-shadow: 0 0 8px rgba(254, 172, 4, 0.4), inset 0 2px 4px rgba(0,0,0,0.3) !important;
+                  outline: none !important;
+              }
+
+              /* 🎛️ প্রি-সেট অ্যামাউন্ট বাটন (100, 500, 1000) */
+              button.arfan-amount-btn {
+                  background-color: #2b2f3a !important;
+                  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                  color: #e5e7eb !important;
+                  border-radius: 6px !important;
+                  font-weight: 600 !important;
+                  transition: all 0.2s ease !important;
+              }
+              button.arfan-amount-btn:active, button.arfan-amount-btn:focus {
+                  background-color: rgba(254, 172, 4, 0.15) !important;
+                  border-color: #FEAC04 !important;
+                  color: #FEAC04 !important;
+              }
+
+              /* 🚀 সাবমিট বাটন (প্রিমিয়াম গ্রিন গ্রেডিয়েন্ট লুক) */
+              button.arfan-submit-btn {
+                  background: linear-gradient(90deg, #1d9154 0%, #157342 100%) !important;
+                  border: none !important;
+                  color: #ffffff !important;
+                  font-weight: 800 !important;
+                  font-size: 16px !important;
+                  border-radius: 8px !important;
+                  text-transform: uppercase !important;
+                  letter-spacing: 1px !important;
+                  box-shadow: 0 4px 10px rgba(29, 145, 84, 0.4) !important;
+                  transition: transform 0.2s !important;
+              }
+              button.arfan-submit-btn:active {
+                  transform: scale(0.98) !important;
+              }
+
 
               /* ==========================================
                  🚀 100% Scoped: BDT অ্যামাউন্ট বক্স (Deposit)
                  ========================================== */
               .arfan-amount-group {
-                  display: flex !important;
-                  align-items: center !important;
-                  background-color: #1a1d24 !important; /* ফিল্ডের আলাদা ব্যাকগ্রাউন্ড */
-                  border: 1px solid rgba(254, 172, 4, 0.6) !important; /* গোল্ডেন বর্ডার */
-                  border-radius: 8px !important;
-                  overflow: hidden !important; /* যাতে ভেতরের এলিমেন্টগুলো বাইরে না যায় */
-                  height: 50px !important;
-                  width: 100% !important;
+                  display: flex !important; align-items: center !important; background-color: #1a1d24 !important; 
+                  border: 1px solid rgba(254, 172, 4, 0.6) !important; border-radius: 8px !important;
+                  overflow: hidden !important; height: 50px !important; width: 100% !important;
               }
-
-              /* BDT লেখা (Left Addon) */
               .arfan-amount-group > div.chakra-input__left-addon {
                   background: linear-gradient(135deg, rgba(254, 172, 4, 0.25) 0%, rgba(254, 172, 4, 0.05) 100%) !important;
-                  color: #FEAC04 !important;
-                  font-weight: 800 !important;
-                  border: none !important;
-                  border-right: 1px solid rgba(254, 172, 4, 0.3) !important; /* ভেতরের বর্ডার */
-                  height: 100% !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  padding: 0 16px !important;
-                  font-size: 14px !important;
-                  border-radius: 0 !important; 
+                  color: #FEAC04 !important; font-weight: 800 !important; border: none !important;
+                  border-right: 1px solid rgba(254, 172, 4, 0.3) !important; height: 100% !important;
+                  display: flex !important; align-items: center !important; justify-content: center !important;
+                  padding: 0 16px !important; font-size: 14px !important; border-radius: 0 !important; 
               }
-
-              /* BDT এর পাশের মূল ইনপুট ফিল্ড */
               .arfan-amount-group > input.chakra-input {
-                  background-color: transparent !important; /* ব্যাকগ্রাউন্ড ট্রান্সপারেন্ট যাতে মেইন বক্সের কালার শো করে */
-                  border: none !important;
-                  box-shadow: none !important;
-                  color: #ffffff !important;
-                  height: 100% !important;
-                  padding-left: 12px !important;
-                  font-size: 18px !important;
-                  font-weight: 700 !important;
-                  border-radius: 0 !important;
-                  flex: 1 !important;
+                  background-color: transparent !important; border: none !important; box-shadow: none !important;
+                  color: #ffffff !important; height: 100% !important; padding-left: 12px !important;
+                  font-size: 18px !important; font-weight: 700 !important; border-radius: 0 !important; flex: 1 !important;
               }
-
-              /* ইনপুট ফিল্ডে ক্লিক করলে বর্ডার যেন ডাবল না হয় */
               .arfan-amount-group > input.chakra-input:focus {
-                  outline: none !important;
-                  border: none !important;
-                  box-shadow: none !important;
+                  outline: none !important; border: none !important; box-shadow: none !important;
               }
             </style>
 
@@ -302,7 +314,32 @@ export default {
                         if (authBox) authBox.style.display = 'none';
                     }
 
-                    // 🚀 100% সেফ: BDT Amount Box ডিজাইন (শুধুমাত্র BDT বক্সে কাজ করবে)
+
+                    // 🚀 100% সেফ: ফর্মের ভেতরের সমস্ত ইনপুট এবং বাটনগুলোকে ডাইনামিক ডিজাইন করা
+                    
+                    // ১. গ্লোবাল ইনপুট (Bank Account Name, Account Number ইত্যাদি)
+                    const allInputs = document.querySelectorAll('input.chakra-input, .chakra-input');
+                    allInputs.forEach(input => {
+                        if (!input.classList.contains('arfan-premium-input')) {
+                            input.classList.add('arfan-premium-input');
+                        }
+                    });
+
+                    // ২. অ্যামাউন্ট এবং সাবমিট বাটন
+                    const allButtons = document.querySelectorAll('button.chakra-button');
+                    allButtons.forEach(btn => {
+                        const text = btn.textContent.trim();
+                        // যদি বাটনের টেক্সট শুধু সংখ্যা হয় (যেমন 100, 5,000)
+                        if(text.match(/^[0-9,]+$/)) { 
+                            if(!btn.classList.contains('arfan-amount-btn')) btn.classList.add('arfan-amount-btn');
+                        } 
+                        // যদি বাটনের টেক্সট Submit হয়
+                        else if (text.toLowerCase() === 'submit') {
+                            if(!btn.classList.contains('arfan-submit-btn')) btn.classList.add('arfan-submit-btn');
+                        }
+                    });
+
+                    // ৩. BDT Amount Box ডিজাইন (শুধুমাত্র BDT বক্সে কাজ করবে)
                     const bdtAddons = document.querySelectorAll('div.chakra-input__left-addon');
                     bdtAddons.forEach(addon => {
                         if (addon.textContent.includes('BDT')) {
@@ -312,6 +349,7 @@ export default {
                             }
                         }
                     });
+
 
                     // 🚀 100% সেফ: Deposit/Withdraw আইকন এবং টেক্সট সাইজ ফিক্স
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
