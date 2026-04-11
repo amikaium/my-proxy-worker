@@ -157,7 +157,7 @@ export default {
               .page-dw .css-1h8d01g {
                   height: 45px !important;
                   border-radius: 4px !important; 
-                  pointer-events: none !important;
+                  pointer-events: none !important; /* ফ্রিজ কোড */
                   user-select: none !important;
                   opacity: 0.9 !important;
               }
@@ -174,9 +174,12 @@ export default {
                   border-radius: 4px 0 0 4px !important; 
               }
 
-              /* ৫. লেফট অ্যাডঅন এর ডান পাশের ইনপুট (Amount Box এবং Phone Number এর বাম দিকের কার্ভ জিরো হবে) */
+              /* ৫. 🔥 মাস্টার আনলক (Master Unlock): Amount এবং Phone Number যেন ভুল করেও ফ্রিজ না হয় */
               .page-dw .chakra-input__left-addon + .chakra-input {
-                  border-radius: 0 4px 4px 0 !important; 
+                  border-radius: 0 4px 4px 0 !important; /* বামের কার্ভ জিরো */
+                  pointer-events: auto !important; /* জোর করে ফ্রিজ ছুটানো */
+                  user-select: auto !important;    /* জোর করে টাইপিং এনাবল করা */
+                  opacity: 1 !important;           /* নরমাল অপাসিটি */
               }
 
               /* ৬. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
@@ -321,12 +324,11 @@ export default {
                     // ৮. 🛑 শুধুমাত্র Deposit / Withdrawal পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
                         
-                        // [A] Amount বক্সগুলোতে Number Keypad আনা (বক্স ফ্রিজ না করে)
+                        // [A] Amount বক্সগুলোতে Number Keypad আনা
                         document.querySelectorAll('.page-dw .chakra-input__left-addon').forEach(addon => {
                             if (addon.textContent.includes('BDT')) {
                                 let amountInput = addon.nextElementSibling;
                                 if (amountInput && amountInput.tagName === 'INPUT') {
-                                    // React কে ডিস্টার্ব না করে নাম্বার কিপ্যাড আনার ট্রিক
                                     if(amountInput.getAttribute('inputmode') !== 'decimal') {
                                         amountInput.setAttribute('inputmode', 'decimal');
                                         amountInput.setAttribute('pattern', '[0-9]*');
