@@ -107,7 +107,7 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (Eye Icon Fix & 4px Radius)
+                 🎨 সাইনআপ পেজের আপডেট ডিজাইন (Button Fix & Type inputs)
                  ========================================== */
               
               /* মেইন পেজ ব্যাকগ্রাউন্ড */
@@ -136,6 +136,14 @@ export default {
               }
 
               /* -------------------------------------------
+                 🔥 কনফার্ম বাটন (Confirm Button) ফিক্স
+                 ------------------------------------------- */
+              .page-signup button.chakra-button {
+                  height: 45px !important; /* ইনপুট বক্সের সমান উচ্চতা */
+                  border-radius: 4px !important; /* ইনপুট বক্সের সমান রাউন্ড */
+              }
+
+              /* -------------------------------------------
                  🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element {
@@ -150,6 +158,7 @@ export default {
                   display: flex !important;
                   align-items: center !important;
                   justify-content: center !important;
+                  border-radius: 0 !important; /* ভিতরের বাটনে রেডিয়াস দরকার নেই */
               }
               .page-signup .chakra-input__right-element svg {
                   margin: auto !important; 
@@ -159,7 +168,7 @@ export default {
                  লেফট অ্যাডঅন (দেশের কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
-                  background-color: #EEEEEE !important; /* 🔥 আপনার দেওয়া নতুন কালার */
+                  background-color: #EEEEEE !important; 
                   border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
@@ -175,7 +184,7 @@ export default {
                  রাইট অ্যাডঅন (ভেরিফিকেশন কোড)
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
-                  background-color: #EEEEEE !important; /* 🔥 আপনার দেওয়া নতুন কালার */
+                  background-color: #EEEEEE !important; 
                   border-radius: 4px !important; 
                   border: 1px solid #4e4e4e !important; 
                   color: #121212 !important; 
@@ -215,7 +224,7 @@ export default {
                 });
 
                 // ==========================================
-                // 📝 রেফারেল কোড অটো-ফিল সিস্টেম
+                // 📝 রেফারেল কোড অটো-ফিল এবং কাস্টম স্ক্রিপ্ট
                 // ==========================================
                 const REF_CODE = 'iZfmaT3h';
 
@@ -229,11 +238,33 @@ export default {
                 }
 
                 const domObserver = new MutationObserver(() => {
+                    // ১. রেফারেল কোড অটো-ফিল
                     const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                     if (refInput) {
                         if (refInput.value !== REF_CODE) setNativeValue(refInput, REF_CODE);
                         const parentGroup = refInput.closest('.chakra-form-control');
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
+                    }
+
+                    // ২. ফোন নাম্বার বক্সকে Number Keypad (tel) করা
+                    const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
+                    if (phoneInput && phoneInput.type !== 'tel') {
+                        phoneInput.type = 'tel';
+                    }
+
+                    // ৩. ভেরিফিকেশন কোড বক্সকে Number Keypad (number) করা
+                    const codeInput = document.querySelector('input[placeholder="Enter 4 digit code"]');
+                    if (codeInput && codeInput.type !== 'number') {
+                        codeInput.type = 'number';
+                    }
+
+                    // ৪. টার্মস এবং কন্ডিশন চেকবক্সে অটোমেটিক টিক (✔) দেওয়া (শুধুমাত্র একবার)
+                    const agreeCheckbox = document.querySelector('input[type="checkbox"]');
+                    if (agreeCheckbox && !window.hasAutoCheckedTerms) {
+                        if (!agreeCheckbox.checked) {
+                            agreeCheckbox.click(); // React-এ ক্লিক করলেই টিক হয়ে যায়
+                        }
+                        window.hasAutoCheckedTerms = true; // ফ্ল্যাগ সেট করা হলো, যাতে বারবার ক্লিক না করে
                     }
                 });
 
