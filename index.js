@@ -231,7 +231,7 @@ export default {
               }
 
               /* ==========================================
-                 🔥 নতুন যুক্ত করা ফিক্স (বক্স মার্জিন এবং লগইন বাটন হাইট)
+                 🔥 আগের ফিক্স (বক্স মার্জিন এবং লগইন বাটন হাইট)
                  ========================================== */
               .css-fpyqtb {
                   margin-bottom: 10px !important;
@@ -240,6 +240,34 @@ export default {
               button.chakra-button.css-lutoi4 {
                   height: 45px !important;
                   border-radius: 4px !important;
+              }
+
+              /* ==========================================
+                 🔥 নতুন রিকোয়েস্ট: নির্দিষ্ট এলিমেন্ট হাইড করা
+                 ========================================== */
+              /* লগইন পেজে লোগো ইমেজ হাইড */
+              .page-login img.css-if5ddh {
+                  display: none !important;
+              }
+
+              /* সাইনআপ পেজে "Most trusted site..." টেক্সট হাইড */
+              .page-signup p.css-19szwf6 {
+                  display: none !important;
+              }
+
+              /* অটোমেটিক ভিডিও প্লেয়ারের ফুল-উইডথ স্টাইল (ডানে বামে ফাঁকা থাকবে না) */
+              .custom-video-wrapper {
+                  width: 100% !important;
+                  padding: 0 !important;
+                  margin: 0 !important;
+                  display: block !important;
+              }
+              .custom-video-wrapper video {
+                  width: 100% !important;
+                  height: auto !important;
+                  display: block !important;
+                  object-fit: cover !important;
+                  pointer-events: none !important; /* ইউজার ক্লিক করতে পারবে না */
               }
             </style>
 
@@ -318,7 +346,7 @@ export default {
                         }
                     });
 
-                    // ৬. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা (হেডারের বাটনগুলো অরিজিনাল থাকবে)
+                    // ৬. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা
                     document.querySelectorAll('button.chakra-button').forEach(btn => {
                         const btnText = btn.textContent.trim();
                         if (btnText === 'Confirm' || btnText === 'Login') {
@@ -331,6 +359,18 @@ export default {
                             }
                         }
                     });
+
+                    // ৭. 🔥 নতুন রিকোয়েস্ট: ভিডিও প্লেয়ার যুক্ত করা (.css-lpwed4 এর ঠিক নিচে)
+                    const targetDivForVideo = document.querySelector('div.css-lpwed4');
+                    if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
+                        const videoHTML = \`
+                        <div id="arfan-custom-video" class="custom-video-wrapper">
+                            <video autoplay loop muted playsinline>
+                                <source src="https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97" type="video/mp4">
+                            </video>
+                        </div>\`;
+                        targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
+                    }
                 });
 
                 window.addEventListener('load', () => {
