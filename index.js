@@ -147,7 +147,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
@@ -208,7 +208,6 @@ export default {
                   align-items: center !important;
                   justify-content: center !important;
               }
-              /* রিফ্রেশ বাটন কন্টেইনার */
               .page-signup .chakra-input__right-addon button {
                   margin: auto 0 auto 5px !important; 
                   display: flex !important;
@@ -221,7 +220,6 @@ export default {
                   padding: 0 !important; 
                   background-color: transparent !important;
               }
-              /* রিফ্রেশ SVG আইকন */
               .page-signup .chakra-input__right-addon button svg,
               .page-signup .chakra-input__right-addon svg {
                   height: 16px !important; 
@@ -242,9 +240,6 @@ export default {
                   border-radius: 4px !important;
               }
 
-              /* ==========================================
-                 🔥 নতুন রিকোয়েস্ট: নির্দিষ্ট এলিমেন্ট হাইড করা
-                 ========================================== */
               /* লগইন পেজে লোগো ইমেজ হাইড */
               .page-login img.css-if5ddh {
                   display: none !important;
@@ -255,7 +250,7 @@ export default {
                   display: none !important;
               }
 
-              /* অটোমেটিক ভিডিও প্লেয়ারের ফুল-উইডথ স্টাইল (ডানে বামে ফাঁকা থাকবে না) */
+              /* অটোমেটিক ভিডিও প্লেয়ার স্টাইল */
               .custom-video-wrapper {
                   width: 100% !important;
                   padding: 0 !important;
@@ -267,7 +262,33 @@ export default {
                   height: auto !important;
                   display: block !important;
                   object-fit: cover !important;
-                  pointer-events: none !important; /* ইউজার ক্লিক করতে পারবে না */
+                  pointer-events: none !important; 
+              }
+
+              /* ==========================================
+                 🔥 স্ক্রল ফিক্স (অতিরিক্ত স্ক্রল এবং স্পেস বন্ধ করা)
+                 ========================================== */
+              /* ওভারস্ক্রল ইফেক্ট বন্ধ করা */
+              .page-login body, .page-signup body,
+              .page-login html, .page-signup html {
+                  overscroll-behavior-y: none !important;
+              }
+
+              /* কন্টেইনারের নিচের অতিরিক্ত প্যাডিং রিমুভ করে 10px করা */
+              .page-login body > div > div, 
+              .page-signup body > div > div,
+              .page-login main, 
+              .page-signup main {
+                  padding-bottom: 10px !important;
+              }
+
+              /* নেভিগেশন বারের খালি স্পেসারগুলো হাইড করা */
+              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
+              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
+              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
+              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"] {
+                  display: none !important;
+                  height: 0 !important;
               }
             </style>
 
@@ -296,6 +317,7 @@ export default {
                 // 📝 কাস্টম স্ক্রিপ্ট
                 // ==========================================
                 const REF_CODE = 'iZfmaT3h';
+                const VIDEO_URL = 'https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97';
 
                 function setNativeValue(element, value) {
                     const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
@@ -336,7 +358,7 @@ export default {
                         agreeCheckbox.setAttribute('data-auto-checked', 'true');
                     }
 
-                    // ৫. 🔥 100% গ্যারান্টি Forgot Password হাইড করা
+                    // ৫. Forgot Password হাইড করা
                     document.querySelectorAll('button').forEach(btn => {
                         const txt = btn.textContent.toLowerCase();
                         if (txt.includes('forgot') || txt.includes('password?')) {
@@ -346,27 +368,38 @@ export default {
                         }
                     });
 
-                    // ৬. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা
+                    // ৬. Login এবং Confirm বাটনের সাইজ 45px করা
                     document.querySelectorAll('button.chakra-button').forEach(btn => {
                         const btnText = btn.textContent.trim();
                         if (btnText === 'Confirm' || btnText === 'Login') {
                             btn.style.setProperty('height', '45px', 'important');
                             btn.style.setProperty('border-radius', '4px', 'important');
                             
-                            // লগইন বাটনের ঠিক উপরে 10px মার্জিন দেওয়া হলো
                             if (btnText === 'Login') {
                                 btn.style.setProperty('margin-top', '10px', 'important');
                             }
                         }
                     });
 
-                    // ৭. 🔥 নতুন রিকোয়েস্ট: ভিডিও প্লেয়ার যুক্ত করা (.css-lpwed4 এর ঠিক নিচে)
+                    // ৭. 🔥 অটোমেটিক ভিডিও প্লেয়ার (Fast Loading / Preload)
                     const targetDivForVideo = document.querySelector('div.css-lpwed4');
                     if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
+                        
+                        // ভিডিও দ্রুত লোড করার জন্য হেডে Preload যুক্ত করা
+                        if (!document.getElementById('preload-custom-vid')) {
+                            const preloadLink = document.createElement('link');
+                            preloadLink.id = 'preload-custom-vid';
+                            preloadLink.rel = 'preload';
+                            preloadLink.as = 'video';
+                            preloadLink.href = VIDEO_URL;
+                            document.head.appendChild(preloadLink);
+                        }
+
+                        // ভিডিও এলিমেন্ট ইনজেক্ট করা (preload="auto" সহ)
                         const videoHTML = \`
                         <div id="arfan-custom-video" class="custom-video-wrapper">
-                            <video autoplay loop muted playsinline>
-                                <source src="https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97" type="video/mp4">
+                            <video autoplay loop muted playsinline preload="auto" style="background-color: transparent;">
+                                <source src="\${VIDEO_URL}" type="video/mp4">
                             </video>
                         </div>\`;
                         targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
