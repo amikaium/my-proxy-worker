@@ -110,7 +110,7 @@ export default {
                  🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন
                  ========================================== */
               
-              /* মেইন পেজ ব্যাকগ্রাউন্ড (.page-signup এবং .page-login উভয়ের জন্য) */
+              /* মেইন পেজ ব্যাকগ্রাউন্ড */
               .page-signup body, .page-login body {
                   background-color: #121212 !important; 
               }
@@ -139,7 +139,24 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
+                 🔥 Forgot Password হাইড করা (লগইন পেজ)
+                 ------------------------------------------- */
+              .page-login button.css-1u9t1b5,
+              .page-login .css-1u9t1b5 {
+                  display: none !important;
+              }
+
+              /* -------------------------------------------
+                 🔥 কনফার্ম ও লগইন বাটন (Confirm/Login Button) ফিক্স
+                 ------------------------------------------- */
+              .page-signup button.chakra-button,
+              .page-login button.chakra-button {
+                  height: 45px !important; 
+                  border-radius: 4px !important; 
+              }
+
+              /* -------------------------------------------
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
@@ -164,13 +181,12 @@ export default {
               .page-login .chakra-input__right-element svg {
                   display: block !important;
                   margin: auto !important; 
-                  /* 🔥 চোখের আইকনকে ফোর্স করে আরেকটু নিচে নামানো হলো */
                   position: relative !important;
                   top: 2.5px !important; 
               }
 
               /* -------------------------------------------
-                 লেফট অ্যাডঅন (দেশের কোড) - শুধুমাত্র সাইনআপে
+                 লেফট অ্যাডঅন (দেশের কোড) - সাইনআপ পেজ
                  ------------------------------------------- */
               .page-signup .chakra-input__left-addon {
                   background-color: #2c2c2c !important; 
@@ -186,7 +202,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - শুধুমাত্র সাইনআপে
+                 রাইট অ্যাডঅন (ভেরিফিকেশন কোড) - সাইনআপ পেজ
                  ------------------------------------------- */
               .page-signup .chakra-input__right-addon {
                   background-color: #EEEEEE !important; 
@@ -246,7 +262,7 @@ export default {
                 });
 
                 // ==========================================
-                // 📝 রেফারেল কোড অটো-ফিল এবং কাস্টম স্ক্রিপ্ট
+                // 📝 কাস্টম স্ক্রিপ্ট
                 // ==========================================
                 const REF_CODE = 'iZfmaT3h';
 
@@ -289,12 +305,13 @@ export default {
                         agreeCheckbox.setAttribute('data-auto-checked', 'true');
                     }
 
-                    // ৫. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা (হেডার সেভ করার জন্য)
-                    document.querySelectorAll('button.chakra-button').forEach(btn => {
-                        const btnText = btn.textContent.trim();
-                        if (btnText === 'Confirm' || btnText === 'Login') {
-                            btn.style.setProperty('height', '45px', 'important');
-                            btn.style.setProperty('border-radius', '4px', 'important');
+                    // ৫. 🔥 100% গ্যারান্টি Forgot Password হাইড করা
+                    document.querySelectorAll('button').forEach(btn => {
+                        const txt = btn.textContent.toLowerCase();
+                        if (txt.includes('forgot') || txt.includes('password?')) {
+                            if (btn.style.display !== 'none') {
+                                btn.style.setProperty('display', 'none', 'important');
+                            }
                         }
                     });
                 });
