@@ -107,14 +107,10 @@ export default {
             const customStylesAndScripts = `
             <style>
               /* ==========================================
-                 🚫 Chakra UI এর ফোকাস আউটলাইন এবং সাদা বক্স হাইড
+                 🚫 সাদা বক্স এবং ফালতু এলিমেন্ট হাইড
                  ========================================== */
-              .chakra-input:focus, .chakra-input:active, .chakra-input[data-focus],
-              .chakra-button:focus, .chakra-button:active, .chakra-button[data-focus],
-              .chakra-input__group:focus-within, .chakra-input__group[data-focus] {
-                  box-shadow: none !important; outline: none !important;
-              }
-              div.css-h096tp, .language-select-div { display: none !important; }
+              div.css-h096tp, 
+              .language-select-div { display: none !important; }
 
               /* ==========================================
                  🚀 হেডার ডিজাইন 
@@ -131,7 +127,7 @@ export default {
               .css-1vvjgde .swiper-slide img { max-height: 22px !important; max-width: 45px !important; object-fit: contain !important; }
 
               /* ==========================================
-                 💎 কাস্টম ড্যাশবোর্ড প্যানেল (ওপরের বক্স)
+                 💎 কাস্টম ড্যাশবোর্ড প্যানেল 
                  ========================================== */
               div.css-1rfmqpc {
                   display: flex !important; flex-direction: row !important; justify-content: space-between !important;
@@ -172,14 +168,15 @@ export default {
 
 
               /* ==========================================
-                 🖋️ 100% Scoped: ফর্ম এরিয়া ডিজাইন (div.css-cipbx3) 
+                 🖋️ 100% SCOPED: শুধুমাত্র ডিপোজিট ফর্মের ইনপুট ডিজাইন 
                  ========================================== */
 
-              /* গ্লোবাল ইনপুট ফিল্ড (Bank Name, Account Number, Upload Box) */
+              /* গ্লোবাল ইনপুট ওভাররাইড পুরোপুরি বাদ দেওয়া হয়েছে, তাই লগইন পেইজে ইফেক্ট পড়বে না */
+              
+              /* শুধুমাত্র ডিপোজিট পেইজের ইনপুট (Bank Name, Account Number) */
               div.css-cipbx3 input.chakra-input,
               div.css-qx6nre input.chakra-input {
                   background-color: #1a1d24 !important; /* ডার্ক ব্যাকগ্রাউন্ড */
-                  background: #1a1d24 !important;
                   border: 1px solid rgba(254, 172, 4, 0.6) !important; /* গোল্ডেন বর্ডার */
                   border-radius: 8px !important;
                   color: #ffffff !important;
@@ -190,7 +187,6 @@ export default {
                   box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
                   transition: all 0.2s ease !important;
                   outline: none !important;
-                  opacity: 1 !important;
               }
               div.css-cipbx3 input.chakra-input:focus,
               div.css-qx6nre input.chakra-input:focus {
@@ -198,45 +194,38 @@ export default {
                   box-shadow: 0 0 8px rgba(254, 172, 4, 0.5), inset 0 2px 4px rgba(0,0,0,0.3) !important;
               }
 
-              /* 📁 Upload Receipt ফিক্স (সাদা/নীল ব্যাকগ্রাউন্ড রিমুভ) */
+              /* 📁 Upload Receipt ফিক্স */
               div.css-cipbx3 div[style*="background"], 
               div.css-cipbx3 .chakra-input__group > div {
                   background-color: transparent !important;
-                  background: transparent !important;
               }
-              /* আপলোডের আইকন কালার */
               div.css-cipbx3 svg {
-                  fill: #FEAC04 !important;
-                  color: #FEAC04 !important;
+                  fill: #FEAC04 !important; color: #FEAC04 !important;
               }
 
-              /* 🎛️ প্রি-সেট অ্যামাউন্ট বাটন (100, 500, 1000) - সাদা হওয়া বন্ধ */
-              div.css-cipbx3 button.chakra-button:not([type="submit"]) {
-                  background-color: #1a1d24 !important; /* ইনপুটের মত সলিড ডার্ক */
-                  background: #1a1d24 !important;
+              /* 🎛️ প্রি-সেট অ্যামাউন্ট বাটন (100, 500, 1000) */
+              div.css-cipbx3 button.chakra-button:not([type="submit"]),
+              div.css-qx6nre button.chakra-button:not([type="submit"]) {
+                  background-color: #1a1d24 !important; 
                   border: 1px solid rgba(255, 255, 255, 0.15) !important;
                   color: #e5e7eb !important;
                   border-radius: 6px !important;
                   font-weight: 600 !important;
-                  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; /* স্মুথ ট্রানজিশন */
+                  transition: all 0.3s ease !important;
                   box-shadow: none !important;
                   outline: none !important;
               }
-              /* সিলেক্ট বা ক্লিক করা অবস্থায় কালার (White Override) */
               div.css-cipbx3 button.chakra-button:not([type="submit"])[data-active],
-              div.css-cipbx3 button.chakra-button:not([type="submit"])[aria-pressed="true"],
-              div.css-cipbx3 button.chakra-button:not([type="submit"]):active,
-              div.css-cipbx3 button.chakra-button:not([type="submit"]):hover {
+              div.css-cipbx3 button.chakra-button:not([type="submit"]):active {
                   background-color: rgba(254, 172, 4, 0.15) !important;
-                  background: rgba(254, 172, 4, 0.15) !important;
                   border-color: #FEAC04 !important;
                   color: #FEAC04 !important;
                   box-shadow: 0 0 8px rgba(254, 172, 4, 0.4) !important;
-                  transform: scale(0.98) !important;
               }
 
-              /* 🚀 সাবমিট বাটন (হাইট বাড়ানো হলো: 50px) */
-              div.css-cipbx3 button[type="submit"] {
+              /* 🚀 সাবমিট বাটন (প্রিমিয়াম গ্রিন গ্রেডিয়েন্ট) */
+              div.css-cipbx3 button[type="submit"],
+              div.css-qx6nre button[type="submit"] {
                   background: linear-gradient(90deg, #1d9154 0%, #157342 100%) !important;
                   border: none !important;
                   color: #ffffff !important;
@@ -246,33 +235,38 @@ export default {
                   text-transform: uppercase !important;
                   letter-spacing: 1px !important;
                   box-shadow: 0 4px 10px rgba(29, 145, 84, 0.4) !important;
-                  transition: transform 0.2s !important;
-                  height: 50px !important;       /* হাইট বৃদ্ধি */
+                  height: 50px !important;
                   min-height: 50px !important;
                   margin-top: 10px !important;
+                  transition: transform 0.2s !important;
               }
               div.css-cipbx3 button[type="submit"]:active {
                   transform: scale(0.98) !important;
               }
 
-              /* 💰 BDT অ্যামাউন্ট বক্স (Deposit) */
-              div.css-cipbx3 .chakra-input__group {
+
+              /* ==========================================
+                 🚀 100% Scoped: BDT অ্যামাউন্ট বক্স (Deposit)
+                 ========================================== */
+              .arfan-amount-group {
                   display: flex !important; align-items: center !important; background-color: #1a1d24 !important; 
                   border: 1px solid rgba(254, 172, 4, 0.6) !important; border-radius: 8px !important;
                   overflow: hidden !important; height: 50px !important; width: 100% !important;
               }
-              div.css-cipbx3 .chakra-input__left-addon {
+              .arfan-amount-group > div.chakra-input__left-addon {
                   background: linear-gradient(135deg, rgba(254, 172, 4, 0.25) 0%, rgba(254, 172, 4, 0.05) 100%) !important;
                   color: #FEAC04 !important; font-weight: 800 !important; border: none !important;
                   border-right: 1px solid rgba(254, 172, 4, 0.3) !important; height: 100% !important;
                   display: flex !important; align-items: center !important; justify-content: center !important;
                   padding: 0 16px !important; font-size: 14px !important; border-radius: 0 !important; 
               }
-              div.css-cipbx3 .chakra-input__group > input.chakra-input {
-                  background-color: transparent !important; background: transparent !important; 
-                  border: none !important; box-shadow: none !important; outline: none !important;
-                  height: 100% !important; padding-left: 12px !important; border-radius: 0 !important;
-                  font-size: 18px !important; font-weight: 700 !important; flex: 1 !important;
+              .arfan-amount-group > input.chakra-input {
+                  background-color: transparent !important; border: none !important; box-shadow: none !important;
+                  color: #ffffff !important; height: 100% !important; padding-left: 12px !important;
+                  font-size: 18px !important; font-weight: 700 !important; border-radius: 0 !important; flex: 1 !important;
+              }
+              .arfan-amount-group > input.chakra-input:focus {
+                  outline: none !important; border: none !important; box-shadow: none !important;
               }
             </style>
 
@@ -344,6 +338,16 @@ export default {
                         if (authBox) authBox.style.display = 'none';
                     }
 
+                    // 🚀 100% সেফ: BDT Amount Box ডিজাইন (শুধুমাত্র BDT বক্সে কাজ করবে)
+                    const bdtAddons = document.querySelectorAll('div.chakra-input__left-addon');
+                    bdtAddons.forEach(addon => {
+                        if (addon.textContent.includes('BDT')) {
+                            const parentGroup = addon.parentElement; 
+                            if (parentGroup && parentGroup.classList.contains('chakra-input__group') && !parentGroup.classList.contains('arfan-amount-group')) {
+                                parentGroup.classList.add('arfan-amount-group'); 
+                            }
+                        }
+                    });
 
                     // 🚀 100% সেফ: Deposit/Withdraw আইকন এবং টেক্সট সাইজ ফিক্স
                     const topDepositBtnContainer = document.querySelector('div.css-1rfmqpc div.css-145pjb7 a[href*="deposit"]');
