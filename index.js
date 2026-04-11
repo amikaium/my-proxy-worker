@@ -109,197 +109,41 @@ export default {
               /* ==========================================
                  🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন
                  ========================================== */
-              .page-signup body, .page-login body {
-                  background-color: #121212 !important; 
-              }
-
+              .page-signup body, .page-login body { background-color: #121212 !important; }
               .page-signup .chakra-form-control .chakra-input-group,
-              .page-login .chakra-form-control .chakra-input-group {
-                  background-color: transparent !important; 
-                  border: none !important; 
-              }
-
+              .page-login .chakra-form-control .chakra-input-group { background-color: transparent !important; border: none !important; }
               .page-signup .chakra-input,
-              .page-login .chakra-input {
-                  height: 45px !important; 
-                  background-color: #2c2c2c !important; 
-                  border-radius: 4px !important; 
-                  border: 1px solid #4e4e4e !important; 
-                  color: #ffffff !important; 
-              }
-
+              .page-login .chakra-input { height: 45px !important; background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; }
               .page-signup .chakra-input::placeholder,
-              .page-login .chakra-input::placeholder {
-                  color: #808080 !important; 
-              }
+              .page-login .chakra-input::placeholder { color: #808080 !important; }
+              .page-login button.css-1u9t1b5, .page-login .css-1u9t1b5 { display: none !important; }
+              .page-signup .chakra-input__right-element, .page-login .chakra-input__right-element { height: 45px !important; display: flex !important; align-items: center !important; justify-content: center !important; top: 0 !important; }
+              .page-signup .chakra-input__right-element button, .page-login .chakra-input__right-element button { height: 100% !important; width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 0 !important; padding: 0 !important; margin: 0 !important; }
+              .page-signup .chakra-input__right-element svg, .page-login .chakra-input__right-element svg { display: block !important; margin: auto !important; position: relative !important; top: 2.5px !important; }
+              .page-signup .chakra-input__left-addon { background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; font-weight: 500 !important; height: 45px !important; margin-right: 10px !important; }
+              .page-signup .chakra-input__left-addon img.chakra-image { margin-right: 5px !important; }
+              .page-signup .chakra-input__right-addon { background-color: #EEEEEE !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #121212 !important; font-weight: 700 !important; height: 45px !important; margin-left: 10px !important; padding: 5px 8px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+              .page-signup .chakra-input__right-addon button { margin: auto 0 auto 5px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 26px !important; width: 26px !important; min-width: 26px !important; border-radius: 4px !important; padding: 0 !important; background-color: transparent !important; }
+              .page-signup .chakra-input__right-addon button svg, .page-signup .chakra-input__right-addon svg { height: 16px !important; width: 16px !important; margin: auto !important; color: #121212 !important; }
+              .css-fpyqtb { margin-bottom: 10px !important; }
+              button.chakra-button.css-lutoi4 { height: 45px !important; border-radius: 4px !important; }
+              .page-login img.css-if5ddh { display: none !important; }
+              .page-signup p.css-19szwf6 { display: none !important; }
+              .page-login body, .page-signup body, .page-login html, .page-signup html { overscroll-behavior-y: none !important; }
+              .page-login .css-b13tmd { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
+              .page-signup .css-16ff8oy, .page-signup .css-b13tmd { padding-bottom: 10px !important; margin-bottom: 0 !important; }
+              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"], .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"], .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"], .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"], .page-signup .css-16ff8oy > div[style*="height"], .page-signup .css-b13tmd > div[style*="height"] { display: none !important; height: 0 !important; min-height: 0 !important; }
 
-              .page-login button.css-1u9t1b5,
-              .page-login .css-1u9t1b5 {
-                  display: none !important;
-              }
+              /* Video Styles */
+              .custom-video-wrapper { position: relative !important; width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: transparent !important; min-height: 150px; }
+              .custom-video-wrapper video { width: 100% !important; height: auto !important; display: block !important; object-fit: cover !important; pointer-events: none !important; opacity: 0; transition: opacity 0.5s ease-in-out; }
+              .ios-spinner { position: absolute; width: 32px; height: 32px; z-index: 10; transition: opacity 0.3s ease-out; }
+              .ios-spinner::after { content: ""; display: block; width: 100%; height: 100%; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M50 15V25' opacity='.2'/%3E%3Cpath d='M50 15V25' transform='rotate(45 50 50)' opacity='.3'/%3E%3Cpath d='M50 15V25' transform='rotate(90 50 50)' opacity='.4'/%3E%3Cpath d='M50 15V25' transform='rotate(135 50 50)' opacity='.5'/%3E%3Cpath d='M50 15V25' transform='rotate(180 50 50)' opacity='.6'/%3E%3Cpath d='M50 15V25' transform='rotate(225 50 50)' opacity='.7'/%3E%3Cpath d='M50 15V25' transform='rotate(270 50 50)' opacity='.8'/%3E%3Cpath d='M50 15V25' transform='rotate(315 50 50)' opacity='1'/%3E%3C/g%3E%3C/svg%3E"); background-size: cover; animation: ios-spin 1s steps(8, end) infinite; }
+              @keyframes ios-spin { 100% { transform: rotate(360deg); } }
 
-              .page-signup .chakra-input__right-element,
-              .page-login .chakra-input__right-element {
-                  height: 45px !important; 
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  top: 0 !important;
-              }
-              .page-signup .chakra-input__right-element button,
-              .page-login .chakra-input__right-element button {
-                  height: 100% !important;
-                  width: 100% !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  border-radius: 0 !important; 
-                  padding: 0 !important; 
-                  margin: 0 !important;  
-              }
-              .page-signup .chakra-input__right-element svg,
-              .page-login .chakra-input__right-element svg {
-                  display: block !important;
-                  margin: auto !important; 
-                  position: relative !important;
-                  top: 2.5px !important; 
-              }
-
-              .page-signup .chakra-input__left-addon {
-                  background-color: #2c2c2c !important; 
-                  border-radius: 4px !important; 
-                  border: 1px solid #4e4e4e !important; 
-                  color: #ffffff !important; 
-                  font-weight: 500 !important;
-                  height: 45px !important;
-                  margin-right: 10px !important; 
-              }
-              .page-signup .chakra-input__left-addon img.chakra-image {
-                  margin-right: 5px !important;
-              }
-
-              .page-signup .chakra-input__right-addon {
-                  background-color: #EEEEEE !important; 
-                  border-radius: 4px !important; 
-                  border: 1px solid #4e4e4e !important; 
-                  color: #121212 !important; 
-                  font-weight: 700 !important; 
-                  height: 45px !important;
-                  margin-left: 10px !important; 
-                  padding: 5px 8px !important; 
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-              }
-              .page-signup .chakra-input__right-addon button {
-                  margin: auto 0 auto 5px !important; 
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  height: 26px !important; 
-                  width: 26px !important; 
-                  min-width: 26px !important;
-                  border-radius: 4px !important; 
-                  padding: 0 !important; 
-                  background-color: transparent !important;
-              }
-              .page-signup .chakra-input__right-addon button svg,
-              .page-signup .chakra-input__right-addon svg {
-                  height: 16px !important; 
-                  width: 16px !important; 
-                  margin: auto !important;
-                  color: #121212 !important; 
-              }
-
-              .css-fpyqtb {
-                  margin-bottom: 10px !important;
-              }
-              
-              button.chakra-button.css-lutoi4 {
-                  height: 45px !important;
-                  border-radius: 4px !important;
-              }
-
-              .page-login img.css-if5ddh {
-                  display: none !important;
-              }
-
-              .page-signup p.css-19szwf6 {
-                  display: none !important;
-              }
-
-              .page-login body, .page-signup body,
-              .page-login html, .page-signup html {
-                  overscroll-behavior-y: none !important;
-              }
-
-              .page-login .css-b13tmd {
-                  height: 100vh !important;
-                  max-height: 100vh !important;
-                  overflow: hidden !important; 
-              }
-
-              .page-signup .css-16ff8oy,
-              .page-signup .css-b13tmd {
-                  padding-bottom: 10px !important; 
-                  margin-bottom: 0 !important;
-              }
-
-              .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"],
-              .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"],
-              .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"],
-              .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"],
-              .page-signup .css-16ff8oy > div[style*="height"],
-              .page-signup .css-b13tmd > div[style*="height"] {
-                  display: none !important;
-                  height: 0 !important;
-                  min-height: 0 !important;
-              }
-
-              .custom-video-wrapper {
-                  position: relative !important;
-                  width: 100% !important;
-                  padding: 0 !important;
-                  margin: 0 !important;
-                  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  background-color: transparent !important; 
-                  min-height: 150px; 
-              }
-              
-              .custom-video-wrapper video {
-                  width: 100% !important;
-                  height: auto !important;
-                  display: block !important;
-                  object-fit: cover !important;
-                  pointer-events: none !important; 
-                  opacity: 0; 
-                  transition: opacity 0.5s ease-in-out; 
-              }
-
-              .ios-spinner {
-                  position: absolute;
-                  width: 32px;
-                  height: 32px;
-                  z-index: 10;
-                  transition: opacity 0.3s ease-out;
-              }
-              .ios-spinner::after {
-                  content: "";
-                  display: block;
-                  width: 100%;
-                  height: 100%;
-                  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M50 15V25' opacity='.2'/%3E%3Cpath d='M50 15V25' transform='rotate(45 50 50)' opacity='.3'/%3E%3Cpath d='M50 15V25' transform='rotate(90 50 50)' opacity='.4'/%3E%3Cpath d='M50 15V25' transform='rotate(135 50 50)' opacity='.5'/%3E%3Cpath d='M50 15V25' transform='rotate(180 50 50)' opacity='.6'/%3E%3Cpath d='M50 15V25' transform='rotate(225 50 50)' opacity='.7'/%3E%3Cpath d='M50 15V25' transform='rotate(270 50 50)' opacity='.8'/%3E%3Cpath d='M50 15V25' transform='rotate(315 50 50)' opacity='1'/%3E%3C/g%3E%3C/svg%3E");
-                  background-size: cover;
-                  animation: ios-spin 1s steps(8, end) infinite;
-              }
-              @keyframes ios-spin {
-                  100% { transform: rotate(360deg); }
-              }
 
               /* ==========================================
-                 🛑 ডিপোজিট পেজ (/dw) কাস্টম ডিজাইন (User Provided Classes)
+                 🛑 ডিপোজিট ও উইথড্রয়াল পেজ (/dw) কাস্টম ডিজাইন
                  ========================================== */
               
               /* ১. "Deposit Type" (Online Transfer) ব্লক হাইড */
@@ -318,30 +162,29 @@ export default {
                   opacity: 0.9 !important;
               }
 
-              /* ৩. Amount বক্স: বাম দিকে কোনো রাউন্ড (0px) থাকবে না, ডান দিকে 4px */
-              .page-dw .css-1gqt3vi {
+              /* ৩. ইউনিভার্সাল ইনপুট হাইট (Withdrawal Amount, Phone Number, Transaction ID সব 45px হবে) */
+              .page-dw .chakra-input {
                   height: 45px !important;
-                  border-radius: 0 4px 4px 0 !important; /* Top-Left & Bottom-Left = 0 */
+                  border-radius: 4px !important;
               }
 
-              /* ৪. BDT লেফট অ্যাডঅন বক্স (আপনার ক্লাস css-bics5a) */
-              .page-dw .css-bics5a {
+              /* ৪. ইউনিভার্সাল লেফট অ্যাডঅন (BDT লেবেল এবং পতাকার বক্স 45px হবে) */
+              .page-dw .chakra-input__left-addon {
                   height: 45px !important;
                   border-radius: 4px 0 0 4px !important; 
               }
 
-              /* ৫. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
+              /* ৫. লেফট অ্যাডঅন এর ডান পাশের ইনপুট (Amount Box এবং Phone Number এর বাম দিকের কার্ভ জিরো হবে) */
+              .page-dw .chakra-input__left-addon + .chakra-input {
+                  border-radius: 0 4px 4px 0 !important; 
+              }
+
+              /* ৬. Upload Receipt বক্স (আপনার ক্লাস css-8w1h6v) */
               .page-dw .css-8w1h6v {
                   height: 45px !important;
                   border-radius: 4px !important;
                   display: flex !important;
                   align-items: center !important; 
-              }
-
-              /* ৬. Transaction ID ইনপুট (অন্যান্য বক্সের জন্য সেফটি হাইট) */
-              .page-dw .chakra-input {
-                  height: 45px !important;
-                  border-radius: 4px !important;
               }
 
               /* ৭. কপি আইকন বাটন ফিক্স */
@@ -399,7 +242,7 @@ export default {
                         if (parentGroup && parentGroup.style.display !== 'none') parentGroup.style.display = 'none';
                     }
 
-                    // ২. Phone Number নির্দিষ্ট করে Tel রাখা (কোনো ভুল লুপ ছাড়াই)
+                    // Signup / Login Phone Number 
                     const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
                     if (phoneInput && phoneInput.type !== 'tel') {
                         phoneInput.type = 'tel';
@@ -432,17 +275,16 @@ export default {
                         if (btnText === 'Confirm' || btnText === 'Login') {
                             btn.style.setProperty('height', '45px', 'important');
                             btn.style.setProperty('border-radius', '4px', 'important');
-                            
                             if (btnText === 'Login') {
                                 btn.style.setProperty('margin-top', '10px', 'important');
                             }
                         }
                     });
 
+                    // Video Player
                     if (currentPath === 'login' || currentPath === 'signup') {
                         const targetDivForVideo = document.querySelector('div.css-lpwed4');
                         if (targetDivForVideo && !document.getElementById('arfan-custom-video')) {
-                            
                             if (!document.getElementById('preload-custom-vid')) {
                                 const preloadLink = document.createElement('link');
                                 preloadLink.id = 'preload-custom-vid';
@@ -451,7 +293,6 @@ export default {
                                 preloadLink.href = VIDEO_URL;
                                 document.head.appendChild(preloadLink);
                             }
-
                             const videoHTML = \`
                             <div id="arfan-custom-video" class="custom-video-wrapper">
                                 <div id="arfan-spinner" class="ios-spinner"></div>
@@ -460,47 +301,41 @@ export default {
                                 </video>
                             </div>\`;
                             targetDivForVideo.insertAdjacentHTML('afterend', videoHTML);
-
                             setTimeout(() => {
                                 const vidElement = document.getElementById('arfan-vid');
                                 const spinnerElement = document.getElementById('arfan-spinner');
-                                
                                 if(vidElement) {
                                     vidElement.addEventListener('playing', () => {
                                         if(spinnerElement) spinnerElement.style.opacity = '0';
                                         vidElement.style.opacity = '1';
                                     });
-
                                     vidElement.play().catch(e => console.log("Auto-play ready."));
                                 }
                             }, 100);
                         }
                     } else {
                         const existingVideo = document.getElementById('arfan-custom-video');
-                        if (existingVideo) {
-                            existingVideo.remove();
-                        }
+                        if (existingVideo) { existingVideo.remove(); }
                     }
 
-                    // ৮. 🛑 শুধুমাত্র Deposit পেজ (/dw) এর নির্দিষ্ট কাজ
+                    // ৮. 🛑 শুধুমাত্র Deposit / Withdrawal পেজ (/dw) এর নির্দিষ্ট কাজ
                     if (currentPath === 'dw') {
                         
-                        // শুধুমাত্র Amount বক্সকে নিরাপদে number টাইপ করা (Upload Receipt বা Transaction ID কে ধরবে না)
-                        // BDT অ্যাডঅন এর ঠিক পরের বক্সটাই হলো Amount বক্স
-                        const bdtAddon = document.querySelector('.page-dw .css-bics5a');
-                        
-                        // সেফটি ফলব্যাক (যদি কখনো ক্লাস নেম পরিবর্তন হয়, তাহলেও যেন কাজ করে)
-                        const safeAddon = bdtAddon || Array.from(document.querySelectorAll('.page-dw .chakra-input__left-addon')).find(el => el.textContent.includes('BDT'));
-                        
-                        if (safeAddon) {
-                            const amountInput = safeAddon.nextElementSibling;
-                            // শুধু এই নির্দিষ্ট ইনপুটটিকেই নাম্বার করা হচ্ছে
-                            if (amountInput && amountInput.tagName === 'INPUT' && amountInput.type !== 'number') {
-                                amountInput.type = 'number';
+                        // [A] Amount বক্সগুলোতে Number Keypad আনা (বক্স ফ্রিজ না করে)
+                        document.querySelectorAll('.page-dw .chakra-input__left-addon').forEach(addon => {
+                            if (addon.textContent.includes('BDT')) {
+                                let amountInput = addon.nextElementSibling;
+                                if (amountInput && amountInput.tagName === 'INPUT') {
+                                    // React কে ডিস্টার্ব না করে নাম্বার কিপ্যাড আনার ট্রিক
+                                    if(amountInput.getAttribute('inputmode') !== 'decimal') {
+                                        amountInput.setAttribute('inputmode', 'decimal');
+                                        amountInput.setAttribute('pattern', '[0-9]*');
+                                    }
+                                }
                             }
-                        }
+                        });
 
-                        // Submit বাটন ফিক্স করা
+                        // [B] Submit বাটন ফিক্স করা
                         document.querySelectorAll('.page-dw button').forEach(btn => {
                             if(btn.innerText.includes('Submit')) {
                                 btn.style.setProperty('height', '45px', 'important');
