@@ -147,16 +147,7 @@ export default {
               }
 
               /* -------------------------------------------
-                 🔥 কনফার্ম ও লগইন বাটন (Confirm/Login Button) ফিক্স
-                 ------------------------------------------- */
-              .page-signup button.chakra-button,
-              .page-login button.chakra-button {
-                  height: 45px !important; 
-                  border-radius: 4px !important; 
-              }
-
-              /* -------------------------------------------
-                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স
+                 🔥 পাসওয়ার্ড চোখের আইকন (Eye Icon) ফিক্স - 100% Vertical Middle
                  ------------------------------------------- */
               .page-signup .chakra-input__right-element,
               .page-login .chakra-input__right-element {
@@ -311,6 +302,20 @@ export default {
                         if (txt.includes('forgot') || txt.includes('password?')) {
                             if (btn.style.display !== 'none') {
                                 btn.style.setProperty('display', 'none', 'important');
+                            }
+                        }
+                    });
+
+                    // ৬. 🔥 শুধুমাত্র Login এবং Confirm বাটনের সাইজ 45px করা (হেডারের বাটনগুলো অরিজিনাল থাকবে)
+                    document.querySelectorAll('button.chakra-button').forEach(btn => {
+                        const btnText = btn.textContent.trim();
+                        if (btnText === 'Confirm' || btnText === 'Login') {
+                            btn.style.setProperty('height', '45px', 'important');
+                            btn.style.setProperty('border-radius', '4px', 'important');
+                            
+                            // লগইন বাটনের ঠিক উপরে 10px মার্জিন দেওয়া হলো
+                            if (btnText === 'Login') {
+                                btn.style.setProperty('margin-top', '10px', 'important');
                             }
                         }
                     });
