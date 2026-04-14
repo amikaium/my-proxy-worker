@@ -16,7 +16,7 @@ export default {
     if (url.pathname === '/__secure_core.js') {
         const referer = request.headers.get("Referer");
         if (!referer || !referer.includes(url.hostname)) {
-            return new Response(`console.log("Access Denied: Highly Secured Proxy System 😎");`, {
+            return new Response(`console.log("Access Denied");`, {
                 status: 200, headers: { "Content-Type": "application/javascript" }
             });
         }
@@ -103,10 +103,6 @@ export default {
 
         if (contentType.includes("text/html") || contentType.includes("application/javascript")) {
             
-            // ==========================================
-            // 🔥 রিয়েক্ট স্পেসিফিক ব্যানার রিপ্লেসমেন্ট 
-            // ==========================================
-            
             const banner1_New = "https://i.postimg.cc/d05XnH5B/20260414-035715.webp";
             const banner1_NewEsc = banner1_New.replace(/\//g, '\\/'); 
             
@@ -121,38 +117,36 @@ export default {
 
             if (contentType.includes("text/html")) {
                 const customStylesAndScripts = `
-                <!-- 🚀 গ্লোবাল প্রি-লোড: সাইটে ঢোকার সাথে সাথেই ভিডিও মেমোরিতে সেভ হবে -->
                 <link rel="preload" href="https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97" as="video" type="video/mp4" fetchpriority="high">
 
                 <style>
-                  /* ==========================================
-                     🚀 CSS লেয়ার: ইনস্ট্যান্ট ইমেজ ওভাররাইড 
-                     ========================================== */
-                  img[src*="banner-first-d.jpg"], img[alt*="banner-first-d.jpg"] {
-                      content: url("${banner1_New}") !important;
-                      object-fit: cover !important;
+                  /* 📱 অ্যাপ ইন্সটল ব্যানার ডিজাইন */
+                  #custom-install-banner {
+                      width: 100%; background-color: #1a1a1a; color: white; display: none; align-items: center; 
+                      padding: 10px 15px; box-sizing: border-box; font-family: Arial, sans-serif;
+                      border-bottom: 1px solid #333; z-index: 9999999; position: relative; 
                   }
-                  
-                  img[src*="banner10.jpg"], img[alt*="banner10.jpg"] {
-                      content: url("${banner2_New}") !important;
-                      object-fit: cover !important;
+                  .cib-close { display: flex; align-items: center; justify-content: center; padding: 5px; cursor: pointer; margin-right: 10px; margin-left: -5px; }
+                  .cib-logo { width: 38px; height: 38px; border-radius: 8px; margin-right: 12px; object-fit: contain; background: transparent; }
+                  .cib-text { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+                  .cib-title { font-weight: 700; font-size: 15px; margin: 0 0 2px 0; color: #ffffff; line-height: 1; }
+                  .cib-desc { font-size: 12px; color: #cccccc; margin: 0; line-height: 1.2; }
+                  .cib-install-btn {
+                      background-color: #E53935; /* 🔴 লাল রঙের বাটন */
+                      color: #ffffff; border: none; border-radius: 4px; padding: 7px 16px;
+                      font-weight: 800; font-size: 14px; cursor: pointer; margin-left: 10px;
                   }
 
-                  /* নির্দিষ্ট ক্লাস পুরোপুরি হাইড */
-                  .css-blq8bd {
-                      display: none !important;
-                  }
+                  /* 🚀 CSS লেয়ার: ইনস্ট্যান্ট ইমেজ ওভাররাইড */
+                  img[src*="banner-first-d.jpg"], img[alt*="banner-first-d.jpg"] { content: url("${banner1_New}") !important; object-fit: cover !important; }
+                  img[src*="banner10.jpg"], img[alt*="banner10.jpg"] { content: url("${banner2_New}") !important; object-fit: cover !important; }
+                  .css-blq8bd { display: none !important; }
 
-                  /* ==========================================
-                     🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন (১০০% অরিজিনাল, আনটাচড)
-                     ========================================== */
+                  /* 🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন */
                   .page-signup body, .page-login body { background-color: #121212 !important; }
-                  .page-signup .chakra-form-control .chakra-input-group,
-                  .page-login .chakra-form-control .chakra-input-group { background-color: transparent !important; border: none !important; }
-                  .page-signup .chakra-input,
-                  .page-login .chakra-input { height: 45px !important; background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; }
-                  .page-signup .chakra-input::placeholder,
-                  .page-login .chakra-input::placeholder { color: #808080 !important; }
+                  .page-signup .chakra-form-control .chakra-input-group, .page-login .chakra-form-control .chakra-input-group { background-color: transparent !important; border: none !important; }
+                  .page-signup .chakra-input, .page-login .chakra-input { height: 45px !important; background-color: #2c2c2c !important; border-radius: 4px !important; border: 1px solid #4e4e4e !important; color: #ffffff !important; }
+                  .page-signup .chakra-input::placeholder, .page-login .chakra-input::placeholder { color: #808080 !important; }
                   .page-login button.css-1u9t1b5, .page-login .css-1u9t1b5 { display: none !important; }
                   .page-signup .chakra-input__right-element, .page-login .chakra-input__right-element { height: 45px !important; display: flex !important; align-items: center !important; justify-content: center !important; top: 0 !important; }
                   .page-signup .chakra-input__right-element button, .page-login .chakra-input__right-element button { height: 100% !important; width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 0 !important; padding: 0 !important; margin: 0 !important; }
@@ -170,14 +164,10 @@ export default {
                   .page-login .css-b13tmd { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
                   .page-signup .css-16ff8oy, .page-signup .css-b13tmd { padding-bottom: 10px !important; margin-bottom: 0 !important; }
                   .page-login div[style*="height: 60px"], .page-signup div[style*="height: 60px"], .page-login div[style*="height: 70px"], .page-signup div[style*="height: 70px"], .page-login div[style*="height: 80px"], .page-signup div[style*="height: 80px"], .page-login div[style*="height: 90px"], .page-signup div[style*="height: 90px"], .page-signup .css-16ff8oy > div[style*="height"], .page-signup .css-b13tmd > div[style*="height"] { display: none !important; height: 0 !important; min-height: 0 !important; }
-                  
-                  /* ভিডিওর ডিজাইন (স্পিনার সরানো হয়েছে) */
                   .custom-video-wrapper { position: relative !important; width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: transparent !important; min-height: 150px; }
                   .custom-video-wrapper video { width: 100% !important; height: auto !important; display: block !important; object-fit: cover !important; pointer-events: none !important; opacity: 1 !important; }
 
-                  /* ==========================================
-                     🛑 ডিপোজিট ও উইথড্রয়াল পেজ (/dw) কাস্টম ডিজাইন
-                     ========================================== */
+                  /* ডিপোজিট ও উইথড্রয়াল পেজ কাস্টম ডিজাইন */
                   .page-dw .css-10ici4o { display: none !important; }
                   .page-dw label.chakra-form__label { pointer-events: none !important; user-select: none !important; }
                   .page-dw .css-1kzylc3, .page-dw .css-109ik7k, .page-dw .css-1h8d01g { height: 45px !important; border-radius: 4px !important; pointer-events: none !important; user-select: none !important; opacity: 0.9 !important; }
@@ -190,6 +180,103 @@ export default {
 
                 <script>
                   (function(){
+                    // ⚙️ PWA ব্রাউজার কানেকশন 
+                    let deferredPrompt;
+                    window.addEventListener('beforeinstallprompt', (e) => {
+                        e.preventDefault(); 
+                        deferredPrompt = e; 
+                        showAppBanner(); 
+                    });
+
+                    window.addEventListener('appinstalled', () => {
+                        hideAppBanner(); 
+                    });
+
+                    function showAppBanner() {
+                        const banner = document.getElementById('custom-install-banner');
+                        if(banner && banner.style.display !== 'flex') {
+                            banner.style.display = 'flex';
+                            
+                            // 🛠️ স্মার্ট লেআউট ফিক্স: শুধু 'Fixed' মেনুবার নিচে নামানো হবে, 'Sticky' গুলো স্বাভাবিক থাকবে তাই কিছুই কাটবে না
+                            setTimeout(() => {
+                                const offset = banner.offsetHeight;
+                                document.querySelectorAll('*').forEach(el => {
+                                    if(el.id === 'custom-install-banner') return;
+                                    const style = window.getComputedStyle(el);
+                                    if(style.position === 'fixed') {
+                                        const topVal = parseInt(style.top);
+                                        if(topVal === 0 || style.top === '0px') {
+                                            el.style.transition = 'top 0.3s ease';
+                                            el.style.top = offset + 'px';
+                                            el.setAttribute('data-pushed', 'true');
+                                        }
+                                    }
+                                });
+                            }, 50);
+                        }
+                    }
+
+                    function hideAppBanner() {
+                        const banner = document.getElementById('custom-install-banner');
+                        if(banner) {
+                            banner.style.display = 'none';
+                            document.querySelectorAll('[data-pushed="true"]').forEach(el => {
+                                el.style.top = '0px';
+                            });
+                        }
+                    }
+
+                    function initAppInstallBanner() {
+                        if (document.getElementById('custom-install-banner')) return;
+                        
+                        const bannerHTML = \`
+                        <div id="custom-install-banner">
+                            <div class="cib-close" id="cib-close-btn">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 1L1 13M1 1L13 13" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <img class="cib-logo" id="cib-logo-img" src="/favicon.ico" alt="Baji11">
+                            <div class="cib-text">
+                                <p class="cib-title">Baji11 App</p>
+                                <p class="cib-desc">Install our app for faster access!</p>
+                            </div>
+                            <button class="cib-install-btn" id="cib-install-btn">Install</button>
+                        </div>\`;
+
+                        document.body.insertAdjacentHTML('afterbegin', bannerHTML);
+
+                        const closeBtn = document.getElementById('cib-close-btn');
+                        const installBtn = document.getElementById('cib-install-btn');
+
+                        setTimeout(() => {
+                            const siteLogo = document.querySelector('img[alt*="logo" i], header img');
+                            if (siteLogo && siteLogo.src) document.getElementById('cib-logo-img').src = siteLogo.src;
+                        }, 1000);
+
+                        closeBtn.addEventListener('click', hideAppBanner);
+
+                        installBtn.addEventListener('click', async () => {
+                            if (deferredPrompt) {
+                                deferredPrompt.prompt();
+                                const { outcome } = await deferredPrompt.userChoice;
+                                if (outcome === 'accepted') hideAppBanner();
+                                deferredPrompt = null;
+                            } else {
+                                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                                if (isIOS) alert('To install: Tap the "Share" icon at the bottom and select "Add to Home Screen".');
+                                else alert('Please tap the 3-dot menu in your browser and select "Add to Home screen" or "Install app".');
+                            }
+                        });
+
+                        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                        if (isIOS && !window.navigator.standalone) {
+                            showAppBanner();
+                        }
+                    }
+
+                    // ---------------------------------------------
+                    
                     function updateBodyClass() {
                         document.body.className = document.body.className.replace(/\\bpage-[^ ]*[ ]?\\b/g, '');
                         let path = window.location.pathname.replace(/\\//g, '');
@@ -219,20 +306,30 @@ export default {
                         element.dispatchEvent(new Event('input', { bubbles: true }));
                     }
 
+                    // 🔥 ব্লিংক (Blink) সমস্যার ১০০% সমাধান (ব্যানার বারবার রিফ্রেশ নেবে না)
+                    const b1 = '${banner1_New}';
+                    const b2 = '${banner2_New}';
+                    setInterval(() => {
+                        document.querySelectorAll('img').forEach(img => {
+                            let src = img.getAttribute('src') || '';
+                            let alt = img.getAttribute('alt') || '';
+                            
+                            if (src.includes('banner-first-d.jpg') || alt.includes('banner-first-d.jpg')) {
+                                if (img.getAttribute('src') !== b1) { 
+                                    img.src = b1; img.srcset = ''; img.setAttribute('src', b1); 
+                                }
+                            }
+                            if (src.includes('banner10.jpg') || alt.includes('banner10.jpg')) {
+                                if (img.getAttribute('src') !== b2) { 
+                                    img.src = b2; img.srcset = ''; img.setAttribute('src', b2); 
+                                }
+                            }
+                        });
+                    }, 100);
+
                     const domObserver = new MutationObserver(() => {
                         let fullPath = window.location.pathname.replace(/\\//g, '');
                         let currentPath = fullPath.split('?')[0]; 
-                        
-                        document.querySelectorAll('img').forEach(img => {
-                            if (img.src.includes('banner-first-d.jpg')) {
-                                img.src = '${banner1_New}';
-                                if (img.srcset) img.srcset = '';
-                            }
-                            if (img.src.includes('banner10.jpg')) {
-                                img.src = '${banner2_New}';
-                                if (img.srcset) img.srcset = '';
-                            }
-                        });
                         
                         const refInput = document.querySelector('input[placeholder="Enter if you have one"]');
                         if (refInput) {
@@ -242,29 +339,21 @@ export default {
                         }
 
                         const phoneInput = document.querySelector('input[placeholder="Phone Number"]');
-                        if (phoneInput && phoneInput.type !== 'tel') {
-                            phoneInput.type = 'tel';
-                        }
+                        if (phoneInput && phoneInput.type !== 'tel') phoneInput.type = 'tel';
 
                         const codeInput = document.querySelector('input[placeholder="Enter 4 digit code"]');
-                        if (codeInput && codeInput.type !== 'number') {
-                            codeInput.type = 'number';
-                        }
+                        if (codeInput && codeInput.type !== 'number') codeInput.type = 'number';
 
                         const agreeCheckbox = document.querySelector('input[type="checkbox"]');
                         if (agreeCheckbox && !agreeCheckbox.hasAttribute('data-auto-checked')) {
-                            if (!agreeCheckbox.checked) {
-                                agreeCheckbox.click();
-                            }
+                            if (!agreeCheckbox.checked) agreeCheckbox.click();
                             agreeCheckbox.setAttribute('data-auto-checked', 'true');
                         }
 
                         document.querySelectorAll('button').forEach(btn => {
                             const txt = btn.textContent.toLowerCase();
                             if (txt.includes('forgot') || txt.includes('password?')) {
-                                if (btn.style.display !== 'none') {
-                                    btn.style.setProperty('display', 'none', 'important');
-                                }
+                                if (btn.style.display !== 'none') btn.style.setProperty('display', 'none', 'important');
                             }
                         });
 
@@ -273,9 +362,7 @@ export default {
                             if (btnText === 'Confirm' || btnText === 'Login') {
                                 btn.style.setProperty('height', '45px', 'important');
                                 btn.style.setProperty('border-radius', '4px', 'important');
-                                if (btnText === 'Login') {
-                                    btn.style.setProperty('margin-top', '10px', 'important');
-                                }
+                                if (btnText === 'Login') btn.style.setProperty('margin-top', '10px', 'important');
                             }
                         });
 
@@ -293,14 +380,12 @@ export default {
                                 
                                 setTimeout(() => {
                                     const vidElement = document.getElementById('arfan-vid');
-                                    if(vidElement) {
-                                        vidElement.play().catch(e => console.log("Auto-play ready."));
-                                    }
+                                    if(vidElement) vidElement.play().catch(e => console.log("Auto-play ready."));
                                 }, 10);
                             }
                         } else {
                             const existingVideo = document.getElementById('arfan-custom-video');
-                            if (existingVideo) { existingVideo.remove(); }
+                            if (existingVideo) existingVideo.remove(); 
                         }
 
                         if (currentPath === 'dw') {
@@ -326,6 +411,7 @@ export default {
                     });
 
                     window.addEventListener('load', () => {
+                        initAppInstallBanner(); 
                         updateBodyClass(); 
                         urlObserver.observe(document, {subtree: true, childList: true});
                         domObserver.observe(document.body, { childList: true, subtree: true });
