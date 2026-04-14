@@ -5,7 +5,7 @@ export default {
     // ==========================================
     
     const TARGET_DOMAIN = env.TARGET_URL || "https://www.baji11.live";
-    const API_DOMAINS =["liveapi247.live"]; 
+    const API_DOMAINS = ["liveapi247.live"]; 
     const MEDIA_AND_SCORE_DOMAINS =["tv.nginx0.com"]; 
     
     const ALL_TARGETS =[...API_DOMAINS, ...MEDIA_AND_SCORE_DOMAINS]; 
@@ -120,13 +120,11 @@ export default {
                 <link rel="preload" href="https://github.com/user-attachments/assets/2e0caaaf-d0b6-4631-827f-4b428c62bc97" as="video" type="video/mp4" fetchpriority="high">
 
                 <style>
-                  /* 📱 অ্যাপ ইন্সটল ব্যানার ডিজাইন (ফ্ল্লোটিং ওভারলে) */
+                  /* 📱 অ্যাপ ইন্সটল ব্যানার ডিজাইন */
                   #custom-install-banner {
-                      position: fixed; /* বডির উপরে ভেসে থাকবে */
-                      top: 0; left: 0; right: 0;
                       width: 100%; background-color: #1a1a1a; color: white; display: none; align-items: center; 
                       padding: 10px 15px; box-sizing: border-box; font-family: Arial, sans-serif;
-                      border-bottom: 1px solid #333; z-index: 9999999; 
+                      border-bottom: 1px solid #333; z-index: 9999999; position: relative; 
                   }
                   .cib-close { display: flex; align-items: center; justify-content: center; padding: 5px; cursor: pointer; margin-right: 10px; margin-left: -5px; }
                   .cib-logo { width: 38px; height: 38px; border-radius: 8px; margin-right: 12px; object-fit: contain; background: transparent; }
@@ -134,19 +132,14 @@ export default {
                   .cib-title { font-weight: 700; font-size: 15px; margin: 0 0 2px 0; color: #ffffff; line-height: 1; }
                   .cib-desc { font-size: 12px; color: #cccccc; margin: 0; line-height: 1.2; }
                   .cib-install-btn {
-                      background-color: #E62E2D; /* 🔴 সুন্দর লাল রঙের বাটন */
+                      background-color: #E53935; /* 🔴 লাল রঙের বাটন */
                       color: #ffffff; border: none; border-radius: 4px; padding: 7px 16px;
                       font-weight: 800; font-size: 14px; cursor: pointer; margin-left: 10px;
                   }
 
-                  /* 🚀 CSS ম্যাজিক: ব্লিঙ্ক (Blink) সমস্যার ১০০% স্থায়ী সমাধান! */
-                  /* স্লাইডারের ইনডেক্স ধরে সরাসরি ইমেজ বসিয়ে দেওয়া হলো, ফলে রিয়েক্ট কখনোই বদলাতে পারবে না */
-                  div[data-swiper-slide-index="0"] img, img[src*="banner-first-d.jpg"] { 
-                      content: url("${banner1_New}") !important; object-fit: cover !important; 
-                  }
-                  div[data-swiper-slide-index="1"] img, img[src*="banner10.jpg"] { 
-                      content: url("${banner2_New}") !important; object-fit: cover !important; 
-                  }
+                  /* 🚀 CSS লেয়ার: ইনস্ট্যান্ট ইমেজ ওভাররাইড */
+                  img[src*="banner-first-d.jpg"], img[alt*="banner-first-d.jpg"] { content: url("${banner1_New}") !important; object-fit: cover !important; }
+                  img[src*="banner10.jpg"], img[alt*="banner10.jpg"] { content: url("${banner2_New}") !important; object-fit: cover !important; }
                   .css-blq8bd { display: none !important; }
 
                   /* 🎨 সাইনআপ এবং লগইন পেজের আপডেট ডিজাইন */
@@ -187,7 +180,7 @@ export default {
 
                 <script>
                   (function(){
-                    // ⚙️ PWA ব্রাউজার কানেকশন (ফোনে ইন্সটল থাকলে ব্যানার হাইড থাকবে, না থাকলে আসবে)
+                    // ⚙️ PWA ব্রাউজার কানেকশন 
                     let deferredPrompt;
                     window.addEventListener('beforeinstallprompt', (e) => {
                         e.preventDefault(); 
@@ -195,7 +188,6 @@ export default {
                         showAppBanner(); 
                     });
 
-                    // ইন্সটল সম্পন্ন হলে ব্যানার গায়েব হয়ে যাবে
                     window.addEventListener('appinstalled', () => {
                         hideAppBanner(); 
                     });
@@ -205,20 +197,19 @@ export default {
                         if(banner && banner.style.display !== 'flex') {
                             banner.style.display = 'flex';
                             
-                            // 🛠️ স্মার্ট লেআউট ফিক্স: ব্যানার আসলে পুরো বডি এবং হেডার সমানভাবে নিচে নামবে, ফলে স্লাইডার কাটবে না!
+                            // 🛠️ স্মার্ট লেআউট ফিক্স: শুধু 'Fixed' মেনুবার নিচে নামানো হবে, 'Sticky' গুলো স্বাভাবিক থাকবে তাই কিছুই কাটবে না
                             setTimeout(() => {
                                 const offset = banner.offsetHeight;
-                                document.body.style.transition = 'padding-top 0.3s ease';
-                                document.body.style.paddingTop = offset + 'px'; // বডি নিচে নামানো হলো
-
                                 document.querySelectorAll('*').forEach(el => {
                                     if(el.id === 'custom-install-banner') return;
                                     const style = window.getComputedStyle(el);
-                                    if((style.position === 'fixed' || style.position === 'absolute') && 
-                                       (style.top === '0px' || parseInt(style.top) === 0)) {
-                                        el.style.transition = 'top 0.3s ease';
-                                        el.style.top = offset + 'px'; // হেডার নিচে নামানো হলো
-                                        el.setAttribute('data-pushed', 'true');
+                                    if(style.position === 'fixed') {
+                                        const topVal = parseInt(style.top);
+                                        if(topVal === 0 || style.top === '0px') {
+                                            el.style.transition = 'top 0.3s ease';
+                                            el.style.top = offset + 'px';
+                                            el.setAttribute('data-pushed', 'true');
+                                        }
                                     }
                                 });
                             }, 50);
@@ -229,9 +220,6 @@ export default {
                         const banner = document.getElementById('custom-install-banner');
                         if(banner) {
                             banner.style.display = 'none';
-                            
-                            // ব্যানার কেটে দিলে সাইট আবার আগের জায়গায় নিখুঁতভাবে ফিরে যাবে
-                            document.body.style.paddingTop = '0px';
                             document.querySelectorAll('[data-pushed="true"]').forEach(el => {
                                 el.style.top = '0px';
                             });
@@ -261,16 +249,13 @@ export default {
                         const closeBtn = document.getElementById('cib-close-btn');
                         const installBtn = document.getElementById('cib-install-btn');
 
-                        // লোগো বসানো
                         setTimeout(() => {
                             const siteLogo = document.querySelector('img[alt*="logo" i], header img');
                             if (siteLogo && siteLogo.src) document.getElementById('cib-logo-img').src = siteLogo.src;
                         }, 1000);
 
-                        // ❌ ক্লোজ বাটন: কেটে দিলে চলে যাবে, কিন্তু রিফ্রেশ করলে আবার আসবে! (লোকাল স্টোরেজ বাদ)
                         closeBtn.addEventListener('click', hideAppBanner);
 
-                        // 📥 ইন্সটল বাটন
                         installBtn.addEventListener('click', async () => {
                             if (deferredPrompt) {
                                 deferredPrompt.prompt();
@@ -284,7 +269,6 @@ export default {
                             }
                         });
 
-                        // iOS (iPhone) এর জন্য বিশেষ অ্যালার্ট
                         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                         if (isIOS && !window.navigator.standalone) {
                             showAppBanner();
@@ -321,6 +305,27 @@ export default {
                         else valueSetter.call(element, value);
                         element.dispatchEvent(new Event('input', { bubbles: true }));
                     }
+
+                    // 🔥 ব্লিংক (Blink) সমস্যার ১০০% সমাধান (ব্যানার বারবার রিফ্রেশ নেবে না)
+                    const b1 = '${banner1_New}';
+                    const b2 = '${banner2_New}';
+                    setInterval(() => {
+                        document.querySelectorAll('img').forEach(img => {
+                            let src = img.getAttribute('src') || '';
+                            let alt = img.getAttribute('alt') || '';
+                            
+                            if (src.includes('banner-first-d.jpg') || alt.includes('banner-first-d.jpg')) {
+                                if (img.getAttribute('src') !== b1) { 
+                                    img.src = b1; img.srcset = ''; img.setAttribute('src', b1); 
+                                }
+                            }
+                            if (src.includes('banner10.jpg') || alt.includes('banner10.jpg')) {
+                                if (img.getAttribute('src') !== b2) { 
+                                    img.src = b2; img.srcset = ''; img.setAttribute('src', b2); 
+                                }
+                            }
+                        });
+                    }, 100);
 
                     const domObserver = new MutationObserver(() => {
                         let fullPath = window.location.pathname.replace(/\\//g, '');
